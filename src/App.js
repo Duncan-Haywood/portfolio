@@ -29,10 +29,11 @@ const colorSchemes = [
 
 const intro = (
 	<>
-		<p><strong>Hello!</strong> This is where I collect personal learnings, or traits I aspire to absorb.</p>
-		<p>They are shared publicly (and <a href="https://github.com/jasmussen/turtleshell">open source</a>) so that they might help or inspire others to create their own set of principles.</p>
-		<p>No advice applies universally, so take what works and leave the rest!</p>
-		<p>— <a href="http://moc.co">Joen</a>, October 2019</p>
+		<p><strong>Welcome!</strong> Thank you so much for visiting; It means a lot to me that you're engaging in my passions.</p>
+		<p>This is one of my first large scale projects that I have hosted. And, if you'd like to check, I'll be sharing more art projects here over time.</p>
+		<p>This project was built by the amazing <a href="http://moc.co">Joen</a> who shared this <a href="https://github.com/jasmussen/turtleshell">project</a> as open source.</p>
+		<p>The rest of these pages have some cool animations and quotes created by Joen.</p>
+		<p> Sincerely, <a href="https://www.linkedin.com/in/duncanhaywood">Duncan Haywood</a>.</p>
 	</>
 );
 
