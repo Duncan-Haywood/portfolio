@@ -11,7 +11,9 @@ import './App.scss';
  * Global Variables
  */
 
-// The color scheme is chosen by the number, looping. I.e. the scheme is not random.
+// The color scheme is chosen by the number, looping. 
+// I.e. the scheme is not random.
+// 
 // But the order and which colors inside are then used randomly by elements.
 // Note: If there are too few colors in the array, 
 // it is likely the same color may get chosen.
@@ -65,7 +67,8 @@ const intro = (
 
 const heuristics = [
 	<blockquote>
-		<p>If you want to count the stars in the sky, just start counting.</p>
+		<p>If you want to count the stars in the sky, 
+			just start counting.</p>
 		<cite>— Selma, age 6</cite>
 	</blockquote>,
 	<p>Be careful to not get caught up chasing someone else's dream.
@@ -74,7 +77,8 @@ const heuristics = [
 	<p>You can do amazing things. Just not all at once. 
 		But don't let this discourage you from accomplishing 
 		what's under your control. </p>,
-	<p>Good design has gravity. The more you work on it, the more gravity it gets. 
+	<p>Good design has gravity. The more you work on it, 
+		the more gravity it gets. 
 		At some point, the pieces start falling into place on their own.</p>,
 	<p>The best design is invisible. It is functional to the point that 
 		you forget how it works, you just use it. You might even forget 
@@ -107,7 +111,8 @@ const heuristics = [
 	<>
 		<p>Ideas are a renewable resource. Spend them as you get them, 
 			don't save them for rainy days.</p>
-		<p>Besides, they have a tendency to be brittle when meeting with reality. 
+		<p>Besides, they have a tendency to be brittle 
+			when meeting with reality. 
 			Ideas are rarely as valuable as you might think.</p>
 	</>,
 	<p>Whitespace has intrinsic value, both in design and in life. 
@@ -118,9 +123,10 @@ const heuristics = [
 	<>
 		<p>Sometimes it's good to follow an idea to the end, 
 			even if the idea turns out to be a dud.</p>
-		<p>An old friend of mine used to say there's no such thing as wasted work. 
-			You'll have cauterized that avenue of exploration and know for sure 
-			that idea wasn't the one you needed.</p>
+		<p>An old friend of mine used to say 
+			there's no such thing as wasted work. 
+			You'll have cauterized that avenue of exploration 
+			and know for sure that idea wasn't the one you needed.</p>
 	</>,
 	<>
 		<p>If it doesn't work, it's not real.</p>
@@ -284,7 +290,8 @@ function Navigation( { currentHeuristic, id } ) {
 		prev = heuristics.length; 
 		// previous page button goes to the last page in the web app
 		next = 1;
-		// next page button goes to the first page in the app (the one with the entry)
+		// next page button goes to the first page in the app 
+		// (the one with the entry)
 	}
 	// _first_page_case_navigation(current)
 	if ( current === 1 ) { 
@@ -304,7 +311,8 @@ function Navigation( { currentHeuristic, id } ) {
 				<Link to="/">Home</Link></li>
 				{heuristics.map((value, index) => {
 					let i = parseInt(index) + 1;
-					return <li className={ id === i ? 'is-active' : '' } key={index}>
+					return <li className={ id === i ? 'is-active' : '' } 
+						key={index}>
 					<Link to={"/" + i}>{i}</Link></li>
 				})}
 			</ul>
@@ -316,14 +324,16 @@ function Navigation( { currentHeuristic, id } ) {
 				<Link to={"/" + prev}>
 					<svg xmlns="http://www.w3.org/2000/svg" 
 						viewBox="0 0 24 24">
-						<path d="M14 20l-8-8 8-8 1.414 1.414L8.828 12l6.586 6.586"/>
+						<path d="M14 20l-8-8 8-8 1.414 1.414L8.828 
+							12l6.586 6.586"/>
 					</svg> 
 					Previous
 					</Link>
 				<Link to={"/" + next}>
 					<svg xmlns="http://www.w3.org/2000/svg" 
 						viewBox="0 0 24 24">
-						<path d="M10 20l8-8-8-8-1.414 1.414L15.172 12l-6.586 6.586"/>
+						<path d="M10 20l8-8-8-8-1.414 1.414L15.172 12l-6.586 
+							6.586"/>
 					</svg> 
 					Next
 					</Link>
@@ -366,7 +376,8 @@ function Sky( { className, currentHeuristic } ) {
 		let s4 = Math.round( seed( seed( currentHeuristic ) * i + 3 ) * 10 );
 		items.push(
 			<span key={ i } style={{
-				backgroundColor: getRandomColor( i + 1 * currentHeuristic, currentHeuristic),
+				backgroundColor: getRandomColor( i + 1 * currentHeuristic, 
+					currentHeuristic),
 				left: ( 100 / numItems ) * i + "%",
 				top: 100 * s1 + "%",
 				transform: 
@@ -384,7 +395,8 @@ function Sky( { className, currentHeuristic } ) {
 	return (
 		<div className={ className }
 			style={{
-				backgroundColor: getRandomColor( currentHeuristic, currentHeuristic ),
+				backgroundColor: getRandomColor( currentHeuristic, 
+					currentHeuristic ),
 				perspective: perspectiveAlgo + 'px'
 				}}>
 			{ items }
@@ -400,20 +412,34 @@ function Sky( { className, currentHeuristic } ) {
 function Mountain( { className, currentHeuristic } ) {
 	return (
 		<div className={ className }>
-			<div className="m__group" style={{ bottom: 60 * seed( currentHeuristic ) + "%" }}>
+			<div className="m__group" 
+				style={{ bottom: 60 * seed( currentHeuristic ) + "%" }}>
 				<svg className="m__group-bg" 
-					style={{ fill: getDarkColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
-					<path d="M85 85L75 75 65 65V50L55 40V20L45 30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
-					<path d="M60 145v-15l15-15v-15H20v10l10 10v10l10 10v35l10-10v-10z" />
+					style={{ fill: getDarkColor( currentHeuristic ) }} 
+						width="100" height="200" viewBox="0 0 100 200">
+					<path d="M85 85L75 75 65 65V50L55 40V20L45 
+						30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 
+						5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
+					<path d="M60 145v-15l15-15v-15H20v10l10 10v10l10 
+						10v35l10-10v-10z" />
 				</svg>
 				<svg className="m__group-fg" 
-					style={{ fill: getLightColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
-					<path opacity=".3" d="M50 145h10v-15H50v15zm15-45v15h10v-15H65zm-35 30h10v-10H30v10z" />
+					style={{ fill: getLightColor( currentHeuristic ) }} 
+						width="100" height="200" viewBox="0 0 100 200">
+					<path opacity=".3" 
+						d="M50 145h10v-15H50v15zm15-45v15h10v-15H65zm-35 
+							30h10v-10H30v10z" />
 					<path fill="black" opacity=".1" 
-						d="M40 155h10l10-10H50l-10 10zm10-15l-10-10H30l10 10h10zm-10-20l-10-10H20l10 10h10zm25-5l-15 15h10l15-15H65z" />
-					<path opacity=".6" d="M65 50L55 40H45l10 10h10zm10 25H55l10 10h20L75 75z" />
-					<path opacity=".4" d="M45 50L25 70h10l20-20z" />
-					<path opacity=".2" d="M25 85h10V70H25v15zm30-35v25h10V50H55z" />
+						d="M40 155h10l10-10H50l-10 10zm10-15l-10-10H30l10 
+							10h10zm-10-20l-10-10H20l10 10h10zm25-5l-15 
+							15h10l15-15H65z" />
+					<path opacity=".6" 
+						d="M65 50L55 40H45l10 10h10zm10 25H55l10 
+							10h20L75 75z" />
+					<path opacity=".4" 
+						d="M45 50L25 70h10l20-20z" />
+					<path opacity=".2" 
+						d="M25 85h10V70H25v15zm30-35v25h10V50H55z" />
 				</svg>
 			</div>
 		</div>
@@ -464,7 +490,7 @@ class HeuristicScene extends React.Component {
 		// Render.
 		return (
 			<>
-				<h1>Snacksized Personal Learnings, //testing line breaks: TODO
+				<h1>Snacksized Personal Learnings, 
 					Served on a Turtle's Shell.</h1>
 				<Navigation id={ id } 
 					currentHeuristic={ currentHeuristic } />
