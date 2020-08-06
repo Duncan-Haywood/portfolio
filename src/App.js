@@ -45,35 +45,36 @@ const colorSchemes = [
 const intro = (
 	<>
 		<p><strong>Welcome!</strong> 
-			 Thank you so much for visiting; 
+			&nbsp;Thank you so much for visiting; 
 			 It means a lot to me that you're engaging in my passions.</p>
 		<p>This is one of my first large scale projects that I have hosted. 
 			 And, if you'd like to check,
 			 I'll be sharing more art projects here over time.</p>
-		<p>This project was built by the amazing 
-			 <a href="http://moc.co">Joen</a> 
-			 who shared this 
-			 <a href="https://github.com/jasmussen/turtleshell">project</a> 
-			 as open source.</p>
-		<p>The rest of these pages have some cool animations and quotes 
-			created by Joen.
-			</p>
 		<p> Sincerely, 
-			<a href="https://www.linkedin.com/in/duncanhaywood">
+			&nbsp;<a href="https://www.linkedin.com/in/duncanhaywood">
 				Duncan Haywood</a>.
 			</p>
 	</>
 );
 
 const heuristics = [
+	<>
+		<p>This project was built by the amazing
+			&nbsp;<a href="http://moc.co">Joen</a> 
+			&nbsp;who shared this
+			&nbsp;<a href="https://github.com/jasmussen/turtleshell">project</a>
+			&nbsp;as open source.</p>
+		<p>The rest of these pages have some cool animations and quotes 
+			 created by Joen.</p>
+	</>,
 	<blockquote>
-		<p>If you want to count the stars in the sky, 
-			just start counting.</p>
+		<p>If you want to count the stars in the sky,
+			&nbsp;just start counting.</p>
 		<cite>— Selma, age 6</cite>
 	</blockquote>,
 	<p>Be careful to not get caught up chasing someone else's dream.
-		It's probably a distraction from 
-		what really gets you up in the morning.</p>,
+		&nbsp;It's probably a distraction from 
+		&nbsp;what really gets you up in the morning.</p>,
 	<p>You can do amazing things. Just not all at once. 
 		But don't let this discourage you from accomplishing 
 		what's under your control. </p>,
