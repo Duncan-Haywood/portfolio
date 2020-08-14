@@ -32,6 +32,7 @@ export const COLOR_SCHEMES = [
 		[ '#470064', '#001559', '#1e003f', '#1900e1', '#ecffc7' ], ],
 ]
 
+//this is the text displayed on the home page of the application.
 export const INTRO = (
 	<>
 		<p><strong>Welcome!</strong>{" "}
@@ -49,6 +50,7 @@ export const INTRO = (
 	</>
 );
 
+// these are the quotes that are shown on each page of the application
 export const HEURISTICS = [
 	<>
 		<p>This project was built by the amazing {" "}
