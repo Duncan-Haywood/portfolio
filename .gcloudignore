@@ -4,9 +4,11 @@ node_modules
 /node_modules
 /.pnp
 .pnp.js
+.git
 
 # testing
 /coverage
+/src/App.test.js
 
 # misc
 .DS_Store

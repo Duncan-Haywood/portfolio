@@ -424,12 +424,23 @@ function Mountain( { className, currentHeuristic } ) {
 					<path d="M60 145v-15l15-15v-15H20v10l10 10v10l10 
 						10v35l10-10v-10z" />
 				</svg>
+				{/* comment: svg is scalable vector graphics
+				* the <path> tags are used to create 
+				* lines, curves and shapes.
+				* d is the single property 
+				* that defines the shape of a path.
+				* d="M50..." means that the path will be moving;
+				* the "M" in particular is a "Move To" command 
+				* with the following two numbers being 
+				* the x,y coordinates the path is moved.
+				*/}
 				<svg className="m__group-fg" 
 					style={{ fill: getLightColor( currentHeuristic ) }} 
 						width="100" height="200" viewBox="0 0 100 200">
 					<path opacity=".3" 
 						d="M50 145h10v-15H50v15zm15-45v15h10v-15H65zm-35 
 							30h10v-10H30v10z" />
+						}
 					<path fill="black" opacity=".1" 
 						d="M40 155h10l10-10H50l-10 10zm10-15l-10-10H30l10 
 							10h10zm-10-20l-10-10H20l10 10h10zm25-5l-15 
@@ -480,11 +491,18 @@ class HeuristicScene extends React.Component {
 		let currentHeuristic = id;
 		let heuristic;
 
-		// Show homepage or heuristic.
+		// Show homepage or heuristic 
+		// where heuristic is one of the quotes from the top.
 		if ( !currentHeuristic ) {
+			// the quote we use (heuristic) is 
+			// the intro text we defined at the top
 			heuristic = intro;
+			// the index of the quote text at which we are located
 			currentHeuristic = 0; // Must be zero.
 		} else {
+			// the quote (heuristic) we use mathces the index of 
+			// the page upon which we are with the corresponding quote in 
+			// the list of heuristics from the top of the page
 			heuristic = heuristics[currentHeuristic - 1];
 		}
 
