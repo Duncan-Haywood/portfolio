@@ -5,14 +5,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.scss';
-import {INTRO, HEURISTICS, COLOR_SCHEMES} from './constants/constants.js'
+import {INTRO, HEURISTICS, COLOR_SCHEMES} from './constants'
 
 
 /**
  * Global Variables
  */
 
-// See constants/index.js for the values of constants
+// See constants/constants.js for the values of constants
 const colorSchemes = COLOR_SCHEMES
 
 const intro = INTRO
