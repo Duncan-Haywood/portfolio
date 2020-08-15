@@ -6,6 +6,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.scss';
 import {INTRO, HEURISTICS, COLOR_SCHEMES} from './constants'
+import UIfx from 'uifx'
+import waterDropAudio from './sounds/water-drop-click-production.mp3'
 
 
 /**
