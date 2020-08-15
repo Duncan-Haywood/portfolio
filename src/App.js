@@ -71,7 +71,7 @@ function getLightColor( scheme ) {
  * Navigation
  */
 
-function Navigation( { currentHeuristic, id } ) {
+function Navigation( { currentHeuristic, id, playAudio } ) {
 	// id is the page number in the web app
 	// currentHeuristic is ???
 	let current = parseInt( id );
@@ -105,12 +105,12 @@ function Navigation( { currentHeuristic, id } ) {
 			*/}
 			<ul className="heuristics__navigation">
 				<li className={ !id ? 'is-active is-home' : 'is-home' } >
-				<Link to="/">Home</Link></li>
+				<Link to="/" onClick={playAudio}>Home</Link></li>
 				{heuristics.map((value, index) => {
 					let i = parseInt(index) + 1;
 					return <li className={ id === i ? 'is-active' : '' } 
 						key={index}>
-					<Link to={"/" + i}>{i}</Link></li>
+					<Link to={"/" + i} onClick={playAudio}>{i}</Link></li>
 				})}
 			</ul>
 
@@ -275,6 +275,7 @@ class HeuristicScene extends React.Component {
 	handleClick(e) {
 		e.preventDefault()
 
+		this.playWaterDrop()
 		let current = parseInt( this.props.match.params.id );
 		let next = 1;
 
@@ -287,7 +288,7 @@ class HeuristicScene extends React.Component {
 
 		// This should navigate to the next item.
 		this.props.history.push( '/' + next );
-		this.playWaterDrop()
+
 	}
 
 	render() {
@@ -316,7 +317,8 @@ class HeuristicScene extends React.Component {
 				<h1>Snacksized Personal Learnings, 
 					Served on a Turtle's Shell.</h1>
 				<Navigation id={ id } 
-					currentHeuristic={ currentHeuristic } />
+					currentHeuristic={ currentHeuristic } 
+					playAudio={ this.playWaterDrop }/>
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
 				<Quote currentHeuristic={ currentHeuristic } 
 					heuristic={ heuristic } />
