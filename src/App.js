@@ -271,9 +271,10 @@ class HeuristicScene extends React.Component {
 	}
 	waterDrop = new UIfx(waterDropAudio);
 	playWaterDrop = () => {this.waterDrop.play(1.0)}
+
 	handleClick(e) {
 		e.preventDefault()
-		
+
 		let current = parseInt( this.props.match.params.id );
 		let next = 1;
 
@@ -286,6 +287,7 @@ class HeuristicScene extends React.Component {
 
 		// This should navigate to the next item.
 		this.props.history.push( '/' + next );
+		this.playWaterDrop()
 	}
 
 	render() {
