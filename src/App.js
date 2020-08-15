@@ -269,10 +269,11 @@ class HeuristicScene extends React.Component {
 		super(props)
 		this.handleClick = this.handleClick.bind(this)
 	}
-
+	waterDrop = new UIfx(waterDropAudio);
+	playWaterDrop = () => {this.waterDrop.play(1.0)}
 	handleClick(e) {
 		e.preventDefault()
-
+		
 		let current = parseInt( this.props.match.params.id );
 		let next = 1;
 
