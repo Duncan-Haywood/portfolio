@@ -98,6 +98,9 @@ function Navigation( { currentHeuristic, id } ) {
 
 	return (
 		<>
+			{/*comment: 
+			* this section represents the circle buttons
+			*/}
 			<ul className="heuristics__navigation">
 				<li className={ !id ? 'is-active is-home' : 'is-home' } >
 				<Link to="/">Home</Link></li>
@@ -108,6 +111,11 @@ function Navigation( { currentHeuristic, id } ) {
 					<Link to={"/" + i}>{i}</Link></li>
 				})}
 			</ul>
+
+			{/*comment: 
+			* this section represents the arrow buttons 
+			* for next and previous
+			*/}
 			<div className="heuristics__navigation-next-prev"
 				style={{
 					backgroundColor: getDarkColor( currentHeuristic ),
