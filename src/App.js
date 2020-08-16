@@ -123,7 +123,7 @@ function Navigation( { currentHeuristic, id, playAudio } ) {
 					backgroundColor: getDarkColor( currentHeuristic ),
 					color: getLightColor( currentHeuristic ),
 				}}>
-				<Link to={"/" + prev}>
+				<Link to={"/" + prev} onClick={playAudio}>
 					<svg xmlns="http://www.w3.org/2000/svg" 
 						viewBox="0 0 24 24">
 						<path d="M14 20l-8-8 8-8 1.414 1.414L8.828 
@@ -131,7 +131,7 @@ function Navigation( { currentHeuristic, id, playAudio } ) {
 					</svg> 
 					Previous
 					</Link>
-				<Link to={"/" + next}>
+				<Link to={"/" + next} onClick={playAudio}> 
 					<svg xmlns="http://www.w3.org/2000/svg" 
 						viewBox="0 0 24 24">
 						<path d="M10 20l8-8-8-8-1.414 1.414L15.172 12l-6.586 
@@ -270,7 +270,7 @@ class HeuristicScene extends React.Component {
 		this.handleClick = this.handleClick.bind(this)
 	}
 	waterDrop = new UIfx(waterDropAudio);
-	playWaterDrop = () => {this.waterDrop.play(1.0)}
+	playWaterDrop = () => {this.waterDrop.play(0.4)}
 
 	handleClick(e) {
 		e.preventDefault()
