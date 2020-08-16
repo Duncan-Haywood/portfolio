@@ -61,6 +61,10 @@ export const HEURISTICS = [
 		<p>The rest of these pages have some cool animations and quotes 
 			 created by Joen.</p>
 	</>,
+	<p>So far I've added the music and sound effects to this site.
+		I aim to wrap different art based machine learning projects
+		and incorporate them into this project next.
+	</p>,
 	<blockquote>
 		<p>If you want to count the stars in the sky,
 			{" "}just start counting.</p>

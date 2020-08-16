@@ -8,8 +8,8 @@ import './App.scss';
 import {INTRO, HEURISTICS, COLOR_SCHEMES} from './constants'
 import UIfx from 'uifx'
 import waterDropAudio from './sounds/water-drop-click-production.mp3'
-
-
+import chimesAudio from './sounds/deep-chimes.mp3'
+import {Howl} from 'howler'
 /**
  * Global Variables
  */
@@ -258,7 +258,20 @@ function Mountain( { className, currentHeuristic } ) {
 		</div>
 	);
 }
-
+class Sounds extends React.Component {
+	chimes = new Howl({
+    src: chimesAudio,
+    autoplay: true,
+    loop: true,
+    volume: 0.03
+    })
+    playChimes = () => this.chimes.play()
+	render(){
+		return(
+			<></>
+		);
+	}
+}
 
 /**
  * Output the Heuristic based on the URL
@@ -270,7 +283,7 @@ class HeuristicScene extends React.Component {
 		this.handleClick = this.handleClick.bind(this)
 	}
 	waterDrop = new UIfx(waterDropAudio);
-	playWaterDrop = () => {this.waterDrop.play(0.4)}
+	playWaterDrop = () => {this.waterDrop.play(0.25)}
 
 	handleClick(e) {
 		e.preventDefault()
@@ -314,8 +327,8 @@ class HeuristicScene extends React.Component {
 		// Render.
 		return (
 			<>
-				<h1>Snacksized Personal Learnings, 
-					Served on a Turtle's Shell.</h1>
+				<h1>A space of peace and art.</h1>
+				<Sounds />
 				<Navigation id={ id } 
 					currentHeuristic={ currentHeuristic } 
 					playAudio={ this.playWaterDrop }/>
