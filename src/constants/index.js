@@ -53,13 +53,12 @@ export const INTRO = (
 // these are the quotes that are shown on each page of the application
 export const HEURISTICS = [
 	<>
-		<p>This project was built by the amazing {" "}
+		<p>The background and navigation of this web app was built by the amazing {" "}
 			<a href="http://moc.co">Joen</a> {" "}
 			who shared this {" "}
 			<a href="https://github.com/jasmussen/turtleshell">project</a> {" "}
 			as open source.</p>
-		<p>The rest of these pages have some cool animations and quotes 
-			 created by Joen.</p>
+		<p>The quotes in the following pages are also created by Joen. Much thanks to him.</p>
 	</>,
 	<p>So far I've added the music and sound effects to this site.
 		I aim to wrap different art based machine learning projects
