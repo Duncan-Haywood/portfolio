@@ -61,6 +61,20 @@ function getLightColor( scheme ) {
 	return colorSchemes[ colorScheme ][1][0];
 }
 
+class Sounds extends React.Component {
+	chimes = new Howl({
+    src: chimesAudio,
+    autoplay: true,
+    loop: true,
+    volume: 0.03
+    })
+    playChimes = () => this.chimes.play()
+	render(){
+		return(
+			<></>
+		);
+	}
+}
 
 /**
  * Navigation
@@ -255,20 +269,7 @@ function Mountain( { className, currentHeuristic } ) {
 		</div>
 	);
 }
-class Sounds extends React.Component {
-	chimes = new Howl({
-    src: chimesAudio,
-    autoplay: true,
-    loop: true,
-    volume: 0.03
-    })
-    playChimes = () => this.chimes.play()
-	render(){
-		return(
-			<></>
-		);
-	}
-}
+
 
 /**
  * Output the Heuristic based on the URL
