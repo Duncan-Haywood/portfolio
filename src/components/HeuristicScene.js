@@ -93,11 +93,14 @@ class Sounds extends React.Component {
 const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
 		
 		[prev, next] = homePageCaseNavigation(current, next, prev, heuristics)
-		// _first_page_case_navigation(current)
-		if ( current === 1 ) { 
-			//previous page button goes to home page
-			prev = "";
+		const firstPageCaseNavigation = (current, prev)=>{
+			if ( current === 1 ) { 
+				//previous page button goes to home page
+				prev = "";
+			}
+			return prev
 		}
+		prev = firstPageCaseNavigation(current, prev)	
 		// _last_page_case_navigation(current)
 		if ( current === heuristics.length ) {
 			//next page button goes to home pagge
