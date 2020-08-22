@@ -5,7 +5,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.scss';
-import { HeuristicScene } from './components/heuristic_scene.js';
+import { HeuristicScene } from './components/HeuristicScene.js';
 
 /**
  * Render the Heuristics App
