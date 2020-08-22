@@ -79,14 +79,7 @@ class Sounds extends React.Component {
 /**
  * Navigation
  */
-
-function Navigation( { currentHeuristic, id, playAudio } ) {
-	// id is the page number in the web app
-	// currentHeuristic is ???
-	let current = parseInt( id );
-	let next = current + 1;
-	let prev = current - 1;
-	const _handlingEdgeCaseNavigation = (current, next, prev)=>{
+const _handlesEdgeCaseNavigation = (current, next, prev, heuristics)=>{
 		// _home_page_case_navigation(current)
 		if ( !current ) { 
 		// home page has no id
@@ -108,7 +101,13 @@ function Navigation( { currentHeuristic, id, playAudio } ) {
 		}
 		return [prev, next]
 	}
-	[prev, next] = _handlingEdgeCaseNavigation(current, next, prev);
+function Navigation( { currentHeuristic, id, playAudio } ) {
+	// id is the page number in the web app
+	// currentHeuristic is ???
+	let current = parseInt( id );
+	let next = current + 1;
+	let prev = current - 1;
+	[prev, next] = _handlesEdgeCaseNavigation(current, next, prev, heuristics);
 	return (
 		<>
 			{/*comment: 
