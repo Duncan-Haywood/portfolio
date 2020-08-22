@@ -79,16 +79,19 @@ class Sounds extends React.Component {
 /**
  * Navigation
  */
-const _handlesEdgeCaseNavigation = (current, next, prev, heuristics)=>{
-		// _home_page_case_navigation(current)
-		if ( !current ) { 
-		// home page has no id
-			prev = heuristics.length; 
-			// previous page button goes to the last page in the web app
-			next = 1;
-			// next page button goes to the first page in the app 
-			// (the one with the entry)
+const _handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
+		const _homePageCaseNavigation = (current, next, prev, heuristics)=>{
+			if ( !current ) { 
+			// home page has no id
+				prev = heuristics.length; 
+				// previous page button goes to the last page in the web app
+				next = 1;
+				// next page button goes to the first page in the app 
+				// (the one with the entry)
+			}
+			return [prev, next]
 		}
+		[prev, next] = _homePageCaseNavigation(current, next, prev, heuristics)
 		// _first_page_case_navigation(current)
 		if ( current === 1 ) { 
 			//previous page button goes to home page
@@ -107,7 +110,7 @@ function Navigation( { currentHeuristic, id, playAudio } ) {
 	let current = parseInt( id );
 	let next = current + 1;
 	let prev = current - 1;
-	[prev, next] = _handlesEdgeCaseNavigation(current, next, prev, heuristics);
+	[prev, next] = _handlesEdgeCaseNavigation(current, prev, next, heuristics);
 	return (
 		<>
 			{/*comment: 
