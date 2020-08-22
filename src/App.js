@@ -77,27 +77,29 @@ function Navigation( { currentHeuristic, id, playAudio } ) {
 	let current = parseInt( id );
 	let next = current + 1;
 	let prev = current - 1;
-	// _handling_edge_case_navigation(current, next, previous)
-	// _home_page_case_navigation(current)
-	if ( !current ) { 
-	// home page has no id
-		prev = heuristics.length; 
-		// previous page button goes to the last page in the web app
-		next = 1;
-		// next page button goes to the first page in the app 
-		// (the one with the entry)
+	const _handlingEdgeCaseNavigation = (current, next, prev)=>{
+		// _home_page_case_navigation(current)
+		if ( !current ) { 
+		// home page has no id
+			prev = heuristics.length; 
+			// previous page button goes to the last page in the web app
+			next = 1;
+			// next page button goes to the first page in the app 
+			// (the one with the entry)
+		}
+		// _first_page_case_navigation(current)
+		if ( current === 1 ) { 
+			//previous page button goes to home page
+			prev = "";
+		}
+		// _last_page_case_navigation(current)
+		if ( current === heuristics.length ) {
+			//next page button goes to home pagge
+			next = "";
+		}
+		return [prev, next]
 	}
-	// _first_page_case_navigation(current)
-	if ( current === 1 ) { 
-		//previous page button goes to home page
-		prev = "";
-	}
-	// _last_page_case_navigation(current)
-	if ( current === heuristics.length ) {
-		//next page button goes to home pagge
-		next = "";
-	}
-
+	[prev, next] = _handlingEdgeCaseNavigation(current, next, prev);
 	return (
 		<>
 			{/*comment: 
