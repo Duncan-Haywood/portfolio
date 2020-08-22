@@ -79,8 +79,7 @@ class Sounds extends React.Component {
 /**
  * Navigation
  */
-const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
-		const homePageCaseNavigation = (current, next, prev, heuristics)=>{
+ const homePageCaseNavigation = (current, next, prev, heuristics)=>{
 			if ( !current ) { 
 			// home page has no id
 				prev = heuristics.length; 
@@ -91,6 +90,8 @@ const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
 			}
 			return [prev, next]
 		}
+const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
+		
 		[prev, next] = homePageCaseNavigation(current, next, prev, heuristics)
 		// _first_page_case_navigation(current)
 		if ( current === 1 ) { 
