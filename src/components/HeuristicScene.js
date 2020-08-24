@@ -17,7 +17,7 @@ const intro = INTRO
 
 const heuristics = HEURISTICS
 
-class Sounds extends React.Component {
+export class Sounds extends React.Component {
 	chimes = new Howl({
     src: chimesAudio,
     autoplay: true,
@@ -35,7 +35,7 @@ class Sounds extends React.Component {
 /**
  * Navigation
  */
-function Navigation( { currentHeuristic, id, playAudio } ) {
+export function Navigation( { currentHeuristic, id, playAudio } ) {
 	// id is the page number in the web app
 	// currentHeuristic is ???
 	let [prev, next] = determineNextPrevNavigation(id, heuristics)
@@ -90,7 +90,7 @@ function Navigation( { currentHeuristic, id, playAudio } ) {
  * Heuristic Quote
  */
 
-function Quote( { currentHeuristic, heuristic } ) {
+export function Quote( { currentHeuristic, heuristic } ) {
 	return (
 		<div className="heuristic__quote"
 			style={{
@@ -107,7 +107,7 @@ function Quote( { currentHeuristic, heuristic } ) {
  * Sky
  */
 
-function Sky( { className, currentHeuristic } ) {
+export function Sky( { className, currentHeuristic } ) {
 	// Output elements to transform.
 	let items = [];
 	let numItems = 10;
