@@ -1,7 +1,7 @@
 import React from "react";
 import { configure, shallow, mount } from "enzyme";
 import toJson from "enzyme-to-json";
-import { HeuristicScene } from '../components/HeuristicScene.js'
+import { HeuristicScene, Mountain, Sky, Quote } from '../components/HeuristicScene.js'
 import Adapter from "enzyme-adapter-react-16";
 configure({ adapter: new Adapter() });
 
@@ -115,7 +115,12 @@ describe("HeuristicScene component", () => {
 
 })
 describe("Mountains component", () => {
-	test.todo("renders shallowly")
+	let className = "m";
+	let currentHeuristic = 1;
+	test("renders shallowly", (/*className="m", currentHeuristic=1*/) => {
+		shallow(<Mountain className="m"
+			currentHeuristic="1" />)
+	})
 	test.todo("renders fully")
 })
 describe("Sky component", () => {
