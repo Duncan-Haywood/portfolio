@@ -10,7 +10,7 @@ import {Howl} from 'howler'
  */
 
 // See constants/constants.js for the values of constants
-const colorSchemes = COLOR_SCHEMES
+const colorSchemesConst = COLOR_SCHEMES
 
 const intro = INTRO
 
@@ -28,7 +28,7 @@ function seed( number ) {
 	return seed;
 }
 
-function getRandomColor( seedNumber, scheme ) {
+function getRandomColor( seedNumber, scheme, colorSchemes=colorSchemes ) {
 	// seedNumber is the number to be randomized.
 	// scheme is the scheme from the array of color arrays to use.
 
@@ -51,12 +51,12 @@ function getRandomColor( seedNumber, scheme ) {
 	return colorSchemes[ colorScheme ][2][ colorFromScheme ];
 }
 
-function getDarkColor( scheme ) {
+function getDarkColor( scheme, colorSchemes=colorSchemesConst ) {
 	let colorScheme = scheme % colorSchemes.length;
 	return colorSchemes[ colorScheme ][0][0];
 }
 
-function getLightColor( scheme ) {
+function getLightColor( scheme, colorSchemes=colorSchemesConst ) {
 	let colorScheme = scheme % colorSchemes.length;
 	return colorSchemes[ colorScheme ][1][0];
 }
