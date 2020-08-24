@@ -59,3 +59,10 @@ describe("Navigation Component", () => {
 
 	test.todo("renders fully")
 })
+describe("HeuristicScene component", () => {
+
+	test.todo("renders shallowly")
+	test.todo("renders fully")
+
+})
+// describe("")
