@@ -29,10 +29,11 @@ const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
 	next = lastPageCaseNavigation(current, next, heuristics)
 	return [prev, next]
 }
-export const determineNextPrevNavigation = (id, heuristics)=>{
+const determineNextPrevNavigation = (id, heuristics)=>{
 	let current = parseInt( id );
 	let next = current + 1;
 	let prev = current - 1;
 	[prev, next] = handlesEdgeCaseNavigation(current, prev, next, heuristics);
 	return [prev, next]
 }
+export default determineNextPrevNavigation
