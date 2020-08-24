@@ -16,7 +16,7 @@ const firstPageCaseNavigation = (current, prev)=>{
 	}
 	return prev
 }
-const lastPageCaseNavigation = (current, heuristics) =>{
+const lastPageCaseNavigation = (current, next, heuristics) =>{
 	if ( current === heuristics.length ) {
 		//next page button goes to home pagge
 		next = "";
