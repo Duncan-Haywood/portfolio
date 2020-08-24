@@ -5,62 +5,17 @@ import UIfx from 'uifx'
 import waterDropAudio from '../sounds/water-drop-click-production.mp3'
 import chimesAudio from '../sounds/deep-chimes.mp3'
 import {Howl} from 'howler'
-import { determineNextPrevNavigation, determineCurrentHeuristicAndHeuristic, getCurrentNextHeuristicScene } from './HelperFunctions.js'
+import { determineNextPrevNavigation, determineCurrentHeuristicAndHeuristic, getCurrentNextHeuristicScene, getSeed, getRandomColor, getDarkColor, getLightColor  } from './HelperFunctions.js'
 /**
  * Global Variables
  */
 
 // See constants/constants.js for the values of constants
-const colorSchemesConst = COLOR_SCHEMES
+const colorSchemes = COLOR_SCHEMES
 
 const intro = INTRO
 
 const heuristics = HEURISTICS
-
-
-/**
- * Random Seed Functions
- */
-
-function seed( number ) {
-	number += 1138;
-	let seed = Math.sin( number ++ ) * 10000;
-	seed = seed - Math.floor( seed );
-	return seed;
-}
-
-function getRandomColor( seedNumber, scheme, colorSchemes=colorSchemesConst ) {
-	// seedNumber is the number to be randomized.
-	// scheme is the scheme from the array of color arrays to use.
-
-	// Note to self: by picking a number between 0 and 1 as the seed, 
-	// multiplying by the array length,
-	// it means you'll always pick a number in the array.
-
-	// Non-random color scheme.
-	// The % modulo operator ensures that the array starts again 
-	// from zero when a larger than array.length number is fed.
-	// 
-	// This makes it cycle through the available color arrays, 
-	// one after the other, and cycle when the array ends.
-	let colorScheme = scheme % colorSchemes.length;
-
-	// Store random color from that scheme.
-	let colorFromScheme = Math.floor( seed( seedNumber ) * 
-		colorSchemes[ colorScheme ][2].length );
-
-	return colorSchemes[ colorScheme ][2][ colorFromScheme ];
-}
-
-function getDarkColor( scheme, colorSchemes=colorSchemesConst ) {
-	let colorScheme = scheme % colorSchemes.length;
-	return colorSchemes[ colorScheme ][0][0];
-}
-
-function getLightColor( scheme, colorSchemes=colorSchemesConst ) {
-	let colorScheme = scheme % colorSchemes.length;
-	return colorSchemes[ colorScheme ][1][0];
-}
 
 class Sounds extends React.Component {
 	chimes = new Howl({
@@ -106,8 +61,8 @@ function Navigation( { currentHeuristic, id, playAudio } ) {
 			*/}
 			<div className="heuristics__navigation-next-prev"
 				style={{
-					backgroundColor: getDarkColor( currentHeuristic ),
-					color: getLightColor( currentHeuristic ),
+					backgroundColor: getDarkColor( currentHeuristic, colorSchemes ),
+					color: getLightColor( currentHeuristic, colorSchemes ),
 				}}>
 				<Link to={"/" + prev} onClick={playAudio}>
 					<svg xmlns="http://www.w3.org/2000/svg" 
@@ -139,8 +94,8 @@ function Quote( { currentHeuristic, heuristic } ) {
 	return (
 		<div className="heuristic__quote"
 			style={{
-				backgroundColor: getDarkColor( currentHeuristic ),
-				color: getLightColor( currentHeuristic ),
+				backgroundColor: getDarkColor( currentHeuristic, colorSchemes ),
+				color: getLightColor( currentHeuristic, colorSchemes ),
 			}}>
 			{ heuristic }
 		</div>
@@ -158,14 +113,14 @@ function Sky( { className, currentHeuristic } ) {
 	let numItems = 10;
 	let scaleMultiplier = 6;
 	for (var i = 1; i <= numItems; i++) {
-		let s1 = seed( seed( currentHeuristic ) * i );
-		let s2 = seed( seed( currentHeuristic ) * i + 1 );
-		let s3 = seed( seed( currentHeuristic ) * i + 2 );
-		let s4 = Math.round( seed( seed( currentHeuristic ) * i + 3 ) * 10 );
+		let s1 = getSeed( getSeed( currentHeuristic ) * i );
+		let s2 = getSeed( getSeed( currentHeuristic ) * i + 1 );
+		let s3 = getSeed( getSeed( currentHeuristic ) * i + 2 );
+		let s4 = Math.round( getSeed( getSeed( currentHeuristic ) * i + 3 ) * 10 );
 		items.push(
 			<span key={ i } style={{
 				backgroundColor: getRandomColor( i + 1 * currentHeuristic, 
-					currentHeuristic),
+					currentHeuristic, colorSchemes, getSeed),
 				left: ( 100 / numItems ) * i + "%",
 				top: 100 * s1 + "%",
 				transform: 
@@ -178,13 +133,13 @@ function Sky( { className, currentHeuristic } ) {
 		);
 	}
 
-	let perspectiveAlgo = Math.round( seed( currentHeuristic ) * 5 + 20 );
+	let perspectiveAlgo = Math.round( getSeed( currentHeuristic ) * 5 + 20 );
 
 	return (
 		<div className={ className }
 			style={{
 				backgroundColor: getRandomColor( currentHeuristic, 
-					currentHeuristic ),
+					currentHeuristic, colorSchemes, getSeed ),
 				perspective: perspectiveAlgo + 'px'
 				}}>
 			{ items }
@@ -201,9 +156,9 @@ function Mountain( { className, currentHeuristic } ) {
 	return (
 		<div className={ className }>
 			<div className="m__group" 
-				style={{ bottom: 60 * seed( currentHeuristic ) + "%" }}>
+				style={{ bottom: 60 * getSeed( currentHeuristic ) + "%" }}>
 				<svg className="m__group-bg" 
-					style={{ fill: getDarkColor( currentHeuristic ) }} 
+					style={{ fill: getDarkColor( currentHeuristic, colorSchemes ) }} 
 						width="100" height="200" viewBox="0 0 100 200">
 					<path d="M85 85L75 75 65 65V50L55 40V20L45 
 						30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 
@@ -222,7 +177,7 @@ function Mountain( { className, currentHeuristic } ) {
 				* the x,y coordinates the path is moved.
 				*/}
 				<svg className="m__group-fg" 
-					style={{ fill: getLightColor( currentHeuristic ) }} 
+					style={{ fill: getLightColor( currentHeuristic, colorSchemes ) }} 
 						width="100" height="200" viewBox="0 0 100 200">
 					<path opacity=".3" 
 						d="M50 145h10v-15H50v15zm15-45v15h10v-15H65zm-35 
