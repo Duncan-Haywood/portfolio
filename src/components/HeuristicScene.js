@@ -260,6 +260,24 @@ const getCurrentNextHeuristicScene = (id) => {
 	return [current, next]
 	}
 }
+const determineCurrentHeuristcAndHeuristic = (id) => {
+	// Show homepage or heuristic 
+	// where heuristic is one of the quotes from the top.
+	
+	let currentHeuristic = 1;
+	// the quote (heuristic) we use mathces the index of 
+	// the page upon which we are with the corresponding quote in 
+	// the list of heuristics from the top of the page
+	let heuristic = heuristics[currentHeuristic - 1];
+	if ( !currentHeuristic ) {
+		// the quote we use (heuristic) is 
+		// the intro text we defined at the top
+		heuristic = intro;
+		// the index of the quote text at which we are located
+		currentHeuristic = 0; // Must be zero.
+	}
+	return [currentHeuristic, heuristic]
+}
 export class HeuristicScene extends React.Component {
 	constructor(props) {
 		super(props)
@@ -282,23 +300,9 @@ export class HeuristicScene extends React.Component {
 
 	render() {
 		let id = parseInt( this.props.match.params.id );
-		let currentHeuristic = id;
-		let heuristic;
-
-		// Show homepage or heuristic 
-		// where heuristic is one of the quotes from the top.
-		if ( !currentHeuristic ) {
-			// the quote we use (heuristic) is 
-			// the intro text we defined at the top
-			heuristic = intro;
-			// the index of the quote text at which we are located
-			currentHeuristic = 0; // Must be zero.
-		} else {
-			// the quote (heuristic) we use mathces the index of 
-			// the page upon which we are with the corresponding quote in 
-			// the list of heuristics from the top of the page
-			heuristic = heuristics[currentHeuristic - 1];
-		}
+		let currentHeuristic, heuristic;
+		[currentHeuristic, heuristic] = determineCurrentHeuristcAndHeuristic(id)
+		
 
 		// Render.
 		return (
