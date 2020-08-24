@@ -1,3 +1,6 @@
+/*
+* Navigation helper functions
+*/
 const homePageCaseNavigation = (current, next, prev, heuristics)=>{
 	if ( !current ) { 
 	// home page has no id
