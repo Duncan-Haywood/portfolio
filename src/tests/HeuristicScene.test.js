@@ -1,6 +1,9 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { configure, shallow, mount } from "enzyme";
 import toJson from "enzyme-to-json";
+import { HeuristicScene } from '../components/HeuristicScene.js'
+import Adapter from "enzyme-adapter-react-16";
+configure({ adapter: new Adapter() });
 
 describe("HelperFunctions Navigation", () => {
 	test.todo("has no instantiated tests yet, and we are passing it anyways")
@@ -103,7 +106,10 @@ describe("Navigation Component", () => {
 	test.todo("renders fully")
 })
 describe("HeuristicScene component", () => {
-
+	// const id = 1
+	// test("renders shallowly", () => {
+	// 	shallow(<HeuristicScene id/>)
+	// });
 	test.todo("renders shallowly")
 	test.todo("renders fully")
 
