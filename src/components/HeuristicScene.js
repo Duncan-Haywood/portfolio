@@ -5,7 +5,7 @@ import UIfx from 'uifx'
 import waterDropAudio from '../sounds/water-drop-click-production.mp3'
 import chimesAudio from '../sounds/deep-chimes.mp3'
 import {Howl} from 'howler'
-import determineNextPrevNavigation from './HelperFunctions.js'
+import { determineNextPrevNavigation, determineCurrentHeuristicAndHeuristic, getCurrentNextHeuristicScene } from './HelperFunctions.js'
 /**
  * Global Variables
  */
@@ -249,35 +249,6 @@ function Mountain( { className, currentHeuristic } ) {
 /**
  * Output the Heuristic based on the URL
  */
-const getCurrentNextHeuristicScene = (id) => {
-	let current = parseInt( id );
-	let next = 1;
-	if ( !isNaN(current) ) {
-		next = current + 1;
-	}
-	if (current === heuristics.length ) {
-		next = "";
-	return [current, next]
-	}
-}
-const determineCurrentHeuristcAndHeuristic = (id) => {
-	// Show homepage or heuristic 
-	// where heuristic is one of the quotes from the top.
-	
-	let currentHeuristic = 1;
-	// the quote (heuristic) we use mathces the index of 
-	// the page upon which we are with the corresponding quote in 
-	// the list of heuristics from the top of the page
-	let heuristic = heuristics[currentHeuristic - 1];
-	if ( !currentHeuristic ) {
-		// the quote we use (heuristic) is 
-		// the intro text we defined at the top
-		heuristic = intro;
-		// the index of the quote text at which we are located
-		currentHeuristic = 0; // Must be zero.
-	}
-	return [currentHeuristic, heuristic]
-}
 export class HeuristicScene extends React.Component {
 	constructor(props) {
 		super(props)
@@ -291,7 +262,8 @@ export class HeuristicScene extends React.Component {
 
 		this.playWaterDrop()
 		let current, next;
-		[current, next] = getCurrentNextHeuristicScene( this.props.match.params.id )
+		let id = this.props.match.params.id
+		[current, next] = getCurrentNextHeuristicScene( id , heuristics )
 
 		// This should navigate to the next item.
 		this.props.history.push( '/' + next );
@@ -301,7 +273,7 @@ export class HeuristicScene extends React.Component {
 	render() {
 		let id = parseInt( this.props.match.params.id );
 		let currentHeuristic, heuristic;
-		[currentHeuristic, heuristic] = determineCurrentHeuristcAndHeuristic(id)
+		[currentHeuristic, heuristic] = determineCurrentHeuristicAndHeuristic(id, heuristics)
 		
 
 		// Render.

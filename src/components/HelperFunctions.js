@@ -45,10 +45,45 @@ const handlesStandardCaseNavigation= (id)=>{
 	return [current, prev, next]
 }
 //Main Function of Use
-const determineNextPrevNavigation = (id, heuristics)=>{
+export const determineNextPrevNavigation = (id, heuristics)=>{
 	let current, prev, next; //page indecies (integers) 
 	[current, prev, next] = handlesStandardCaseNavigation(id);
 	[prev, next] = handlesEdgeCaseNavigation(current, prev, next, heuristics);
 	return [prev, next]
 }
-export default determineNextPrevNavigation
+
+/* 
+* HeuristicScene Helper Methods 
+*/
+export const getCurrentNextHeuristicScene = (id, heuristics) => {
+	let current = parseInt( id );
+	let next = 1;
+	if ( !isNaN(current) ) {
+		next = current + 1;
+	}
+	if (current === heuristics.length ) {
+		next = "";
+	return [current, next]
+	}
+}
+export const determineCurrentHeuristicAndHeuristic = (id, heuristics) => {
+	// Show homepage or heuristic 
+	// where heuristic is one of the quotes from the top.
+	
+	let currentHeuristic = 1;
+	// the quote (heuristic) we use mathces the index of 
+	// the page upon which we are with the corresponding quote in 
+	// the list of heuristics from the top of the page
+	let heuristic = heuristics[currentHeuristic - 1];
+	if ( !currentHeuristic ) {
+		// the quote we use (heuristic) is 
+		// the intro text we defined at the top
+		heuristic = intro;
+		// the index of the quote text at which we are located
+		currentHeuristic = 0; // Must be zero.
+	}
+	return [currentHeuristic, heuristic]
+}
+
+
+export default determineNextPrevNavigation;
