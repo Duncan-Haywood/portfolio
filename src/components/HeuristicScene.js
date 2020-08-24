@@ -98,14 +98,12 @@ const firstPageCaseNavigation = (current, prev)=>{
 	return prev
 }
 const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
-		[prev, next] = homePageCaseNavigation(current, next, prev, heuristics)
-		prev = firstPageCaseNavigation(current, prev)	
-		// _last_page_case_navigation(current)
-		if ( current === heuristics.length ) {
-			//next page button goes to home pagge
-			next = "";
-		}
-		return [prev, next]
+	[prev, next] = homePageCaseNavigation(current, next, prev, heuristics)
+	prev = firstPageCaseNavigation(current, prev)	
+	// _last_page_case_navigation(current)
+	if ( current === heuristics.length ) {
+		//next page button goes to home pagge
+		next = "";
 	}
 function Navigation( { currentHeuristic, id, playAudio } ) {
 	// id is the page number in the web app
