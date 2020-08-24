@@ -84,6 +84,3 @@ export const determineCurrentHeuristicAndHeuristic = (id, heuristics) => {
 	}
 	return [currentHeuristic, heuristic]
 }
-
-
-export default determineNextPrevNavigation;
