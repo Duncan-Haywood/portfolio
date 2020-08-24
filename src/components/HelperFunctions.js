@@ -26,7 +26,7 @@ const lastPageCaseNavigation = (current, next, heuristics) =>{
 const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
 	[prev, next] = homePageCaseNavigation(current, next, prev, heuristics)
 	prev = firstPageCaseNavigation(current, prev)	
-	next = lastPageCaseNavigation(current, heuristics)
+	next = lastPageCaseNavigation(current, next, heuristics)
 	return [prev, next]
 }
 export const determineNextPrevNavigation = (id, heuristics)=>{
