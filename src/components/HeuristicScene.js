@@ -249,7 +249,17 @@ function Mountain( { className, currentHeuristic } ) {
 /**
  * Output the Heuristic based on the URL
  */
-
+const getCurrentNextHeuristicScene = (id) => {
+	let current = parseInt( id );
+	let next = 1;
+	if ( !isNaN(current) ) {
+		next = current + 1;
+	}
+	if (current === heuristics.length ) {
+		next = "";
+	return [current, next]
+	}
+}
 export class HeuristicScene extends React.Component {
 	constructor(props) {
 		super(props)
@@ -262,15 +272,8 @@ export class HeuristicScene extends React.Component {
 		e.preventDefault()
 
 		this.playWaterDrop()
-		let current = parseInt( this.props.match.params.id );
-		let next = 1;
-
-		if ( !isNaN(current) ) {
-			next = current + 1;
-		}
-		if (current === heuristics.length ) {
-			next = "";
-		}
+		let current, next;
+		[current, next] = getCurrentNextHeuristicScene( this.props.match.params.id )
 
 		// This should navigate to the next item.
 		this.props.history.push( '/' + next );
