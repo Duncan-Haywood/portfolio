@@ -117,10 +117,11 @@ describe("HeuristicScene component", () => {
 describe("Mountains component", () => {
 	let className = "m";
 	let currentHeuristic = 1;
-	test("renders shallowly", (/*className="m", currentHeuristic=1*/) => {
-		shallow(<Mountain className="m"
-			currentHeuristic="1" />)
+	test("renders shallowly", (className="m", currentHeuristic=1) => {
+		shallow(<Mountain className={ className }
+			currentHeuristic={ currentHeuristic } />)
 	})
+	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
 	test.todo("renders fully")
 })
 describe("Sky component", () => {
