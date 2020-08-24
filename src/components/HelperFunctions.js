@@ -36,9 +36,7 @@ const handlesStandardCaseNavigation= (id)=>{
 	return [current, prev, next]
 }
 const determineNextPrevNavigation = (id, heuristics)=>{
-	let current;
-	let prev;
-	let next; //page indecies (integers) 
+	let current, prev, next; //page indecies (integers) 
 	[current, prev, next] = handlesStandardCaseNavigation(id);
 	[prev, next] = handlesEdgeCaseNavigation(current, prev, next, heuristics);
 	return [prev, next]
