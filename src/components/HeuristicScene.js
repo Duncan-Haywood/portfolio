@@ -100,11 +100,14 @@ const firstPageCaseNavigation = (current, prev)=>{
 const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
 	[prev, next] = homePageCaseNavigation(current, next, prev, heuristics)
 	prev = firstPageCaseNavigation(current, prev)	
-	// _last_page_case_navigation(current)
-	if ( current === heuristics.length ) {
-		//next page button goes to home pagge
-		next = "";
+	const lastPageCaseNavigation = (current, heuristics) =>{
+		if ( current === heuristics.length ) {
+			//next page button goes to home pagge
+			next = "";
+		}
+		return next
 	}
+	next = lastPageCaseNavigation(current, heuristics)
 	return [prev, next]
 }
 const determineNextPrevNavigation = (id, heuristics)=>{
