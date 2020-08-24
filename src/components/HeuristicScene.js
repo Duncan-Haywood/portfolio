@@ -105,13 +105,19 @@ const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
 		//next page button goes to home pagge
 		next = "";
 	}
-function Navigation( { currentHeuristic, id, playAudio } ) {
-	// id is the page number in the web app
-	// currentHeuristic is ???
+	return [prev, next]
+}
+const determineNextPrevNavigation = (id, heuristics)=>{
 	let current = parseInt( id );
 	let next = current + 1;
 	let prev = current - 1;
 	[prev, next] = handlesEdgeCaseNavigation(current, prev, next, heuristics);
+	return [prev, next]
+}
+function Navigation( { currentHeuristic, id, playAudio } ) {
+	// id is the page number in the web app
+	// currentHeuristic is ???
+	let [prev, next] = determineNextPrevNavigation(id, heuristics)
 	return (
 		<>
 			{/*comment: 
