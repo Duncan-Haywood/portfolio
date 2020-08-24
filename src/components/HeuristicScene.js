@@ -5,6 +5,7 @@ import UIfx from 'uifx'
 import waterDropAudio from '../sounds/water-drop-click-production.mp3'
 import chimesAudio from '../sounds/deep-chimes.mp3'
 import {Howl} from 'howler'
+import determineNextPrevNavigation from './HelperFunctions.js'
 /**
  * Global Variables
  */
