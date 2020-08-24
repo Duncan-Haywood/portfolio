@@ -28,7 +28,7 @@ function seed( number ) {
 	return seed;
 }
 
-function getRandomColor( seedNumber, scheme, colorSchemes=colorSchemes ) {
+function getRandomColor( seedNumber, scheme, colorSchemes=colorSchemesConst ) {
 	// seedNumber is the number to be randomized.
 	// scheme is the scheme from the array of color arrays to use.
 
