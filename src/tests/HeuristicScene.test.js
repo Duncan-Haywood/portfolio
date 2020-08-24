@@ -1,6 +1,7 @@
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 configure({ adapter: new Adapter() });
+
 describe("HelperFunctions Navigation", () => {
 	test.todo("has no instantiated tests yet, and we are passing it anyways")
 	test.todo("homePageCaseNavigation") /*= (current, next, prev, heuristics)=>{
@@ -50,4 +51,11 @@ describe("HelperFunctions Navigation", () => {
 		[current, prev, next] = handlesStandardCaseNavigation(id);
 		[prev, next] = handlesEdgeCaseNavigation(current, prev, next, heuristics);
 		return [prev, next]*/
+})
+
+describe("Navigation Component", () => {
+
+	test.todo("renders shallowly")
+
+	test.todo("renders fully")
 })
