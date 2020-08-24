@@ -152,7 +152,7 @@ function Sky( { className, currentHeuristic } ) {
  * Mountain
  */
 
-function Mountain( { className, currentHeuristic } ) {
+export function Mountain( { className, currentHeuristic } ) {
 	return (
 		<div className={ className }>
 			<div className="m__group" 
