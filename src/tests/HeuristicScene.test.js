@@ -65,4 +65,20 @@ describe("HeuristicScene component", () => {
 	test.todo("renders fully")
 
 })
-// describe("")
+describe("Mountains component", () => {
+	test.todo("renders shallowly")
+	test.todo("renders fully")
+})
+describe("Sky component", () => {
+	test.todo("renders shallowly")
+	test.todo("renders fully")
+})
+describe("Quote component", () => {
+	test.todo("renders shallowly")
+	test.todo("renders fully")
+})
+describe("Sounds component -- to be reworked", () => {
+	test.todo("renders shallowly")
+	test.todo("renders fully")
+})
+
