@@ -17,19 +17,18 @@ const intro = INTRO
 
 const heuristics = HEURISTICS
 
-export class Sounds extends React.Component {
-	chimes = new Howl({
+export function Sounds() {
+	let chimes = new Howl({
     src: chimesAudio,
     autoplay: true,
     loop: true,
     volume: 0.03
     })
-    playChimes = () => this.chimes.play()
-	render(){
-		return(
-			<></>
-		);
-	}
+    let playChimes = () => chimes.play()
+    playChimes()
+	return(
+		<></>
+	);
 }
 
 /**
