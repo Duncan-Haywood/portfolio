@@ -6,13 +6,19 @@ import Adapter from "enzyme-adapter-react-16";
 configure({ adapter: new Adapter() });
 
 it("renders shallowly without crashing", () => {
-  shallow(<App />);
+  	shallow(<App />);
 });
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+	const div = document.createElement('div');
+	ReactDOM.render(<App />, div);
+  	ReactDOM.unmountComponentAtNode(div);
 });
+
+test.todo('mounts without errors'/* () => {}
+	const wrapper = mount(<App />);
+  	expect(wrapper.state("error")).toEqual(null);
+}*/
+)
 
 test.todo("")
