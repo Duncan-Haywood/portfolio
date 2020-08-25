@@ -233,6 +233,7 @@ export class HeuristicScene extends React.Component {
 		// Render.
 		return (
 			<>
+				{/*Navigation and quotes*/}
 				<h1>A space of peace and art.</h1>
 				<Sounds />
 				<Navigation id={ id } 
@@ -241,7 +242,7 @@ export class HeuristicScene extends React.Component {
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
 				<Quote currentHeuristic={ currentHeuristic } 
 					heuristic={ heuristic } />
-
+					{/*background*/}
 				<section className="heuristic" onClick={ this.handleClick }>
 					<Sky className="heuristic__primary" 
 						currentHeuristic={ currentHeuristic } />
