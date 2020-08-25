@@ -227,7 +227,7 @@ export class HeuristicScene extends React.Component {
 	render() {
 		let id = parseInt( this.props.match.params.id );
 		let currentHeuristic, heuristic;
-		[currentHeuristic, heuristic] = determineCurrentHeuristicAndHeuristic(id, heuristics)
+		[currentHeuristic, heuristic] = determineCurrentHeuristicAndHeuristic(id, heuristics, intro)
 		
 
 		// Render.
