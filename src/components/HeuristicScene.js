@@ -215,7 +215,7 @@ export class HeuristicScene extends React.Component {
 		e.preventDefault()
 
 		this.playWaterDrop()
-		let current, next;
+		let next;
 		let id = this.props.match.params.id
 		next = getCurrentNextHeuristicScene( id , heuristics )
 
