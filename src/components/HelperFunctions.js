@@ -115,7 +115,7 @@ export const getCurrentNextHeuristicScene = (id, heuristics) => {
 	return next
 	}
 }
-export const determineCurrentHeuristicAndHeuristic = (id, heuristics) => {
+export const determineCurrentHeuristicAndHeuristic = (id, heuristics, intro) => {
 	// Show homepage or heuristic 
 	// where heuristic is one of the quotes from the top.
 	
