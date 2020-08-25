@@ -216,8 +216,8 @@ export class HeuristicScene extends React.Component {
 
 		this.playWaterDrop()
 		let current, next;
--		let id = this.props.match.params.id
--		next = getCurrentNextHeuristicScene( id , heuristics )
+		let id = this.props.match.params.id
+		next = getCurrentNextHeuristicScene( id , heuristics )
 
 		// This should navigate to the next item.
 		this.props.history.push( '/' + next );
