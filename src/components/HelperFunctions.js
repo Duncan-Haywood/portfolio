@@ -112,7 +112,7 @@ export const getCurrentNextHeuristicScene = (id, heuristics) => {
 	}
 	if (current === heuristics.length ) {
 		next = "";
-	return [current, next]
+	return next
 	}
 }
 export const determineCurrentHeuristicAndHeuristic = (id, heuristics) => {
