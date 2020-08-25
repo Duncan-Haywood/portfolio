@@ -5,36 +5,82 @@ import UIfx from 'uifx'
 import waterDropAudio from '../sounds/water-drop-click-production.mp3'
 import chimesAudio from '../sounds/deep-chimes.mp3'
 import {Howl} from 'howler'
-import { determineNextPrevNavigation, determineCurrentHeuristicAndHeuristic, getCurrentNextHeuristicScene, getSeed, getRandomColor, getDarkColor, getLightColor  } from './HelperFunctions.js'
+import determineNextPrevNavigation from './HelperFunctions.js'
 /**
  * Global Variables
  */
 
 // See constants/constants.js for the values of constants
-const colorSchemes = COLOR_SCHEMES
+const colorSchemesConst = COLOR_SCHEMES
 
 const intro = INTRO
 
 const heuristics = HEURISTICS
 
-export function Sounds() {
-	let chimes = new Howl({
+
+/**
+ * Random Seed Functions
+ */
+
+function seed( number ) {
+	number += 1138;
+	let seed = Math.sin( number ++ ) * 10000;
+	seed = seed - Math.floor( seed );
+	return seed;
+}
+
+function getRandomColor( seedNumber, scheme, colorSchemes=colorSchemesConst ) {
+	// seedNumber is the number to be randomized.
+	// scheme is the scheme from the array of color arrays to use.
+
+	// Note to self: by picking a number between 0 and 1 as the seed, 
+	// multiplying by the array length,
+	// it means you'll always pick a number in the array.
+
+	// Non-random color scheme.
+	// The % modulo operator ensures that the array starts again 
+	// from zero when a larger than array.length number is fed.
+	// 
+	// This makes it cycle through the available color arrays, 
+	// one after the other, and cycle when the array ends.
+	let colorScheme = scheme % colorSchemes.length;
+
+	// Store random color from that scheme.
+	let colorFromScheme = Math.floor( seed( seedNumber ) * 
+		colorSchemes[ colorScheme ][2].length );
+
+	return colorSchemes[ colorScheme ][2][ colorFromScheme ];
+}
+
+function getDarkColor( scheme, colorSchemes=colorSchemesConst ) {
+	let colorScheme = scheme % colorSchemes.length;
+	return colorSchemes[ colorScheme ][0][0];
+}
+
+function getLightColor( scheme, colorSchemes=colorSchemesConst ) {
+	let colorScheme = scheme % colorSchemes.length;
+	return colorSchemes[ colorScheme ][1][0];
+}
+
+class Sounds extends React.Component {
+	chimes = new Howl({
     src: chimesAudio,
     autoplay: true,
     loop: true,
     volume: 0.03
     })
-    let playChimes = () => chimes.play()
-    playChimes()
-	return(
-		<></>
-	);
+    playChimes = () => this.chimes.play()
+	render(){
+		return(
+			<></>
+		);
+	}
 }
 
 /**
  * Navigation
  */
-export function Navigation( { currentHeuristic, id, playAudio } ) {
+function Navigation( { currentHeuristic, id, playAudio } ) {
 	// id is the page number in the web app
 	// currentHeuristic is ???
 	let [prev, next] = determineNextPrevNavigation(id, heuristics)
@@ -60,8 +106,8 @@ export function Navigation( { currentHeuristic, id, playAudio } ) {
 			*/}
 			<div className="heuristics__navigation-next-prev"
 				style={{
-					backgroundColor: getDarkColor( currentHeuristic, colorSchemes ),
-					color: getLightColor( currentHeuristic, colorSchemes ),
+					backgroundColor: getDarkColor( currentHeuristic ),
+					color: getLightColor( currentHeuristic ),
 				}}>
 				<Link to={"/" + prev} onClick={playAudio}>
 					<svg xmlns="http://www.w3.org/2000/svg" 
@@ -89,12 +135,12 @@ export function Navigation( { currentHeuristic, id, playAudio } ) {
  * Heuristic Quote
  */
 
-export function Quote( { currentHeuristic, heuristic } ) {
+function Quote( { currentHeuristic, heuristic } ) {
 	return (
 		<div className="heuristic__quote"
 			style={{
-				backgroundColor: getDarkColor( currentHeuristic, colorSchemes ),
-				color: getLightColor( currentHeuristic, colorSchemes ),
+				backgroundColor: getDarkColor( currentHeuristic ),
+				color: getLightColor( currentHeuristic ),
 			}}>
 			{ heuristic }
 		</div>
@@ -106,20 +152,20 @@ export function Quote( { currentHeuristic, heuristic } ) {
  * Sky
  */
 
-export function Sky( { className, currentHeuristic } ) {
+function Sky( { className, currentHeuristic } ) {
 	// Output elements to transform.
 	let items = [];
 	let numItems = 10;
 	let scaleMultiplier = 6;
 	for (var i = 1; i <= numItems; i++) {
-		let s1 = getSeed( getSeed( currentHeuristic ) * i );
-		let s2 = getSeed( getSeed( currentHeuristic ) * i + 1 );
-		let s3 = getSeed( getSeed( currentHeuristic ) * i + 2 );
-		let s4 = Math.round( getSeed( getSeed( currentHeuristic ) * i + 3 ) * 10 );
+		let s1 = seed( seed( currentHeuristic ) * i );
+		let s2 = seed( seed( currentHeuristic ) * i + 1 );
+		let s3 = seed( seed( currentHeuristic ) * i + 2 );
+		let s4 = Math.round( seed( seed( currentHeuristic ) * i + 3 ) * 10 );
 		items.push(
 			<span key={ i } style={{
 				backgroundColor: getRandomColor( i + 1 * currentHeuristic, 
-					currentHeuristic, colorSchemes, getSeed),
+					currentHeuristic),
 				left: ( 100 / numItems ) * i + "%",
 				top: 100 * s1 + "%",
 				transform: 
@@ -132,13 +178,13 @@ export function Sky( { className, currentHeuristic } ) {
 		);
 	}
 
-	let perspectiveAlgo = Math.round( getSeed( currentHeuristic ) * 5 + 20 );
+	let perspectiveAlgo = Math.round( seed( currentHeuristic ) * 5 + 20 );
 
 	return (
 		<div className={ className }
 			style={{
 				backgroundColor: getRandomColor( currentHeuristic, 
-					currentHeuristic, colorSchemes, getSeed ),
+					currentHeuristic ),
 				perspective: perspectiveAlgo + 'px'
 				}}>
 			{ items }
@@ -151,13 +197,13 @@ export function Sky( { className, currentHeuristic } ) {
  * Mountain
  */
 
-export function Mountain( { className, currentHeuristic } ) {
+function Mountain( { className, currentHeuristic } ) {
 	return (
 		<div className={ className }>
 			<div className="m__group" 
-				style={{ bottom: 60 * getSeed( currentHeuristic ) + "%" }}>
+				style={{ bottom: 60 * seed( currentHeuristic ) + "%" }}>
 				<svg className="m__group-bg" 
-					style={{ fill: getDarkColor( currentHeuristic, colorSchemes ) }} 
+					style={{ fill: getDarkColor( currentHeuristic ) }} 
 						width="100" height="200" viewBox="0 0 100 200">
 					<path d="M85 85L75 75 65 65V50L55 40V20L45 
 						30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 
@@ -176,7 +222,7 @@ export function Mountain( { className, currentHeuristic } ) {
 				* the x,y coordinates the path is moved.
 				*/}
 				<svg className="m__group-fg" 
-					style={{ fill: getLightColor( currentHeuristic, colorSchemes ) }} 
+					style={{ fill: getLightColor( currentHeuristic ) }} 
 						width="100" height="200" viewBox="0 0 100 200">
 					<path opacity=".3" 
 						d="M50 145h10v-15H50v15zm15-45v15h10v-15H65zm-35 
@@ -203,6 +249,7 @@ export function Mountain( { className, currentHeuristic } ) {
 /**
  * Output the Heuristic based on the URL
  */
+
 export class HeuristicScene extends React.Component {
 	constructor(props) {
 		super(props)
@@ -215,9 +262,15 @@ export class HeuristicScene extends React.Component {
 		e.preventDefault()
 
 		this.playWaterDrop()
-		let next;
-		let id = this.props.match.params.id
-		next = getCurrentNextHeuristicScene( id , heuristics )
+		let current = parseInt( this.props.match.params.id );
+		let next = 1;
+
+		if ( !isNaN(current) ) {
+			next = current + 1;
+		}
+		if (current === heuristics.length ) {
+			next = "";
+		}
 
 		// This should navigate to the next item.
 		this.props.history.push( '/' + next );
@@ -226,14 +279,27 @@ export class HeuristicScene extends React.Component {
 
 	render() {
 		let id = parseInt( this.props.match.params.id );
-		let currentHeuristic, heuristic;
-		[currentHeuristic, heuristic] = determineCurrentHeuristicAndHeuristic(id, heuristics, intro)
-		
+		let currentHeuristic = id;
+		let heuristic;
+
+		// Show homepage or heuristic 
+		// where heuristic is one of the quotes from the top.
+		if ( !currentHeuristic ) {
+			// the quote we use (heuristic) is 
+			// the intro text we defined at the top
+			heuristic = intro;
+			// the index of the quote text at which we are located
+			currentHeuristic = 0; // Must be zero.
+		} else {
+			// the quote (heuristic) we use mathces the index of 
+			// the page upon which we are with the corresponding quote in 
+			// the list of heuristics from the top of the page
+			heuristic = heuristics[currentHeuristic - 1];
+		}
 
 		// Render.
 		return (
 			<>
-				{/*Navigation and quotes*/}
 				<h1>A space of peace and art.</h1>
 				<Sounds />
 				<Navigation id={ id } 
@@ -242,7 +308,7 @@ export class HeuristicScene extends React.Component {
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
 				<Quote currentHeuristic={ currentHeuristic } 
 					heuristic={ heuristic } />
-					{/*background*/}
+
 				<section className="heuristic" onClick={ this.handleClick }>
 					<Sky className="heuristic__primary" 
 						currentHeuristic={ currentHeuristic } />

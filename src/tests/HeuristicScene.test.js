@@ -1,10 +1,6 @@
 import React from "react";
-import { configure, shallow, mount } from "enzyme";
+import { shallow, mount } from "enzyme";
 import toJson from "enzyme-to-json";
-import { HeuristicScene, Mountain, Sky, Quote } from '../components/HeuristicScene.js'
-import Adapter from "enzyme-adapter-react-16";
-import HEURISTICS from 'constants'
-configure({ adapter: new Adapter() });
 
 describe("HelperFunctions Navigation", () => {
 	test.todo("has no instantiated tests yet, and we are passing it anyways")
@@ -107,45 +103,20 @@ describe("Navigation Component", () => {
 	test.todo("renders fully")
 })
 describe("HeuristicScene component", () => {
-	// const id = 1
-	// test("renders shallowly", () => {
-	// 	shallow(<HeuristicScene id/>)
-	// });
+
 	test.todo("renders shallowly")
 	test.todo("renders fully")
 
 })
 describe("Mountains component", () => {
-	// let className = "m";
-	// let currentHeuristic = 1;
-	test("renders shallowly", (className="m", currentHeuristic=1) => {
-		shallow(<Mountain className={ className }
-			currentHeuristic={ currentHeuristic } />)
-	})
-
-	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
+	test.todo("renders shallowly")
 	test.todo("renders fully")
 })
 describe("Sky component", () => {
-	// let className = "heuristic__primary";
-	// let currentHeuristic = 1;
-	test("renders shallowly", (className="heuristic__primary", currentHeuristic=1) => {
-		shallow(<Sky className={ className }
-			currentHeuristic={ currentHeuristic } />)
-	})
-
-	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
+	test.todo("renders shallowly")
 	test.todo("renders fully")
 })
 describe("Quote component", () => {
-	// let className = "heuristic__primary";
-	// let currentHeuristic = 1;
-	test("renders shallowly", (currentHeuristic=1, heuristic=HEURISTICS[0]) => {
-		shallow(<Quote currentHeuristic={ currentHeuristic } 
-					heuristic={ heuristic } />)
-	})
-	
-	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
 	test.todo("renders shallowly")
 	test.todo("renders fully")
 })
