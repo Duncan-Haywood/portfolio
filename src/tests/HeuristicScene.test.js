@@ -3,6 +3,7 @@ import { configure, shallow, mount } from "enzyme";
 import toJson from "enzyme-to-json";
 import { HeuristicScene, Mountain, Sky, Quote } from '../components/HeuristicScene.js'
 import Adapter from "enzyme-adapter-react-16";
+import HEURISTICS from 'constants'
 configure({ adapter: new Adapter() });
 
 describe("HelperFunctions Navigation", () => {
