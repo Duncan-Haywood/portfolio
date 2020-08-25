@@ -207,6 +207,7 @@ export class HeuristicScene extends React.Component {
 	constructor(props) {
 		super(props)
 		this.handleClick = this.handleClick.bind(this)
+	 	this.ID = this.props.match.params.id
 	}
 	waterDrop = new UIfx(waterDropAudio);
 	playWaterDrop = () => {this.waterDrop.play(0.25)}
@@ -225,9 +226,8 @@ export class HeuristicScene extends React.Component {
 	}
 
 	render() {
-		let id = parseInt( this.props.match.params.id );
 		let currentHeuristic, heuristic;
-		[currentHeuristic, heuristic] = determineCurrentHeuristicAndHeuristic(id, heuristics, intro)
+		[currentHeuristic, heuristic] = determineCurrentHeuristicAndHeuristic(this.ID, heuristics, intro)
 		
 
 		// Render.
@@ -235,7 +235,7 @@ export class HeuristicScene extends React.Component {
 			<>
 				<h1>A space of peace and art.</h1>
 				<Sounds />
-				<Navigation id={ id } 
+				<Navigation id={ this.ID } 
 					currentHeuristic={ currentHeuristic } 
 					playAudio={ this.playWaterDrop }/>
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
