@@ -115,20 +115,36 @@ describe("HeuristicScene component", () => {
 
 })
 describe("Mountains component", () => {
-	let className = "m";
-	let currentHeuristic = 1;
+	// let className = "m";
+	// let currentHeuristic = 1;
 	test("renders shallowly", (className="m", currentHeuristic=1) => {
 		shallow(<Mountain className={ className }
 			currentHeuristic={ currentHeuristic } />)
 	})
+
 	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
 	test.todo("renders fully")
 })
 describe("Sky component", () => {
-	test.todo("renders shallowly")
+	// let className = "heuristic__primary";
+	// let currentHeuristic = 1;
+	test("renders shallowly", (className="heuristic__primary", currentHeuristic=1) => {
+		shallow(<Sky className={ className }
+			currentHeuristic={ currentHeuristic } />)
+	})
+
+	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
 	test.todo("renders fully")
 })
 describe("Quote component", () => {
+	// let className = "heuristic__primary";
+	// let currentHeuristic = 1;
+	test("renders shallowly", (currentHeuristic=1, heuristic=HEURISTICS[0]) => {
+		shallow(<Quote currentHeuristic={ currentHeuristic } 
+					heuristic={ heuristic } />)
+	})
+	
+	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
 	test.todo("renders shallowly")
 	test.todo("renders fully")
 })
