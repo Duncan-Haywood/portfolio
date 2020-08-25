@@ -216,8 +216,8 @@ export class HeuristicScene extends React.Component {
 
 		this.playWaterDrop()
 		let next;
-		let id = this.props.match.params.id
-		next = getCurrentNextHeuristicScene( id , heuristics )
+		// let id = this.props.match.params.id
+		next = getCurrentNextHeuristicScene( this.props.match.params.id , heuristics )
 
 		// This should navigate to the next item.
 		this.props.history.push( '/' + next );
@@ -225,9 +225,9 @@ export class HeuristicScene extends React.Component {
 	}
 
 	render() {
-		let id = parseInt( this.props.match.params.id );
+		// let id = parseInt( this.props.match.params.id );
 		let currentHeuristic, heuristic;
-		[currentHeuristic, heuristic] = determineCurrentHeuristicAndHeuristic(id, heuristics, intro)
+		[currentHeuristic, heuristic] = determineCurrentHeuristicAndHeuristic(this.props.match.params.id, heuristics, intro)
 		
 
 		// Render.
@@ -236,7 +236,7 @@ export class HeuristicScene extends React.Component {
 				{/*Navigation and quotes*/}
 				<h1>A space of peace and art.</h1>
 				<Sounds />
-				<Navigation id={ id } 
+				<Navigation id={ this.props.match.params.id } 
 					currentHeuristic={ currentHeuristic } 
 					playAudio={ this.playWaterDrop }/>
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
