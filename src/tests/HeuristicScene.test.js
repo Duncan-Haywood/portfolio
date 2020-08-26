@@ -8,7 +8,7 @@ import HEURISTICS from 'constants'
 configure({ adapter: new Adapter() });
 
 describe("HelperFunctions Navigation", () => {
-	test.todo("has no instantiated tests yet, and we are passing it anyways")
+	test.todo("has few instantiated tests yet, and we are passing it anyways")
 	
 	test.todo("homePageCaseNavigation")/*, (current="", next=, prev, heuristics)=>{
 		if ( !current ) { 
