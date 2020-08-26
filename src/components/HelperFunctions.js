@@ -94,7 +94,7 @@ const handlesStandardCaseNavigation= (id)=>{
 	return [current, prev, next]
 }
 //Main Function of Use
-export const determineNextPrevNavigation = (id, heuristics)=>{
+export const determineNextPrevNavigation = (id, heuristics)=>{ // id is the id the router passes to the function
 	let current, prev, next; //page indecies (integers) 
 	[current, prev, next] = handlesStandardCaseNavigation(id);
 	[prev, next] = handlesEdgeCaseNavigation(current, prev, next, heuristics);
