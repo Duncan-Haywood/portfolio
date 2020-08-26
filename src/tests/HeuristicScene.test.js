@@ -45,14 +45,20 @@ describe("HelperFunctions Navigation", () => {
 		return [prev, next]
 	}*/
 	//Second Layer into Abstraction
-	test("handlesStandardCaseNavigation", (id="", expected=["",HEURISTICS.length,1])=>{
+	const tableHandlesStandardCaseNavigation = [
+	["", ["",HEURISTICS.length,1]],
+	[1, [1,"",2]],
+	[2, [2,1,3]],
+	[HEURISTICS.length, [HEURISTICS.length, HEURISTICS.length-1,""]]]
+	test.each(tableHandlesStandardCaseNavigation)("handlesStandardCaseNavigation", (id="", expected=["",HEURISTICS.length,1])=>{
 		const returnedCurrentPrevNext = handlesStandardCaseNavigation(id);
 		const expectedCurrentPrevNext = expected;
 		expect(returnedCurrentPrevNext).toEqual(expectedCurrentPrevNext);
 	});
 	
 	// for each testing table, [id, expectedOutput=[prev,next]]
-	const tableDetermineNextPrevNavigation = [["", [HEURISTICS.length,1]],
+	const tableDetermineNextPrevNavigation = [
+	["", [HEURISTICS.length,1]],
 	[1, ["",2]],
 	[2, [1,3]],
 	[HEURISTICS.length, [HEURISTICS.length-1,""]]]
