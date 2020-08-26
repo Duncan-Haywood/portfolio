@@ -2,7 +2,7 @@ import React from "react";
 import { configure, shallow, mount } from "enzyme";
 import toJson from "enzyme-to-json";
 import { HeuristicScene, Mountain, Sky, Quote } from '../components/HeuristicScene.js'
-import { getCurrentNextHeuristicScene, determineNextPrevNavigation  } from '../components/HelperFunctions.js'
+import { getCurrentNextHeuristicScene, determineNextPrevNavigation, handlesStandardCaseNavigation  } from '../components/HelperFunctions.js'
 import Adapter from "enzyme-adapter-react-16";
 import HEURISTICS from 'constants'
 configure({ adapter: new Adapter() });
@@ -45,14 +45,19 @@ describe("HelperFunctions Navigation", () => {
 		return [prev, next]
 	}*/
 	//Second Layer into Abstraction
-	test.todo("handlesStandardCaseNavigation")/*= (id)=>{
-		let current = parseInt( id );
-		let next = current + 1;
-		let prev = current - 1;
-		return [current, prev, next]
-	}*/
+	test("handlesStandardCaseNavigation", (id="", expected=["",HEURISTICS.length,1])=>{
+		const returnedCurrentPrevNext = handlesStandardCaseNavigation(id);
+		const expectedCurrentPrevNext = expected;
+		expect(returnedCurrentPrevNext).toEqual(expectedCurrentPrevNext);
+	});
+	
+	// for each testing table, [id, expectedOutput=[prev,next]]
+	const tableDetermineNextPrevNavigation = [["", [HEURISTICS.length,1]],
+	[1, ["",2]],
+	[2, [1,3]],
+	[HEURISTICS.length, [HEURISTICS.length-1,""]]]
 	//Main Function of Use
-	test("determineNextPrevNavigation", (id="", expected=[HEURISTICS.length,1], heuristics=HEURISTICS)=>{
+	test.each(tableDetermineNextPrevNavigation)("determineNextPrevNavigation", (id="", expected=[HEURISTICS.length,1], heuristics=HEURISTICS)=>{
 		const returnedPrevNext = determineNextPrevNavigation(id, heuristics)
 		const expectedPrevNext = expected;
 		expect(returnedPrevNext).toEqual(expectedPrevNext);
