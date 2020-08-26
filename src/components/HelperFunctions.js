@@ -105,15 +105,18 @@ export const determineNextPrevNavigation = (id, heuristics)=>{
 * HeuristicScene Helper Methods 
 */
 export const getCurrentNextHeuristicScene = (id, heuristics) => {
-	let current = parseInt( id );
+	let current = id;
 	let next = 1;
+	// current is a number
 	if ( !isNaN(current) ) {
 		next = current + 1;
 	}
+	//case of lastPageCaseNavigation()
 	if (current === heuristics.length ) {
+		// next is the home page
 		next = "";
-	return next
 	}
+	return next;
 }
 export const determineCurrentHeuristicAndHeuristic = (id, heuristics, intro) => {
 	// Show homepage or heuristic 
