@@ -2,6 +2,7 @@ import React from "react";
 import { configure, shallow, mount } from "enzyme";
 import toJson from "enzyme-to-json";
 import { HeuristicScene, Mountain, Sky, Quote } from '../components/HeuristicScene.js'
+import { getCurrentNextHeuristicScene,  } from '../components/HelperFunctions.js'
 import Adapter from "enzyme-adapter-react-16";
 import HEURISTICS from 'constants'
 configure({ adapter: new Adapter() });
@@ -100,6 +101,16 @@ describe("HelperFunctions colors", () => {
 	}*/
 
 })
+const lastHeuristicsIndex = HEURISTICS.length-1
+const tableGetCurrentNextHeuristicScene = [["", 1], [1, 2], [lastHeuristicsIndex, ""]]
+describe("helperFunctions HeuristicScene", () => {
+	
+	test.each(tableGetCurrentNextHeuristicScene)("getCurrentNextHeuristicScene", (id="", expected=1, heuristics=HEURISTICS ) => {
+		let resultNext = getCurrentNextHeuristicScene(id, heuristics)
+		let expectedNext = expected
+		expect(resultNext).toEqual(expectedNext )
+	})
+})
 describe("Navigation Component", () => {
 
 	test.todo("renders shallowly")
@@ -115,10 +126,11 @@ describe("HeuristicScene component", () => {
 	test.todo("renders fully")
 
 })
+const tableIndecies = [[""], [1], [lastHeuristicsIndex]]
 describe("Mountains component", () => {
 	// let className = "m";
 	// let currentHeuristic = 1;
-	test("renders shallowly", (className="m", currentHeuristic=1) => {
+	test.each(tableIndecies)("renders shallowly", (currentHeuristic=1, className="m" ) => {
 		shallow(<Mountain className={ className }
 			currentHeuristic={ currentHeuristic } />)
 	})
@@ -129,7 +141,7 @@ describe("Mountains component", () => {
 describe("Sky component", () => {
 	// let className = "heuristic__primary";
 	// let currentHeuristic = 1;
-	test("renders shallowly", (className="heuristic__primary", currentHeuristic=1) => {
+	test.each(tableIndecies)("renders shallowly", ( currentHeuristic=1, className="heuristic__primary" ) => {
 		shallow(<Sky className={ className }
 			currentHeuristic={ currentHeuristic } />)
 	})
@@ -140,7 +152,7 @@ describe("Sky component", () => {
 describe("Quote component", () => {
 	// let className = "heuristic__primary";
 	// let currentHeuristic = 1;
-	test("renders shallowly", (currentHeuristic=1, heuristic=HEURISTICS[0]) => {
+	test.each(tableIndecies)("renders shallowly", (currentHeuristic=1, heuristic=HEURISTICS[0]) => {
 		shallow(<Quote currentHeuristic={ currentHeuristic } 
 					heuristic={ heuristic } />)
 	})
