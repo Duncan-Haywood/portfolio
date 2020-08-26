@@ -2,14 +2,15 @@ import React from "react";
 import { configure, shallow, mount } from "enzyme";
 import toJson from "enzyme-to-json";
 import { HeuristicScene, Mountain, Sky, Quote } from '../components/HeuristicScene.js'
-import { getCurrentNextHeuristicScene,  } from '../components/HelperFunctions.js'
+import { getCurrentNextHeuristicScene, determineNextPrevNavigation  } from '../components/HelperFunctions.js'
 import Adapter from "enzyme-adapter-react-16";
 import HEURISTICS from 'constants'
 configure({ adapter: new Adapter() });
 
 describe("HelperFunctions Navigation", () => {
 	test.todo("has no instantiated tests yet, and we are passing it anyways")
-	test.todo("homePageCaseNavigation") /*= (current, next, prev, heuristics)=>{
+	
+	test.todo("homePageCaseNavigation")/*, (current="", next=, prev, heuristics)=>{
 		if ( !current ) { 
 		// home page has no id
 			prev = heuristics.length; 
@@ -21,13 +22,13 @@ describe("HelperFunctions Navigation", () => {
 		return [prev, next]
 	}*/
 	//Child of handlesEdgeCaseNavigation -third layer into abstraction
-	test.todo("firstPageCaseNavigation")/* = (current, prev)=>{
+	test.todo("firstPageCaseNavigation")/*, (current=1, prev= undefined)=>{
 		if ( current === 1 ) { 
 			//previous page button goes to home page
 			prev = "";
 		}
 		return prev
-	}*/
+	})*/
 	//Child of handlesEdgeCaseNavigation -third layer into abstraction
 	test.todo("lastPageCaseNavigation")/* = (current, next, heuristics) =>{
 		if ( current === heuristics.length ) {
@@ -51,11 +52,11 @@ describe("HelperFunctions Navigation", () => {
 		return [current, prev, next]
 	}*/
 	//Main Function of Use
-	test.todo("determineNextPrevNavigation")/* = (id, heuristics)=>{
-		let current, prev, next; //page indecies (integers) 
-		[current, prev, next] = handlesStandardCaseNavigation(id);
-		[prev, next] = handlesEdgeCaseNavigation(current, prev, next, heuristics);
-		return [prev, next]*/
+	test("determineNextPrevNavigation", (id="", expected=[HEURISTICS.length,1], heuristics=HEURISTICS)=>{
+		const returnedPrevNext = determineNextPrevNavigation(id, heuristics)
+		const expectedPrevNext = expected;
+		expect(returnedPrevNext).toEqual(expectedPrevNext);
+	})
 })
 describe("HelperFunctions colors", () => {
 	test.todo("seed")
