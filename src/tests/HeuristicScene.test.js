@@ -114,7 +114,10 @@ describe("HelperFunctions colors", () => {
 
 })
 const lastHeuristicsIndex = HEURISTICS.length-1
-const tableGetCurrentNextHeuristicScene = [["", 1], [1, 2], [lastHeuristicsIndex, ""]]
+const tableGetCurrentNextHeuristicScene = [
+["", 1], 
+[1, 2], 
+[lastHeuristicsIndex, ""]]
 describe("helperFunctions HeuristicScene", () => {
 	
 	test.each(tableGetCurrentNextHeuristicScene)("getCurrentNextHeuristicScene", (id="", expected=1, heuristics=HEURISTICS ) => {
