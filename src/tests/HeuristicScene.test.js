@@ -145,9 +145,9 @@ const tableIndecies = [[""], [1], [lastHeuristicsIndex]]
 describe("Mountains component", () => {
 	// let className = "m";
 	// let currentHeuristic = 1;
-	test("renders shallowly", (currentHeuristic=1, className="m", colorSchemes=COLOR_SCHEMES ) => {
+	test.each(tableIndecies)("renders shallowly", (currentHeuristic=1, className="m" ) => {
 		shallow(<Mountain className={ className }
-			currentHeuristic={ currentHeuristic } colorSchemes={ colorSchemes } />)
+			currentHeuristic={ currentHeuristic } />)
 	})
 
 	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
