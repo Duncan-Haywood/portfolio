@@ -52,7 +52,7 @@ export function getLightColor( scheme, colorSchemes) {
 */
 //Main function at bottom
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
-const homePageCaseNavigation = (current, next, prev, heuristics)=>{
+export const homePageCaseNavigation = (current, next, prev, heuristics)=>{
 	if ( !current ) { 
 	// home page has no id
 		prev = heuristics.length; 
@@ -64,7 +64,7 @@ const homePageCaseNavigation = (current, next, prev, heuristics)=>{
 	return [prev, next]
 }
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
-const firstPageCaseNavigation = (current, prev)=>{
+export const firstPageCaseNavigation = (current, prev)=>{
 	if ( current === 1 ) { 
 		//previous page button goes to home page
 		prev = "";
@@ -72,7 +72,7 @@ const firstPageCaseNavigation = (current, prev)=>{
 	return prev
 }
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
-const lastPageCaseNavigation = (current, next, heuristics) =>{
+export const lastPageCaseNavigation = (current, next, heuristics) =>{
 	if ( current === heuristics.length ) {
 		//next page button goes to home pagge
 		next = "";
@@ -80,14 +80,14 @@ const lastPageCaseNavigation = (current, next, heuristics) =>{
 	return next
 }
 //Second Layer into Abstraction
-const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
+export const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
 	[prev, next] = homePageCaseNavigation(current, next, prev, heuristics)
 	prev = firstPageCaseNavigation(current, prev)	
 	next = lastPageCaseNavigation(current, next, heuristics)
 	return [prev, next]
 }
 //Second Layer into Abstraction
-const handlesStandardCaseNavigation= (id)=>{
+export const handlesStandardCaseNavigation= (id)=>{
 	let current = parseInt( id );
 	let next = current + 1;
 	let prev = current - 1;
