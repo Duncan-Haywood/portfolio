@@ -106,7 +106,7 @@ export function Quote( { currentHeuristic, heuristic } ) {
  * Sky
  */
 
-export function Sky( { className, currentHeuristic } ) {
+export function Sky( { className, currentHeuristic, colorSchemes } ) {
 	// Output elements to transform.
 	let items = [];
 	let numItems = 10;
@@ -151,7 +151,7 @@ export function Sky( { className, currentHeuristic } ) {
  * Mountain
  */
 
-export function Mountain( { className, currentHeuristic } ) {
+export function Mountain( { className, currentHeuristic, colorSchemes } ) {
 	return (
 		<div className={ className }>
 			<div className="m__group" 
@@ -245,13 +245,13 @@ export class HeuristicScene extends React.Component {
 					{/*background*/}
 				<section className="heuristic" onClick={ this.handleClick }>
 					<Sky className="heuristic__primary" 
-						currentHeuristic={ currentHeuristic } />
+						currentHeuristic={ currentHeuristic } colorSchemes={colorSchemes} />
 					<Sky className="heuristic__clone" 
-						currentHeuristic={ currentHeuristic } />
+						currentHeuristic={ currentHeuristic } colorSchemes={colorSchemes} />
 					<Mountain className="m" 
-						currentHeuristic={ currentHeuristic } />
+						currentHeuristic={ currentHeuristic } colorSchemes={colorSchemes} />
 					<Mountain className="m__clone" 
-						currentHeuristic={ currentHeuristic } />
+						currentHeuristic={ currentHeuristic } colorSchemes={colorSchemes} />
 				</section>
 			</>
 		);
