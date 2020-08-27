@@ -44,12 +44,21 @@ describe("HelperFunctions Navigation", () => {
 		next = lastPageCaseNavigation(current, next, heuristics)
 		return [prev, next]
 	}*/
+	//for following table: id, expected=[current, prev, next]
+	const tableHandlesStandardCaseNavigation = [
+	["", [NaN,NaN,NaN]],
+	[1, [1,0,2]],
+	[2, [2,1,3]],
+	[HEURISTICS.length, [HEURISTICS.length, HEURISTICS.length-1,HEURISTICS.length+1]]]
 	//Second Layer into Abstraction
+<<<<<<< Updated upstream
 	const tableHandlesStandardCaseNavigation = [
 	["", ["",HEURISTICS.length,1]],
 	[1, [1,"",2]],
 	[2, [2,1,3]],
 	[HEURISTICS.length, [HEURISTICS.length, HEURISTICS.length-1,""]]]
+=======
+>>>>>>> Stashed changes
 	test.each(tableHandlesStandardCaseNavigation)("handlesStandardCaseNavigation", (id="", expected=["",HEURISTICS.length,1])=>{
 		const returnedCurrentPrevNext = handlesStandardCaseNavigation(id);
 		const expectedCurrentPrevNext = expected;
