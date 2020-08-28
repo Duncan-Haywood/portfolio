@@ -22,6 +22,8 @@ class App extends React.Component {
 	render() {
 		// The basename attribute makes it run in a subfolder.
 		return (
+
+			//TODO: Hooks for Routes
 			<Router basename={'/'}>
 				<Route
 					path="/order/:direction(asc|desc)"

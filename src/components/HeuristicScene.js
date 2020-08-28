@@ -17,19 +17,7 @@ const intro = INTRO
 
 const heuristics = HEURISTICS
 
-export function Sounds() {
-	let chimes = new Howl({
-    src: chimesAudio,
-    autoplay: true,
-    loop: true,
-    volume: 0.03
-    })
-    let playChimes = () => chimes.play()
-    playChimes()
-	return(
-		<></>
-	);
-}
+
 
 /**
  * Navigation
@@ -41,14 +29,12 @@ export function Sounds() {
  }
 export function Navigation( props ) {
 	// id is the page number in the web app
-	// currentHeuristic is ???
 	let [prev, next] = determineNextPrevNavigation(props.id, props.heuristics)
 	return (
 		<>
 			{/*comment: 
 			* this section represents the circle buttons
 			*/}
-
 			diplayNavigationCircleButtons(props)
 
 			{/*comment: 
@@ -123,10 +109,9 @@ export function Mountain( { className, currentHeuristic } ) {
 	return (
 		<div className={ props.className }>
 			<div className="m__group" 
-				
 				style={{ bottom: 60 * props.getSeed( props.currentHeuristic ) + "%" }}>
-				bgMountain= displayMountainBG(props)
 				
+				bgMountain= displayMountainBG(props)
 				fgMountain = displayMountainFG(props)
 				
 			</div>
@@ -136,28 +121,33 @@ export function Mountain( { className, currentHeuristic } ) {
 
 /**
  * Output the Heuristic based on the URL
- */			
+ */	
 
-export class HeuristicScene extends React.Component {
+handleClick.defaultProps = {
+	e, props, id
+}
+handleClick(props) {
+	props.e.preventDefault()
+
+	props.playWaterDrop()
+	let next;
+	let id = parseInt(props.id);
+	next = getCurrentNextHeuristicScene( id, heuristics );
+
+	// This should navigate to the next item.
+	useRedirect( '/'+id, '/'+next )
+}		
+HeuristicScene.defaultProps = {
+	handleClick
+}
+export function HeuristicScene (props) {
 	constructor(props) {
 		super(props)
 		this.handleClick = this.handleClick.bind(this)
 	}
-	waterDrop = new UIfx(waterDropAudio);
-	playWaterDrop = () => {this.waterDrop.play(0.25)}
+	
 
-	handleClick(e) {
-		e.preventDefault()
-
-		this.playWaterDrop()
-		let next;
-		let id = parseInt(this.props.match.params.id);
-		next = getCurrentNextHeuristicScene( id, heuristics );
-
-		// This should navigate to the next item.
-		this.props.history.push( '/' + next );
-
-	}
+	
 
 	render() {
 		let id = parseInt( this.props.match.params.id );

@@ -278,6 +278,32 @@ export const determineNextPrevNavigation = (id, heuristics)=>{ // id is the id t
 	[prev, next] = handlesEdgeCaseNavigation(current, prev, next, heuristics);
 	return [prev, next]
 }
+/*
+* Audio functions
+*/
+
+
+export const playWaterDropFX = (props) => {
+		waterDrop = new props.UIfx(props.waterDropAudio);
+		waterDrop.play(0.25)
+	}
+playWaterDropFX.defaultProps = {
+	waterDropAudio, UIfx
+}
+
+
+export function BackgroundSound( props ) {
+	let backgroundSound = new props.Howl({
+    src: props.audioFile,
+    autoplay: true,
+    loop: true,
+    volume: 0.03
+    })
+    backgroundSounds.play()
+}
+BackgroundSound.defaultProps = {
+	audioFile, Howl
+}
 
 /* 
 * HeuristicScene Helper Methods 
