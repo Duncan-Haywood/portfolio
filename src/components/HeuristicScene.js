@@ -34,23 +34,7 @@ export function Sounds() {
 /**
  * Navigation
  */
-diplayNavigationCircleButtons.defaultProps = {
-	id, playAudio, heuristics 
-}
-function diplayNavigationCircleButtons(props){
-				return(
-					<ul className="heuristics__navigation">
-				<li className={ !props.id ? 'is-active is-home' : 'is-home' } >
-				<Link to="/" onClick={props.playAudio}>Home</Link></li>
-				{heuristics.map((value, index) => {
-					let i = parseInt(index) + 1;
-					return <li className={ props.id === i ? 'is-active' : '' } 
-						key={index}>
-					<Link to={"/" + i} onClick={props.playAudio}>{i}</Link></li>
-				})}
-			</ul>
-					)
-			}
+
 
  Navigation.defaultProps = { 
  	currentHeuristic, id, playAudio, heuristics, getLightColor, getDarkColor, colorSchemes
