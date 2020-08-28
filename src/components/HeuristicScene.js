@@ -91,15 +91,17 @@ export function Navigation( props ) {
 /**
  * Heuristic Quote
  */
-
-export function Quote( { currentHeuristic, heuristic } ) {
+Quote.defaultProps = { 
+	currentHeuristic, heuristic, getDarkColor, getLightColor, currentHeuristic, colorSchemes 
+}
+export function Quote( props ) {
 	return (
 		<div className="heuristic__quote"
 			style={{
-				backgroundColor: getDarkColor( currentHeuristic, colorSchemes ),
-				color: getLightColor( currentHeuristic, colorSchemes ),
+				backgroundColor: props.getDarkColor( props.currentHeuristic, props.colorSchemes ),
+				color: props.getLightColor( props.currentHeuristic, props.colorSchemes ),
 			}}>
-			{ heuristic }
+			{ props.heuristic }
 		</div>
 	);
 }
