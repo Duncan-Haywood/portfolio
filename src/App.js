@@ -10,32 +10,42 @@ import { HeuristicScene } from './components/HeuristicScene.js';
  * Render the Heuristics App
  */
 
-class App extends React.Component {
-	ComponentWithRegex({ match }) {
-		return (
+const routes = {
+  '/order/:direction(asc|desc)' ({direction}) => <ComponentWithRegex diereciton={direction}/>
+  '/:id': ({id}) => <HeuristicScene userId={id} />
+  '': () => <HeuristicScene />
+
+}
+
+ComponentWithRegex.defaultProps = {
+	direction
+}
+function ComponentWithRegex(props) {
+	return (
 		<div>
-			<h3>Only asc/desc are allowed: {match.params.direction}</h3>
+			<h3>Only asc/desc are allowed: {props.direction}</h3>
 		</div>
-		);
-	}
+	);
+}
 
-	render() {
-		// The basename attribute makes it run in a subfolder.
-		return (
-
-			//TODO: Hooks for Routes
-			<Router basename={'/'}>
-				<Route
-					path="/order/:direction(asc|desc)"
-					component={this.ComponentWithRegex}
-				/>
-				<Switch>
-					<Route exact path="/:id" component={HeuristicScene} />
-					<Route exact path="" component={HeuristicScene} />
-				</Switch>
-			</Router>
-		)
-	}
+App.defaultProps = {
+	ComponentWithRegex, HeuristicScene
+}
+function App (props) {
+	// The basename attribute makes it run in a subfolder.
+	return (
+		//TODO: Hooks for Routes
+		<Router basename={'/'}>
+			<Route
+				path="/order/:direction(asc|desc)"
+				component={props.ComponentWithRegex}
+			/>
+			<Switch>
+				<Route exact path="/:id" component={props.HeuristicScene} />
+				<Route exact path="" component={props.HeuristicScene} />
+			</Switch>
+		</Router>
+	)
 }
 
 export default App;
