@@ -34,10 +34,13 @@ export function Sounds() {
 /**
  * Navigation
  */
-export function Navigation( { currentHeuristic, id, playAudio } ) {
+ Navigation.defaultProps = { 
+ 	currentHeuristic, id, playAudio, heuristics, getLightColor, getDarkColor, colorSchemes
+ }
+export function Navigation( props ) {
 	// id is the page number in the web app
 	// currentHeuristic is ???
-	let [prev, next] = determineNextPrevNavigation(id, heuristics)
+	let [prev, next] = determineNextPrevNavigation(props.id, props.heuristics)
 	return (
 		<>
 			{/*comment: 
@@ -45,12 +48,12 @@ export function Navigation( { currentHeuristic, id, playAudio } ) {
 			*/}
 			<ul className="heuristics__navigation">
 				<li className={ !id ? 'is-active is-home' : 'is-home' } >
-				<Link to="/" onClick={playAudio}>Home</Link></li>
+				<Link to="/" onClick={props.playAudio}>Home</Link></li>
 				{heuristics.map((value, index) => {
 					let i = parseInt(index) + 1;
-					return <li className={ id === i ? 'is-active' : '' } 
+					return <li className={ props.id === i ? 'is-active' : '' } 
 						key={index}>
-					<Link to={"/" + i} onClick={playAudio}>{i}</Link></li>
+					<Link to={"/" + i} onClick={props.playAudio}>{i}</Link></li>
 				})}
 			</ul>
 
@@ -60,10 +63,10 @@ export function Navigation( { currentHeuristic, id, playAudio } ) {
 			*/}
 			<div className="heuristics__navigation-next-prev"
 				style={{
-					backgroundColor: getDarkColor( currentHeuristic, colorSchemes ),
-					color: getLightColor( currentHeuristic, colorSchemes ),
+					backgroundColor: props.getDarkColor( props.currentHeuristic, props.colorSchemes ),
+					color: props.getLightColor( props.currentHeuristic, props.colorSchemes ),
 				}}>
-				<Link to={"/" + prev} onClick={playAudio}>
+				<Link to={"/" + prev} onClick={props.playAudio}>
 					<svg xmlns="http://www.w3.org/2000/svg" 
 						viewBox="0 0 24 24">
 						<path d="M14 20l-8-8 8-8 1.414 1.414L8.828 
@@ -71,7 +74,7 @@ export function Navigation( { currentHeuristic, id, playAudio } ) {
 					</svg> 
 					Previous
 					</Link>
-				<Link to={"/" + next} onClick={playAudio}> 
+				<Link to={"/" + next} onClick={props.playAudio}> 
 					<svg xmlns="http://www.w3.org/2000/svg" 
 						viewBox="0 0 24 24">
 						<path d="M10 20l8-8-8-8-1.414 1.414L15.172 12l-6.586 
@@ -105,40 +108,68 @@ export function Quote( { currentHeuristic, heuristic } ) {
 /**
  * Sky
  */
+getSeeds.defaultProps = {
+	getSeed, currentHeuristic
+}
+function getSeeds(props){
+	let s1 = props.getSeed( props.getSeed( props.currentHeuristic ) * i );
+	let s2 = props.getSeed( props.getSeed( props.currentHeuristic ) * i + 1 );
+	let s3 = props.getSeed( props.getSeed( props.currentHeuristic ) * i + 2 );
+	let s4 = Math.round( props.getSeed( props.getSeed( props.currentHeuristic ) * i + 3 ) * 10 );
+	return [s1, s2, s3, s4]
+}
+addItemsSky.defaultProps = {
+	items, i, s1, s2, s3, s4, getRandomColor, colorSchemes, getSeed, scaleMultiplier, numItems, currentHeuristic
+}
+function addItemSky( props ){
+	items.push(
+		<span key={ i } style={{
+			backgroundColor: props.getRandomColor( i + 1 * props.currentHeuristic, 
+				props.currentHeuristic, props.colorSchemes, props.getSeed),
+			left: ( 100 / numItems ) * i + "%",
+			top: 100 * s1 + "%",
+			transform: 
+				'translate(-50%, -50%)'
+				+ 'translateZ(' + s4 + 'px)'
+				+ 'rotate(' + s2 * 360 + 'deg)'
+				+ 'scale(' + s3 * scaleMultiplier + ')',
+			opacity: s1,
+		}} />
+	);
+	return items;
+}
+addItemsSky.defaultProps= {}
+function addItemsSky(props){
+	for (var i = 1; i <= numItems; i++) {
+		let s1, s2, s3, s4;
+		
+		[s1, s2, s3, s4] = getSeeds(getSeed=props.getSeed, currentHeuristic=props.currentHeuristic)
+		items = addItemSky()
+		
+	}
+	return items
+}
 
-export function Sky( { className, currentHeuristic, colorSchemes } ) {
+
+Navigation.defaultProps = { 
+ 	className, currentHeuristic, getSeed, getRandomColor, id, colorSchemes
+ }
+export function Sky( props ) {
 	// Output elements to transform.
+	//TODO: what are items?
 	let items = [];
 	let numItems = 10;
+	//TODO: what does this do?
 	let scaleMultiplier = 6;
-	for (var i = 1; i <= numItems; i++) {
-		let s1 = getSeed( getSeed( currentHeuristic ) * i );
-		let s2 = getSeed( getSeed( currentHeuristic ) * i + 1 );
-		let s3 = getSeed( getSeed( currentHeuristic ) * i + 2 );
-		let s4 = Math.round( getSeed( getSeed( currentHeuristic ) * i + 3 ) * 10 );
-		items.push(
-			<span key={ i } style={{
-				backgroundColor: getRandomColor( i + 1 * currentHeuristic, 
-					currentHeuristic, colorSchemes, getSeed),
-				left: ( 100 / numItems ) * i + "%",
-				top: 100 * s1 + "%",
-				transform: 
-					'translate(-50%, -50%)'
-					+ 'translateZ(' + s4 + 'px)'
-					+ 'rotate(' + s2 * 360 + 'deg)'
-					+ 'scale(' + s3 * scaleMultiplier + ')',
-				opacity: s1,
-			}} />
-		);
-	}
+	items = addItemsSky(Error(Unimplemented))
 
-	let perspectiveAlgo = Math.round( getSeed( currentHeuristic ) * 5 + 20 );
+	let perspectiveAlgo = Math.round( props.getSeed( props.currentHeuristic ) * 5 + 20 );
 
 	return (
-		<div className={ className }
+		<div className={ props.className }
 			style={{
-				backgroundColor: getRandomColor( currentHeuristic, 
-					currentHeuristic, colorSchemes, getSeed ),
+				backgroundColor: props.getRandomColor( props.currentHeuristic, 
+					props.currentHeuristic, props.colorSchemes, props.getSeed ),
 				perspective: perspectiveAlgo + 'px'
 				}}>
 			{ items }
