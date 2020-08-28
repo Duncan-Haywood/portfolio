@@ -138,6 +138,38 @@ export function getLightColor( scheme, colorSchemes) {
 */
 //Main function at bottom
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
+diplayNavigationArrowButton.deffaultProps{
+	getDarkColor, currentHeuristic, colorSchemes, getLightColor, playAudio, prev, next }
+}
+function diplayNavigationArrowButton(props){
+	return(
+				<div className="heuristics__navigation-next-prev"
+			style={{
+				backgroundColor: props.getDarkColor( props.currentHeuristic, props.colorSchemes ),
+				color: props.getLightColor( props.currentHeuristic, props.colorSchemes ),
+			}}>
+			<Link to={"/" + prev} onClick={props.playAudio}>
+				<svg xmlns="http://www.w3.org/2000/svg" 
+					viewBox="0 0 24 24">
+					<path d="M14 20l-8-8 8-8 1.414 1.414L8.828 
+						12l6.586 6.586"/>
+				</svg> 
+				Previous
+				</Link>
+			<Link to={"/" + next} onClick={props.playAudio}> 
+				<svg xmlns="http://www.w3.org/2000/svg" 
+					viewBox="0 0 24 24">
+					<path d="M10 20l8-8-8-8-1.414 1.414L15.172 12l-6.586 
+						6.586"/>
+				</svg> 
+				Next
+				</Link>
+		</div>
+	)
+}
+
+
+
 export const homePageCaseNavigation = (current, next, prev, heuristics)=>{
 	if ( !current ) { 
 	// home page has no id
