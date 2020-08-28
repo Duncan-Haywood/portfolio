@@ -5,7 +5,7 @@ import UIfx from 'uifx'
 import waterDropAudio from '../sounds/water-drop-click-production.mp3'
 import chimesAudio from '../sounds/deep-chimes.mp3'
 import {Howl} from 'howler'
-import { determineNextPrevNavigation, determineCurrentHeuristicAndHeuristic, getCurrentNextHeuristicScene, getSeed, getRandomColor, getDarkColor, getLightColor  } from './HelperFunctions.js'
+import  * as HelperFunctions from './HelperFunctions.js'
 /**
  * Global Variables
  */

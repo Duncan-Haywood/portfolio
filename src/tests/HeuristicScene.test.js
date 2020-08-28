@@ -2,7 +2,7 @@ import React from "react";
 import { configure, shallow, mount } from "enzyme";
 import toJson from "enzyme-to-json";
 import { HeuristicScene, Mountain, Sky, Quote } from '../components/HeuristicScene.js'
-import { getCurrentNextHeuristicScene, determineNextPrevNavigation, handlesStandardCaseNavigation  } from '../components/HelperFunctions.js'
+import * as HelperFunctions from '../components/HelperFunctions.js'
 import Adapter from "enzyme-adapter-react-16";
 import HEURISTICS from 'constants'
 configure({ adapter: new Adapter() });
@@ -50,15 +50,7 @@ describe("HelperFunctions Navigation", () => {
 	[1, [1,0,2]],
 	[2, [2,1,3]],
 	[HEURISTICS.length, [HEURISTICS.length, HEURISTICS.length-1,HEURISTICS.length+1]]]
-	//Second Layer into Abstraction
-<<<<<<< Updated upstream
-	const tableHandlesStandardCaseNavigation = [
-	["", ["",HEURISTICS.length,1]],
-	[1, [1,"",2]],
-	[2, [2,1,3]],
-	[HEURISTICS.length, [HEURISTICS.length, HEURISTICS.length-1,""]]]
-=======
->>>>>>> Stashed changes
+	
 	test.each(tableHandlesStandardCaseNavigation)("handlesStandardCaseNavigation", (id="", expected=["",HEURISTICS.length,1])=>{
 		const returnedCurrentPrevNext = handlesStandardCaseNavigation(id);
 		const expectedCurrentPrevNext = expected;
