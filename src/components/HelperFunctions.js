@@ -1,4 +1,39 @@
 /*
+* HeuristicSceneHelperMethods
+*/
+
+displayHeuristicScene.defaultProps =  {
+				id, currentHeuristic, playWaterDrop, heuristic, handleClick, colorSchemes
+}
+function displayHeuristicScene (props) {
+	return(
+		<>
+	{/*Navigation and quotes*/}
+	<h1>A space of peace and art.</h1>
+	<Sounds />
+	<Navigation id={ id } 
+		currentHeuristic={ currentHeuristic } 
+		playAudio={ this.playWaterDrop }/>
+	<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
+	<Quote currentHeuristic={ currentHeuristic } 
+		heuristic={ heuristic } />
+		{/*background*/}
+	<section className="heuristic" onClick={ this.handleClick }>
+		<Sky className="heuristic__primary" 
+			currentHeuristic={ currentHeuristic } colorSchemes={colorSchemes} />
+		<Sky className="heuristic__clone" 
+			currentHeuristic={ currentHeuristic } colorSchemes={colorSchemes} />
+		<Mountain className="m" 
+			currentHeuristic={ currentHeuristic } colorSchemes={colorSchemes} />
+		<Mountain className="m__clone" 
+			currentHeuristic={ currentHeuristic } colorSchemes={colorSchemes} />
+	</section>
+</>
+	)
+}
+
+
+/*
 * Sky helper Functions.
 */
 
