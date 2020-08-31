@@ -12,8 +12,8 @@ import { HeuristicScene } from './HeuristicScene';
 
 function App (props) {
 	// The basename attribute makes it run in a subfolder.
-	routes = props.HeuristicSceneRoutes(props.ComponentWithRegex, props.HeuristicScene)
-	const routeResult = useRoutes(routes);
+	routes = props.HeuristicSceneRoutes()
+	const routeResult = props.useRoutes(routes);
 	return (
 		//TODO: <Router basename={'/'}>
 		// </Router>
@@ -21,7 +21,7 @@ function App (props) {
 	)
 }
 App.defaultProps = {
-	ComponentWithRegex: ComponentWithRegex, HeuristicScene: HeuristicScene, HeuristicSceneRoutes: HeuristicSceneRoutes, useRoutes: useRoutes
+	HeuristicSceneRoutes: HeuristicSceneRoutes, useRoutes: useRoutes
 }
 export default App;
 
@@ -40,7 +40,7 @@ export default App;
 
 export function getHeuristicSceneRoutes(props) {
   routes = {
-	  '/order/:direction(asc|desc)': ({direction}) => <props.ComponentWithRegex direciton={direction} />, 
+	  '/order/:direction(asc|desc)': ({direction}) => <props.ComponentWithRegex direction={direction} />, 
 	  '/:id': ({id}) => <props.HeuristicScene userId={id} />,
 	  '': () => <props.HeuristicScene />
   }
@@ -59,5 +59,5 @@ export function ComponentWithRegex(props) {
 	);
 }
 ComponentWithRegex.defaultProps = {
-	direction
+	direction: undefined
 }

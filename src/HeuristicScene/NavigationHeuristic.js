@@ -1,14 +1,16 @@
+import React from 'react';
+import { INTRO, HEURISTICS, COLOR_SCHEMES } from './constants'
+import playClickFxAudio from './SoundHeuristic.js'
+import { getDarkColor, getLightColor } from './HelperFunctions.js'
+
 /**
  * Navigation
  */
-
-
- Navigation.defaultProps = { 
- 	currentHeuristic, id, playAudio, heuristics, getLightColor, getDarkColor, colorSchemes, diplayNavigationCircleButtons, diplayNavigationArrowButton
- }
+let [intro, heuristics, colorSchemes] = [INTRO, HEURISTICS, COLOR_SCHEMES]
+ 
 export function Navigation( props ) {
 	// id is the page number in the web app
-	let [prev, next] = determineNextPrevNavigation(props.id, props.heuristics)
+	let [prev, next] = determineNextPrevNavigation(props.id, props.currentHeuristic)
 	navigationComponent = <>
 			{/*comment: 
 			* this section represents the circle buttons
@@ -25,7 +27,9 @@ export function Navigation( props ) {
 	return (navigationComponent);
 		
 }
-
+Navigation.defaultProps = { 
+ 	currentHeuristic: undefined, id: undefined, diplayNavigationCircleButtons: diplayNavigationCircleButtons, diplayNavigationArrowButton: diplayNavigationArrowButton
+ }
 
 
 /*
@@ -33,9 +37,6 @@ export function Navigation( props ) {
 */
 //Main function at bottom
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
-diplayNavigationArrowButton.deffaultProps{
-	getDarkColor, currentHeuristic, colorSchemes, getLightColor, playAudio, prev, next }
-}
 function diplayNavigationArrowButton(props){
 	return(
 				<div className="heuristics__navigation-next-prev"
@@ -43,7 +44,7 @@ function diplayNavigationArrowButton(props){
 				backgroundColor: props.getDarkColor( props.currentHeuristic, props.colorSchemes ),
 				color: props.getLightColor( props.currentHeuristic, props.colorSchemes ),
 			}}>
-			<Link to={"/" + prev} onClick={props.playAudio}>
+			<Link to={"/" + prev} onClick={props.playClickFxAudio}>
 				<svg xmlns="http://www.w3.org/2000/svg" 
 					viewBox="0 0 24 24">
 					<path d="M14 20l-8-8 8-8 1.414 1.414L8.828 
@@ -51,7 +52,7 @@ function diplayNavigationArrowButton(props){
 				</svg> 
 				Previous
 				</Link>
-			<Link to={"/" + next} onClick={props.playAudio}> 
+			<Link to={"/" + next} onClick={props.playClickFxAudio}> 
 				<svg xmlns="http://www.w3.org/2000/svg" 
 					viewBox="0 0 24 24">
 					<path d="M10 20l8-8-8-8-1.414 1.414L15.172 12l-6.586 
@@ -62,26 +63,29 @@ function diplayNavigationArrowButton(props){
 		</div>
 	)
 }
-
-
-diplayNavigationCircleButtons.defaultProps = {
-	id, playAudio, heuristics 
+diplayNavigationArrowButton.defaultProps = {
+	prev: undefined, next: undefined, currentHeuristic: undefined, getDarkColor: getDarkColor, colorSchemes: colorSchemes, getLightColor: getLightColor, playClickFxAudio: playClickFxAudio
 }
+
+
+
 function diplayNavigationCircleButtons(props){
 				return(
 					<ul className="heuristics__navigation">
 				<li className={ !props.id ? 'is-active is-home' : 'is-home' } >
-				<Link to="/" onClick={props.playAudio}>Home</Link></li>
+				<Link to="/" onClick={props.playClickFxAudio}>Home</Link></li>
 				{heuristics.map((value, index) => {
 					let i = parseInt(index) + 1;
 					return <li className={ props.id === i ? 'is-active' : '' } 
 						key={index}>
-					<Link to={"/" + i} onClick={props.playAudio}>{i}</Link></li>
+					<Link to={"/" + i} onClick={props.playClickFxAudio}>{i}</Link></li>
 				})}
 			</ul>
 					)
 			}
-
+diplayNavigationCircleButtons.defaultProps = {
+	id: undefined, playClickFxAudio: playClickFxAudio, heuristics: heuristics 
+}
 
 export const homePageCaseNavigation = (current, next, prev, heuristics)=>{
 	if ( !current ) { 

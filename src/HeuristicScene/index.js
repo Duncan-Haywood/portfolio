@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import {INTRO, HEURISTICS, COLOR_SCHEMES} from './constants'
-import UIfx from 'uifx'
-import waterDropAudio from '../soundFiles/water-drop-click-production.mp3'
-import chimesAudio from '../soundFiles/deep-chimes.mp3'
-import {Howl} from 'howler'
-import  * as HelperFunctions from './HelperFunctions.js'
 import playWaterDrop from './SoundHeuristic.js'
+import BackgroundSound from './SoundHeuristic.js'
+import Navigation from './NavigationHeuristic.js'
+import Sky from './SkyHeuristic.js'
+import Mountain from './MountainHeuristic.js'
+
 /**
  * Global Variables
  */
@@ -24,7 +23,7 @@ const heuristics = HEURISTICS
 
 
 export function HeuristicScene (props) {
-	let id = parseInt( props.id ); //TODO
+	let id = parseInt( /*TODO: implement hooks here*/ ); //TODO
 		let currentHeuristic, heuristic;
 		[currentHeuristic, heuristic] = props.determineCurrentHeuristicAndHeuristic(id, props.heuristics, props.intro)
 		heuristicScene=props.displayHeuristicScene(id, currentHeuristic, heuristic )
@@ -34,7 +33,7 @@ export function HeuristicScene (props) {
 	);
 }
 HeuristicScene.defaultProps = {
-	handleClick: handleClick, determineCurrentHeuristicAndHeuristic: determineCurrentHeuristicAndHeuristic, displayHeuristicScene: displayHeuristicScene
+	determineCurrentHeuristicAndHeuristic: determineCurrentHeuristicAndHeuristic, displayHeuristicScene: displayHeuristicScene, heuristic: heuristics, intro: intro,  
 }
 
 /*

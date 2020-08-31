@@ -8,24 +8,25 @@ import chimesAudio from '../soundFiles/deep-chimes.mp3'
 */
 
 
-export function playWaterDropFX(props) {
-		waterDrop = new props.UIfx(props.waterDropAudio);
-		waterDrop.play(0.25)
+export function playClickFxAudio(props) {
+		soundFx = new props.UIfx(props.soundFxAudio);
+		soundFx.play(0.25)
 	}
-playWaterDropFX.defaultProps = {
-	waterDropAudio: waterDropAudio, UIfx: UIfx
-}
+playClickFxAudio.defaultProps = {
+	soundFxAudio: waterDropAudio, UIfx: UIfx 
+} // change sound played here
 
 
-export function BackgroundSound( props ) {
+export function playBackgroundSound( props ) {
 	let backgroundSound = new props.Howl({
-    src: props.audioFile,
+    src: props.audioBackgroundFile,
     autoplay: true,
     loop: true,
     volume: 0.03
     })
-    backgroundSounds.play()
+    backgroundSound.play()
 }
-BackgroundSound.defaultProps = {
-	audioFile: chimesAudio, Howl: Howl
-}
+playBackgroundSound.defaultProps = {
+	audioBackgroundFile: chimesAudio, Howl: Howl
+} // change sound played here
+
