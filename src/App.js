@@ -1,51 +1,63 @@
 /**
- * TSH App Dev
+ * Portfolio App Dev
  */
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.scss';
-import { HeuristicScene } from './components/HeuristicScene.js';
+import { HeuristicScene } from './HeuristicScene';
 
 /**
  * Render the Heuristics App
  */
 
-const routes = {
-  '/order/:direction(asc|desc)' ({direction}) => <ComponentWithRegex diereciton={direction}/>
-  '/:id': ({id}) => <HeuristicScene userId={id} />
-  '': () => <HeuristicScene />
 
+function App (props) {
+	// The basename attribute makes it run in a subfolder.
+	routes = props.HeuristicSceneRoutes(props.ComponentWithRegex, props.HeuristicScene)
+	const routeResult = useRoutes(routes);
+	return (
+		//TODO: <Router basename={'/'}>
+		// </Router>
+		{routeResult}
+	)
+}
+App.defaultProps = {
+	ComponentWithRegex: ComponentWithRegex, HeuristicScene: HeuristicScene, HeuristicSceneRoutes: HeuristicSceneRoutes, useRoutes: useRoutes
+}
+export default App;
+
+
+
+/*
+* ------------------------------------------------------
+*/
+
+/*
+* App Helper Methods
+*/
+
+
+
+
+export function getHeuristicSceneRoutes(props) {
+  routes = {
+	  '/order/:direction(asc|desc)': ({direction}) => <props.ComponentWithRegex direciton={direction} />, 
+	  '/:id': ({id}) => <props.HeuristicScene userId={id} />,
+	  '': () => <props.HeuristicScene />
+  }
+  return(routes)
+}
+Routes.defaultProps = {
+	ComponentWithRegex: ComponentWithRegex, HeuristicScene: HeuristicScene
 }
 
-ComponentWithRegex.defaultProps = {
-	direction
-}
-function ComponentWithRegex(props) {
+
+export function ComponentWithRegex(props) {
 	return (
 		<div>
 			<h3>Only asc/desc are allowed: {props.direction}</h3>
 		</div>
 	);
 }
-
-App.defaultProps = {
-	ComponentWithRegex, HeuristicScene
+ComponentWithRegex.defaultProps = {
+	direction
 }
-function App (props) {
-	// The basename attribute makes it run in a subfolder.
-	return (
-		//TODO: Hooks for Routes
-		<Router basename={'/'}>
-			<Route
-				path="/order/:direction(asc|desc)"
-				component={props.ComponentWithRegex}
-			/>
-			<Switch>
-				<Route exact path="/:id" component={props.HeuristicScene} />
-				<Route exact path="" component={props.HeuristicScene} />
-			</Switch>
-		</Router>
-	)
-}
-
-export default App;
