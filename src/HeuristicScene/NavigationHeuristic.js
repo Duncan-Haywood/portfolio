@@ -8,28 +8,31 @@ import { getDarkColor, getLightColor } from './HelperFunctions.js'
  */
 let [intro, heuristics, colorSchemes] = [INTRO, HEURISTICS, COLOR_SCHEMES]
  
-export function Navigation( props ) {
+export function Navigation( id, currentHeuristic ) {
 	// id is the page number in the web app
-	let [prev, next] = determineNextPrevNavigation(props.id, props.currentHeuristic)
+	let [prev, next] = determineNextPrevNavigation(id, currentHeuristic)
+	let circleButtons = diplayNavigationCircleButtons()
+	let arrowButtons = diplayNavigationArrowButton()
+
 	navigationComponent = <>
 			{/*comment: 
 			* this section represents the circle buttons
 			*/}
-			diplayNavigationCircleButtons()
+			circleButtons
 
 			{/*comment: 
 			* this section represents the arrow buttons 
 			* for next and previous
 			*/}
-			diplayNavigationArrowButton()
+			arrowButtons
 		</>
-	
+	{Mountain}
 	return (navigationComponent);
 		
 }
-Navigation.defaultProps = { 
+/* Navigation dependencies = { 
  	currentHeuristic: undefined, id: undefined, diplayNavigationCircleButtons: diplayNavigationCircleButtons, diplayNavigationArrowButton: diplayNavigationArrowButton
- }
+ }*/
 
 
 /*
@@ -69,25 +72,25 @@ diplayNavigationArrowButton.defaultProps = {
 
 
 
-function diplayNavigationCircleButtons(props){
+function diplayNavigationCircleButtons(id, playClickFxAudio=playClickFxAudio){
 				return(
 					<ul className="heuristics__navigation">
-				<li className={ !props.id ? 'is-active is-home' : 'is-home' } >
-				<Link to="/" onClick={props.playClickFxAudio}>Home</Link></li>
+				<li className={ !id ? 'is-active is-home' : 'is-home' } >
+				<Link to="/" onClick={playClickFxAudio}>Home</Link></li>
 				{heuristics.map((value, index) => {
 					let i = parseInt(index) + 1;
-					return <li className={ props.id === i ? 'is-active' : '' } 
+					return <li className={ id === i ? 'is-active' : '' } 
 						key={index}>
-					<Link to={"/" + i} onClick={props.playClickFxAudio}>{i}</Link></li>
+					<Link to={"/" + i} onClick={playClickFxAudio}>{i}</Link></li>
 				})}
 			</ul>
 					)
 			}
-diplayNavigationCircleButtons.defaultProps = {
-	id: undefined, playClickFxAudio: playClickFxAudio, heuristics: heuristics 
-}
+/*diplayNavigationCircleButtons.defaultProps = {
+	id: undefined, heuristics: heuristics, playClickFxAudio=playClickFxAudio 
+}*/
 
-export const homePageCaseNavigation = (current, next, prev, heuristics)=>{
+export const homePageCaseNavigation = (current, next, prev)=>{
 	if ( !current ) { 
 	// home page has no id
 		prev = heuristics.length; 
@@ -98,6 +101,9 @@ export const homePageCaseNavigation = (current, next, prev, heuristics)=>{
 	}
 	return [prev, next]
 }
+homePageCaseNavigation.defaultProps = {
+	current: undefined, next: undefined, prev: undefined, heuristics: heuristics
+}
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
 export const firstPageCaseNavigation = (current, prev)=>{
 	if ( current === 1 ) { 
@@ -107,33 +113,45 @@ export const firstPageCaseNavigation = (current, prev)=>{
 	return prev
 }
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
-export const lastPageCaseNavigation = (current, next, heuristics) =>{
+export const lastPageCaseNavigation = (props) =>{
 	if ( current === heuristics.length ) {
-		//next page button goes to home pagge
+		//next page button goes to home page
 		next = "";
 	}
-	return next
+	return props.next
+}
+lastPageCaseNavigation.defaultProps = {
+	current: undefined, next: undefined, heuristics: heuristics
 }
 //Second Layer into Abstraction
-export const handlesEdgeCaseNavigation = (current, prev, next, heuristics)=>{
-	[prev, next] = homePageCaseNavigation(current, next, prev, heuristics)
-	prev = firstPageCaseNavigation(current, prev)	
-	next = lastPageCaseNavigation(current, next, heuristics)
+export const handlesEdgeCaseNavigation = (props)=>{
+	[prev, next] = homePageCaseNavigation(props.current, props.next, props.prev)
+	prev = firstPageCaseNavigation(props.current, prev)	
+	next = lastPageCaseNavigation(props.current, next)
 	return [prev, next]
 }
+handlesEdgeCaseNavigation.defaultProps = {
+	current: undefined, prev: undefined, next: undefined, heuristics: heuristics
+}
 //Second Layer into Abstraction
-export const handlesStandardCaseNavigation= (id)=>{
-	let current = parseInt( id );
+export const handlesStandardCaseNavigation= (props)=>{
+	let current = parseInt( props.id );
 	let next = current + 1;
 	let prev = current - 1;
 	return [current, prev, next]
 }
+handlesStandardCaseNavigation.defaultProps = {
+	id: undefined
+}
 //Main Function of Use
-export const determineNextPrevNavigation = (id, heuristics)=>{ // id is the id the router passes to the function
+export const determineNextPrevNavigation = (props)=>{ // id is the id the router passes to the function
 	let current, prev, next; //page indecies (integers) 
-	[current, prev, next] = handlesStandardCaseNavigation(id);
-	[prev, next] = handlesEdgeCaseNavigation(current, prev, next, heuristics);
+	[current, prev, next] = handlesStandardCaseNavigation(props.id);
+	[prev, next] = handlesEdgeCaseNavigation(current, prev, next, props.heuristics);
 	return [prev, next]
+}
+determineNextPrevNavigation.defaultProps = {
+	id: undefined, heuristics: heuristics
 }
 
 

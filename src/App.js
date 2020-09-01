@@ -4,13 +4,13 @@
 import React from 'react';
 import './App.scss';
 import { HeuristicScene } from './HeuristicScene';
-
+import {useRoutes} from 'hookrouter';
 /**
  * Render the Heuristics App
  */
 
 
-function App (props) {
+export function App (props) {
 	// The basename attribute makes it run in a subfolder.
 	routes = props.HeuristicSceneRoutes()
 	const routeResult = props.useRoutes(routes);
@@ -23,8 +23,6 @@ function App (props) {
 App.defaultProps = {
 	HeuristicSceneRoutes: HeuristicSceneRoutes, useRoutes: useRoutes
 }
-export default App;
-
 
 
 /*

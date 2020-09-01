@@ -4,13 +4,16 @@ import toJson from "enzyme-to-json";
 import { HeuristicScene, Mountain, Sky, Quote } from '../components/HeuristicScene.js'
 import * as HelperFunctions from '../components/HelperFunctions.js'
 import Adapter from "enzyme-adapter-react-16";
-import HEURISTICS from 'constants'
+//import HEURISTICS from 'constants'
 configure({ adapter: new Adapter() });
 
 describe("HelperFunctions Navigation", () => {
 	test.todo("has few instantiated tests yet, and we are passing it anyways")
 	
-	test.todo("homePageCaseNavigation")/*, (current="", next=, prev, heuristics)=>{
+	test("homePageCaseNavigation", (current="", next=1, prev=heuristics.length)=>{
+
+		expect()
+	})/*, (current="", next=, prev, heuristics)=>{
 		if ( !current ) { 
 		// home page has no id
 			prev = heuristics.length; 
