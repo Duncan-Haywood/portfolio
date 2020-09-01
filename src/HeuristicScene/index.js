@@ -1,6 +1,6 @@
 import React from 'react';
 import {INTRO, HEURISTICS, COLOR_SCHEMES} from './constants'
-import playWaterDrop from './SoundHeuristic.js'
+import playClickFxAudio from './SoundHeuristic.js'
 import BackgroundSound from './SoundHeuristic.js'
 import Navigation from './NavigationHeuristic.js'
 import Sky from './SkyHeuristic.js'
@@ -50,8 +50,7 @@ HeuristicScene.defaultProps = {
 
 
 export function displayHeuristicScene (props) {
-	return(
-		<>
+	heuristicScene = <>
 	{/*Navigation and quotes*/}
 	<h1>A space of peace and art.</h1>
 	<props.Sounds />
@@ -73,7 +72,7 @@ export function displayHeuristicScene (props) {
 			currentHeuristic={ props.currentHeuristic } colorSchemes={props.colorSchemes} />
 	</section>
 </>
-	)
+	return(heuristicScene)
 }
 displayHeuristicScene.defaultProps = {
 				id: undefined, currentHeuristic: undefined, heuristic: undefined, playWaterDrop: playWaterDrop, handleClick: handleClick, colorSchemes: colorSchemes, BackgroundSound: BackgroundSound, Navigation: Navigation, Quote: Quote, Sky: Sky, Mountain: Mountain
@@ -112,7 +111,7 @@ export function getCurrentNextHeuristicScene(props) {
 	return next;
 }
 getCurrentNextHeuristicScene.defaultProps = {
-	id, heuristics: heuristics
+	id: undefined, heuristics: heuristics
 }
 
 
@@ -135,6 +134,6 @@ export function determineCurrentHeuristicAndHeuristic(props) {
 	return [currentHeuristic, props.heuristic]
 }
 determineCurrentHeuristicAndHeuristic.defaultProps = {
-	id, heuristics: heuristics, intro: intro
+	id: undefined, heuristics: heuristics, intro: intro
 }
 
