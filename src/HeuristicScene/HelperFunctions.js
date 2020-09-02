@@ -9,7 +9,7 @@ import {COLOR_SCHEMES} from './Constants.js'
 */
 
 export function getSeed( props ) {
-	number += 1138;
+	let number = props.number + 1138;
 	let seed = Math.sin( number ++ ) * 10000;
 	seed = seed - Math.floor( seed );
 	return seed;
@@ -33,12 +33,12 @@ export function getRandomColor( props ) {
 	// 
 	// This makes it cycle through the available color arrays, 
 	// one after the other, and cycle when the array ends.
-	let colorScheme = scheme % colorSchemes.length;
+	let colorScheme = props.scheme % props.colorSchemes.length;
 
 	// Store random color from that scheme.
-	let colorFromScheme = Math.floor( getSeed( seedNumber ) * 
-		colorSchemes[ colorScheme ][2].length );
-	let randomColor = colorSchemes[ colorScheme ][2][ colorFromScheme ];
+	let colorFromScheme = Math.floor( getSeed( props.seedNumber ) * 
+		props.colorSchemes[ colorScheme ][2].length );
+	let randomColor = props.colorSchemes[ colorScheme ][2][ colorFromScheme ];
 	return randomColor;
 }
 getRandomColor.defaultProps = {
@@ -47,7 +47,7 @@ getRandomColor.defaultProps = {
 
 
 export function getDarkColor( props ) {
-	let colorScheme = scheme % colorSchemes.length;
+	let colorScheme = props.scheme % props.colorSchemes.length;
 	let darkColor = props.colorSchemes[ colorScheme ][0][0];
 	return darkColor;
 }

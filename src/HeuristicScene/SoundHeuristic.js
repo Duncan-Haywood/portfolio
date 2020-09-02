@@ -1,7 +1,6 @@
 import UIfx from 'uifx'
 import waterDropAudio from '../soundFiles/water-drop-click-production.mp3'
 import Howl from 'howler'
-import React from 'react'
 import chimesAudio from '../soundFiles/deep-chimes.mp3'
 /*
 * Audio functions
@@ -9,7 +8,7 @@ import chimesAudio from '../soundFiles/deep-chimes.mp3'
 
 
 export function playClickFxAudio(props) {
-		soundFx = new props.UIfx(props.soundFxAudio);
+		let soundFx = new props.UIfx(props.soundFxAudio);
 		soundFx.play(0.25)
 	}
 playClickFxAudio.defaultProps = {

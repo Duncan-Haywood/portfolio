@@ -1,38 +1,37 @@
 import React from 'react';
-import { INTRO, HEURISTICS, COLOR_SCHEMES } from './constants'
-import playClickFxAudio from './SoundHeuristic.js'
+import { HEURISTICS, COLOR_SCHEMES } from './Constants.js'
+import { playClickFxAudio } from './SoundHeuristic.js'
 import { getDarkColor, getLightColor } from './HelperFunctions.js'
-
+import {A} from 'hookrouter'
 /**
  * Navigation
  */
-let [intro, heuristics, colorSchemes] = [INTRO, HEURISTICS, COLOR_SCHEMES]
+let [heuristics, colorSchemes] = [HEURISTICS, COLOR_SCHEMES]
  
-export function Navigation( id, currentHeuristic ) {
+export function Navigation( props ) {
 	// id is the page number in the web app
-	let [prev, next] = determineNextPrevNavigation(id, currentHeuristic)
+	let [prev, next] = determineNextPrevNavigation(props.id, props.currentHeuristic)
 	let circleButtons = diplayNavigationCircleButtons()
-	let arrowButtons = diplayNavigationArrowButton()
+	let arrowButtons = diplayNavigationArrowButton({prev: prev,next: next, currentHeuristic: props.currentHeuristic})
 
-	navigationComponent = <>
+	let navigationComponent = <>
 			{/*comment: 
 			* this section represents the circle buttons
 			*/}
-			circleButtons
+			{circleButtons}
 
 			{/*comment: 
 			* this section represents the arrow buttons 
 			* for next and previous
 			*/}
-			arrowButtons
+			{arrowButtons}
 		</>
-	{Mountain}
 	return (navigationComponent);
 		
 }
-/* Navigation dependencies = { 
+Navigation.defaultProps = { 
  	currentHeuristic: undefined, id: undefined, diplayNavigationCircleButtons: diplayNavigationCircleButtons, diplayNavigationArrowButton: diplayNavigationArrowButton
- }*/
+ }
 
 
 /*
@@ -41,47 +40,61 @@ export function Navigation( id, currentHeuristic ) {
 //Main function at bottom
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
 function diplayNavigationArrowButton(props){
-	return(
-				<div className="heuristics__navigation-next-prev"
+	let prevArrowButton = displayPrevNavigationArrowButton(props);
+	let nextArrowButton = displayNextNavigationArrowButton(props)
+	let arrowButtons = <div className="heuristics__navigation-next-prev"
 			style={{
 				backgroundColor: props.getDarkColor( props.currentHeuristic, props.colorSchemes ),
 				color: props.getLightColor( props.currentHeuristic, props.colorSchemes ),
 			}}>
-			<Link to={"/" + prev} onClick={props.playClickFxAudio}>
-				<svg xmlns="http://www.w3.org/2000/svg" 
-					viewBox="0 0 24 24">
-					<path d="M14 20l-8-8 8-8 1.414 1.414L8.828 
-						12l6.586 6.586"/>
-				</svg> 
-				Previous
-				</Link>
-			<Link to={"/" + next} onClick={props.playClickFxAudio}> 
+			{prevArrowButton}
+			{nextArrowButton}
+		</div>
+	return( arrowButtons )
+}
+diplayNavigationArrowButton.defaultProps = {
+	prev: undefined, next: undefined, currentHeuristic: undefined, getDarkColor: getDarkColor, colorSchemes: colorSchemes, getLightColor: getLightColor, playClickFxAudio: playClickFxAudio
+}
+function displayPrevNavigationArrowButton(props){
+	let prevArrowButton = 
+		<A href={"/" + props.prev} onClick={props.playClickFxAudio}>
+			<svg xmlns="http://www.w3.org/2000/svg" 
+				viewBox="0 0 24 24">
+				<path d="M14 20l-8-8 8-8 1.414 1.414L8.828 
+					12l6.586 6.586"/>
+			</svg> 
+			Previous
+		</A>
+	return(prevArrowButton)
+}
+displayPrevNavigationArrowButton.defaultProps = {
+	prev: undefined, playClickFxAudio: playClickFxAudio
+}
+function displayNextNavigationArrowButton(props){
+	let nextArrowButton = <A href={"/" + props.next} onClick={props.playClickFxAudio}> 
 				<svg xmlns="http://www.w3.org/2000/svg" 
 					viewBox="0 0 24 24">
 					<path d="M10 20l8-8-8-8-1.414 1.414L15.172 12l-6.586 
 						6.586"/>
 				</svg> 
 				Next
-				</Link>
-		</div>
-	)
+				</A>
+	return(nextArrowButton)
 }
-diplayNavigationArrowButton.defaultProps = {
-	prev: undefined, next: undefined, currentHeuristic: undefined, getDarkColor: getDarkColor, colorSchemes: colorSchemes, getLightColor: getLightColor, playClickFxAudio: playClickFxAudio
+displayPrevNavigationArrowButton.defaultProps = {
+	next: undefined, playClickFxAudio: playClickFxAudio
 }
-
-
 
 function diplayNavigationCircleButtons(id){
 				return(
 					<ul className="heuristics__navigation">
 				<li className={ !id ? 'is-active is-home' : 'is-home' } >
-				<Link to="/" onClick={playClickFxAudio}>Home</Link></li>
+				<A href="/" onClick={playClickFxAudio}>Home</A></li>
 				{heuristics.map((value, index) => {
 					let i = parseInt(index) + 1;
 					return <li className={ id === i ? 'is-active' : '' } 
 						key={index}>
-					<Link to={"/" + i} onClick={playClickFxAudio}>{i}</Link></li>
+					<A href={"/" + i} onClick={playClickFxAudio}>{i}</A></li>
 				})}
 			</ul>
 					)

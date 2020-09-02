@@ -1,5 +1,6 @@
-import { getSeed, getRandomColor } from './HelperFunctions.js'
-import colorSchemes from './Constants.js'
+import React from 'react';
+import { getSeed, getRandomColor } from './HelperFunctions.js';
+import { COLOR_SCHEMES } from './Constants.js';
 /**
  * Sky
  */
@@ -11,7 +12,7 @@ export function Sky( props ) {
 	//TODO: what does this do?
 	items = props.addMultiItemsSky(items, props.currentHeuristic)
 	let perspectiveAlgo = getPerspectiveAlgo()
-	sky = props.displaySky(props.className, props.currentHeuristic, perspectiveAlgo, items)
+	let sky = props.displaySky(props.className, props.currentHeuristic, perspectiveAlgo, items)
 	return (
 		sky
 	);
@@ -34,9 +35,9 @@ getPerspectiveAlgo.defaultProps = {
 * Sky helper Functions.
 */
 export function displaySky(props){
-	backgroundColor = props.getRandomColor( props.currentHeuristic, 
+	let backgroundColor = props.getRandomColor( props.currentHeuristic, 
 					props.currentHeuristic, props.colorSchemes, props.getSeed )
-	perspective = props.perspectiveAlgo + 'px'
+	let perspective = props.perspectiveAlgo + 'px'
 	// the component is below
 	let sky = 
 		<div className={ props.className }
@@ -50,7 +51,7 @@ export function displaySky(props){
 	return(sky)
 }
 displaySky.defaultProps = {
-	className: undefined, perspectiveAlgo: undefined, currentHeuristic: undefined, items: undefined, getRandomColor: getRandomColor, colorSchemes: colorSchemes, getSeed: getSeed 
+	className: undefined, perspectiveAlgo: undefined, currentHeuristic: undefined, items: undefined, getRandomColor: getRandomColor, colorSchemes: COLOR_SCHEMES, getSeed: getSeed 
 }
 
 
@@ -87,7 +88,8 @@ getMultiSeeds.defaultProps = {
 
 
 export function addItemSky( props ){
-	scaleMultiplier = 6;
+	let scaleMultiplier = 6;
+	let items = props.items;
 	items.push(
 		<span key={ props.i } style={{
 			backgroundColor: props.getRandomColor( props.i + 1 * props.currentHeuristic, 
@@ -98,12 +100,12 @@ export function addItemSky( props ){
 				'translate(-50%, -50%)'
 				+ 'translateZ(' + props.s4 + 'px)'
 				+ 'rotate(' + props.s2 * 360 + 'deg)'
-				+ 'scale(' + props.s3 * props.scaleMultiplier + ')',
+				+ 'scale(' + props.s3 * scaleMultiplier + ')',
 			opacity: props.s1,
 		}} />
 	);
 	return items;
 }
 addItemSky.defaultProps = {
-	items: undefined, i: undefined, s1: undefined, s2: undefined, s3: undefined, s4: undefined, currentHeuristic: undefined, numItems: undefined, getRandomColor: getRandomColor, colorSchemes: colorSchemes, getSeed: getSeed
+	items: undefined, i: undefined, s1: undefined, s2: undefined, s3: undefined, s4: undefined, currentHeuristic: undefined, numItems: undefined, getRandomColor: getRandomColor, colorSchemes: COLOR_SCHEMES, getSeed: getSeed
 }

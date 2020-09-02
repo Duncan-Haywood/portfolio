@@ -1,5 +1,5 @@
 import { getLightColor, getDarkColor } from './HelperFunctions.js'
-import COLOR_SCHEMES from './Constants.js'
+import { COLOR_SCHEMES } from './Constants.js'
 import React from 'react'
 
 /**

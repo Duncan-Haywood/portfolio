@@ -12,12 +12,12 @@ import {useRoutes} from 'hookrouter';
 
 export function App (props) {
 	// The basename attribute makes it run in a subfolder.
-	routes = props.getHeuristicSceneRoutes()
+	let routes = props.getAppRoutes({})
 	const routeResult = props.useRoutes(routes);
 	return (
 		//TODO: <Router basename={'/'}>
 		// </Router>
-		{routeResult}
+		<{routeResult} />
 	)
 }
 App.defaultProps = {
@@ -37,9 +37,9 @@ App.defaultProps = {
 
 
 export function getAppRoutes(props) {
-  routes = {
+  let routes = {
 	  '/order/:direction(asc|desc)': ({direction}) => <props.ComponentWithRegex direction={direction} />, 
-	  '/:id': ({id}) => <props.HeuristicScene userId={id} />,
+	  '/:id': ({id}) => <props.HeuristicScene id={id} />,
 	  '': () => <props.HeuristicScene />
   }
   return(routes)
