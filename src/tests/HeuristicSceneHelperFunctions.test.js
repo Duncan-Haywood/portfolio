@@ -17,9 +17,12 @@ describe("HelperFunctions colors", () => {
 	})
 	describe("getRandomColor", () => {
 		const tableGetRandomColor = [
-			[{seedNumber: undefined, scheme: undefined},{randomColor: undefined}]
+			[{seedNumber: 0.5, schemeIndex: 1},{randomColor: undefined}]
 		]
-		test.todo("getRandomColor: %j => %j")
+		test.each(tableGetRandomColor)("getRandomColor: %j => %j", (props, expected) => {
+			let result = getRandomColor(props);
+			expect(result).toEqual(expected.randomColor)
+		})
 
 	})
 
