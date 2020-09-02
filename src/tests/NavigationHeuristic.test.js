@@ -91,8 +91,8 @@ describe("HelperFunctions Navigation", () => {
 		[{current: 1, prev: 0, next: 2}, {prev: 0, next: 2}], 
 		[{current: 1, prev: undefined, next: 2}, {prev: "", next: 2}],
 		[{current: 1, prev: NaN, next: 2}, {prev: "", next: 2}],
-		[{current: HEURISTICS.length, prev: HEURISTICS.length-1, next: HEURISTICS.length+1}, {prev: HEURISTICS.length-1, next: ""] 
-	]
+		[{current: HEURISTICS.length, prev: HEURISTICS.length-1, next: HEURISTICS.length+1}, {prev: HEURISTICS.length-1, next: ""}] 
+	];
 	test.each("handlesEdgeCaseNavigation", (props, expected) => {
 		result = handlesEdgeCaseNavigation(props)
 		expect(result).toEqual(expected)

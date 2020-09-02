@@ -1,4 +1,4 @@
-
+import {COLOR_SCHEMES} from './Constants.js' 
 
 
 
@@ -8,12 +8,16 @@
 * Helper functions for colors
 */
 
-export function getSeed( number ) {
+export function getSeed( props ) {
 	number += 1138;
 	let seed = Math.sin( number ++ ) * 10000;
 	seed = seed - Math.floor( seed );
 	return seed;
 }
+getSeed.defaultProps = {
+	number: undefined
+}
+
 
 export function getRandomColor( props ) {
 	// seedNumber is the number to be randomized.
@@ -34,22 +38,30 @@ export function getRandomColor( props ) {
 	// Store random color from that scheme.
 	let colorFromScheme = Math.floor( getSeed( seedNumber ) * 
 		colorSchemes[ colorScheme ][2].length );
-	let result = colorSchemes[ colorScheme ][2][ colorFromScheme ];
-	return result;
+	let randomColor = colorSchemes[ colorScheme ][2][ colorFromScheme ];
+	return randomColor;
 }
 getRandomColor.defaultProps = {
 	seedNumber: undefined, scheme: undefined, colorSchemes: COLOR_SCHEMES, getSeed: getSeed
 }
 
 
-export function getDarkColor( scheme, colorSchemes ) {
+export function getDarkColor( props ) {
 	let colorScheme = scheme % colorSchemes.length;
-	return colorSchemes[ colorScheme ][0][0];
+	let darkColor = props.colorSchemes[ colorScheme ][0][0];
+	return darkColor;
+}
+getDarkColor.defaultProps = {
+	scheme: undefined, colorSchemes: COLOR_SCHEMES
 }
 
-export function getLightColor( scheme, colorSchemes) {
-	let colorScheme = scheme % colorSchemes.length;
-	return colorSchemes[ colorScheme ][1][0];
+export function getLightColor( props ) {
+	let colorScheme = props.scheme % props.colorSchemes.length;
+	let lightColor = props.colorSchemes[ colorScheme ][1][0];
+	return lightColor;
+}
+getLightColor.defaultProps = {
+	scheme: undefined, colorSchemes: COLOR_SCHEMES
 }
 
 

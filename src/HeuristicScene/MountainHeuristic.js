@@ -2,31 +2,43 @@ import {getSeed, getDarkColor, getLightColor} from './HelperFunctions.js'
 import React from 'react'
 
 export function Mountain( props ) {
+	mgStyle = getMgStyle({currentHeuristic: props.currentHeuristic})
+	bgMountain= displayMountainBG({currentHeuristic: props.currentHeuristic})
+	fgMountain = displayMountainFG({currentHeuristic: props.currentHeuristic})
 	return (
 		<div className={ props.className }>
 			<div className="m__group" 
-				style={{ bottom: 60 * props.getSeed( props.currentHeuristic ) + "%" }}>
+				style={{ bottom: {mgStyle} }}>
+				{bgMountain}
+				{fgMountain}
 				
-				bgMountain= displayMountainBG(props.getDarkColor, props.currentHeuristic)
-				fgMountain = displayMountainFG(props)
 				
 			</div>
 		</div>
 	);
 }
 Mountain.defaultProps= {
-	className: undefined, currentHeuristic: undefined, getSeed: getSeed, getDarkColor: getDarkColor 
+	className: undefined, currentHeuristic: undefined, getSeed: getSeed 
 }
 
 
 /*
 * Mountain Helper Functions
 */
+function getMgStyle(props){
+	mgStyle = 60 * props.getSeed({currentHeuristic: props.currentHeuristic}) + "%";
+	return mgStyle;
+}
+getMgStyle.defaultProps = {
+	currentHeuristic: undefined, getSeed: getSeed
+}
+
 
 function displayMountainBG(props){
+	darkColor = props.getDarkColor( {currentHeuristic: props.currentHeuristic} )
 	return(
 		<svg className="m__group-bg" 
-	style={{ fill: props.getDarkColor( props.currentHeuristic ) }} 
+	style={{ fill: {darkColor} }} 
 		width="100" height="200" viewBox="0 0 100 200">
 	<path d="M85 85L75 75 65 65V50L55 40V20L45 
 		30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 
@@ -42,9 +54,10 @@ displayMountainBG.defaultProps = {
 
 
 function displayMountainFG(props){
+	lightColor = props.getLightColor( {currentHeuristic: props.currentHeuristic} )
 	return(
 <svg className="m__group-fg" 
-	style={{ fill: props.getLightColor( props.currentHeuristic ) }} 
+	style={{ fill: {lightColor} }} 
 		width="100" height="200" viewBox="0 0 100 200">
 	<path opacity=".3" 
 		d="M50 145h10v-15H50v15zm15-45v15h10v-15H65zm-35 

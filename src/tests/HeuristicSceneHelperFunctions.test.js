@@ -17,9 +17,8 @@ describe("HelperFunctions colors", () => {
 	return seed;
 	}*/
 	tableGetRandomColor = [
-	[{( seedNumber: , scheme, colorSchemes:COLOR_SCHEMES )},{}]
-
-	]
+	[{ seedNumber: , scheme, colorSchemes:COLOR_SCHEMES },{}]
+	];
 	test.todo("getRandomColor")
 	/*( seedNumber, scheme, colorSchemes=colorSchemesConst ) {
 	// seedNumber is the number to be randomized.
