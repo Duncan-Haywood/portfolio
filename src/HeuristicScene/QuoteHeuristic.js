@@ -1,12 +1,12 @@
-
-
+import { getLightColor, getDarkColor } from './HelperFunctions.js'
+import COLOR_SCHEMES from './Constants.js'
+import React from 'react'
 
 /**
  * Heuristic Quote
  */
-Quote.defaultProps = { 
-	currentHeuristic, heuristic, getDarkColor, getLightColor, currentHeuristic, colorSchemes 
-}
+let colorSchemes = COLOR_SCHEMES
+
 export function Quote( props ) {
 	return (
 		<div className="heuristic__quote"
@@ -17,4 +17,7 @@ export function Quote( props ) {
 			{ props.heuristic }
 		</div>
 	);
+}
+Quote.defaultProps = { 
+	currentHeuristic: undefined, heuristic: undefined, getDarkColor: getDarkColor, getLightColor: getLightColor, colorSchemes: colorSchemes 
 }

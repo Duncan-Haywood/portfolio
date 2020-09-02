@@ -12,7 +12,7 @@ import {useRoutes} from 'hookrouter';
 
 export function App (props) {
 	// The basename attribute makes it run in a subfolder.
-	routes = props.HeuristicSceneRoutes()
+	routes = props.getHeuristicSceneRoutes()
 	const routeResult = props.useRoutes(routes);
 	return (
 		//TODO: <Router basename={'/'}>
@@ -21,7 +21,7 @@ export function App (props) {
 	)
 }
 App.defaultProps = {
-	HeuristicSceneRoutes: HeuristicSceneRoutes, useRoutes: useRoutes
+	getAppRoutes: getAppRoutes, useRoutes: useRoutes
 }
 
 
@@ -36,7 +36,7 @@ App.defaultProps = {
 
 
 
-export function getHeuristicSceneRoutes(props) {
+export function getAppRoutes(props) {
   routes = {
 	  '/order/:direction(asc|desc)': ({direction}) => <props.ComponentWithRegex direction={direction} />, 
 	  '/:id': ({id}) => <props.HeuristicScene userId={id} />,
@@ -44,7 +44,7 @@ export function getHeuristicSceneRoutes(props) {
   }
   return(routes)
 }
-Routes.defaultProps = {
+getAppRoutes.defaultProps = {
 	ComponentWithRegex: ComponentWithRegex, HeuristicScene: HeuristicScene
 }
 

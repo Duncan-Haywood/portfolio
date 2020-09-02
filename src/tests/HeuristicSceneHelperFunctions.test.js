@@ -1,21 +1,27 @@
-
-
-
-
-/*
-* HeuristicSceneHelperMethods
-*
-* Helper functions for colors
-*/
-
-export function getSeed( number ) {
+describe("HelperFunctions colors", () => {
+	tableGetSeed = [
+		[{number: 0},{seed: 0.3853}],
+		[{number: 1},{seed: 0.3072}],
+		[{number: 10},{seed: 0.1297}],
+		[{number: NaN}, {seed: NaN}],
+		[{number: undefined}, {seed: NaN}]
+	]
+	test.each(tableGetSeed)("getSeed", (number) => {
+		result = getSeed(number)
+		expect(result).toEqual(expected)
+	})
+	/*	( number ) {
 	number += 1138;
 	let seed = Math.sin( number ++ ) * 10000;
 	seed = seed - Math.floor( seed );
 	return seed;
-}
+	}*/
+	tableGetRandomColor = [
+	[{( seedNumber: , scheme, colorSchemes:COLOR_SCHEMES )},{}]
 
-export function getRandomColor( props ) {
+	]
+	test.todo("getRandomColor")
+	/*( seedNumber, scheme, colorSchemes=colorSchemesConst ) {
 	// seedNumber is the number to be randomized.
 	// scheme is the scheme from the array of color arrays to use.
 
@@ -32,29 +38,20 @@ export function getRandomColor( props ) {
 	let colorScheme = scheme % colorSchemes.length;
 
 	// Store random color from that scheme.
-	let colorFromScheme = Math.floor( getSeed( seedNumber ) * 
+	let colorFromScheme = Math.floor( seed( seedNumber ) * 
 		colorSchemes[ colorScheme ][2].length );
-	let result = colorSchemes[ colorScheme ][2][ colorFromScheme ];
-	return result;
-}
-getRandomColor.defaultProps = {
-	seedNumber: undefined, scheme: undefined, colorSchemes: COLOR_SCHEMES, getSeed: getSeed
-}
 
+	return colorSchemes[ colorScheme ][2][ colorFromScheme ];
+	}*/
 
-export function getDarkColor( scheme, colorSchemes ) {
+	test.todo("getDarkColor")/*( scheme, colorSchemes=colorSchemesConst ) {
 	let colorScheme = scheme % colorSchemes.length;
 	return colorSchemes[ colorScheme ][0][0];
-}
+	}*/
 
-export function getLightColor( scheme, colorSchemes) {
+	test.todo("getLightColor")/*( scheme, colorSchemes=colorSchemesConst ) {
 	let colorScheme = scheme % colorSchemes.length;
 	return colorSchemes[ colorScheme ][1][0];
-}
+	}*/
 
-
-
-
-
-
-
+})

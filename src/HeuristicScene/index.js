@@ -5,6 +5,8 @@ import BackgroundSound from './SoundHeuristic.js'
 import Navigation from './NavigationHeuristic.js'
 import Sky from './SkyHeuristic.js'
 import Mountain from './MountainHeuristic.js'
+import Quote from './QuoteHeuristic.js'
+import useRedirect from 'hookrouter'
 
 /**
  * Global Variables
@@ -33,7 +35,7 @@ export function HeuristicScene (props) {
 	);
 }
 HeuristicScene.defaultProps = {
-	determineCurrentHeuristicAndHeuristic: determineCurrentHeuristicAndHeuristic, displayHeuristicScene: displayHeuristicScene, heuristic: heuristics, intro: intro,  
+	determineCurrentHeuristicAndHeuristic: determineCurrentHeuristicAndHeuristic, displayHeuristicScene: displayHeuristicScene, heuristics: heuristics, intro: intro,  
 }
 
 /*
@@ -49,7 +51,7 @@ HeuristicScene.defaultProps = {
 
 
 
-export function displayHeuristicScene (props) {
+export function displayHeuristicScene (id, currentHeuristic, heuristic) {
 	heuristicScene = <>
 	{/*Navigation and quotes*/}
 	<h1>A space of peace and art.</h1>
@@ -75,7 +77,7 @@ export function displayHeuristicScene (props) {
 	return(heuristicScene)
 }
 displayHeuristicScene.defaultProps = {
-				id: undefined, currentHeuristic: undefined, heuristic: undefined, playWaterDrop: playWaterDrop, handleClick: handleClick, colorSchemes: colorSchemes, BackgroundSound: BackgroundSound, Navigation: Navigation, Quote: Quote, Sky: Sky, Mountain: Mountain
+				id: undefined, currentHeuristic: undefined, heuristic: undefined, playClickFxAudio: playClickFxAudio, handleClick: handleClick, colorSchemes: colorSchemes, BackgroundSound: BackgroundSound, Navigation: Navigation, Quote: Quote, Sky: Sky, Mountain: Mountain
 }
 
 
@@ -92,7 +94,7 @@ export function handleClick(props) {
 	props.useRedirect( '/'+id, '/'+next )
 }		
 handleClick.defaultProps = {
-	e: undefined, id: undefined, getCurrentNextHeuristicScene: getCurrentNextHeuristicScene, useRedirect: useRedirect, playWaterDrop: playWaterDrop
+	e: undefined, id: undefined, getCurrentNextHeuristicScene: getCurrentNextHeuristicScene, useRedirect: useRedirect, playClickFxAudio: playClickFxAudio
 }
 
 

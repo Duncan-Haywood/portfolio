@@ -1,6 +1,6 @@
-Mountain.defaultProps= {
-	className, getSeed, currentHeuristic, getDarkColor, 
-}
+import {getSeed, getDarkColor, getLightColor} from './HelperFunctions.js'
+import React from 'react'
+
 export function Mountain( props ) {
 	return (
 		<div className={ props.className }>
@@ -14,15 +14,15 @@ export function Mountain( props ) {
 		</div>
 	);
 }
-
+Mountain.defaultProps= {
+	className: undefined, currentHeuristic: undefined, getSeed: getSeed, getDarkColor: getDarkColor 
+}
 
 
 /*
 * Mountain Helper Functions
 */
-displayMountainBG.defaultProps = {
-	getDarkColor, currentHeuristic
-}
+
 function displayMountainBG(props){
 	return(
 		<svg className="m__group-bg" 
@@ -33,13 +33,13 @@ function displayMountainBG(props){
 		5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
 	<path d="M60 145v-15l15-15v-15H20v10l10 10v10l10 
 		10v35l10-10v-10z" />
-</svg>
-		)
+</svg>		)
+}
+displayMountainBG.defaultProps = {
+	currentHeuristic: undefined, getDarkColor: getDarkColor
 }
 
-displayMountainFG.defaultProps = {
-	getLightColor, currentHeuristic
-}
+
 
 function displayMountainFG(props){
 	return(
@@ -63,4 +63,7 @@ function displayMountainFG(props){
 		d="M25 85h10V70H25v15zm30-35v25h10V50H55z" />
 </svg>
 )
+}
+displayMountainFG.defaultProps = {
+	currentHeuristic: undefined, getLightColor: getLightColor
 }

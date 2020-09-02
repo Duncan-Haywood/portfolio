@@ -1,5 +1,5 @@
-
-
+import { getSeed, getRandomColor } from './HelperFunctions.js'
+import colorSchemes from './Constants.js'
 /**
  * Sky
  */
@@ -9,7 +9,7 @@ export function Sky( props ) {
 	// TODO: what are items?
 	let items;
 	//TODO: what does this do?
-	items = props.addMultiItemsSky(items, currentHeuristic)
+	items = props.addMultiItemsSky(items, props.currentHeuristic)
 	let perspectiveAlgo = getPerspectiveAlgo()
 	sky = props.displaySky(props.className, props.currentHeuristic, perspectiveAlgo, items)
 	return (
@@ -21,7 +21,7 @@ Sky.defaultProps = {
  }
 
 
-function getPerspectiveAlgo(props){
+export function getPerspectiveAlgo(props){
 	let perspectiveAlgo = Math.round( props.getSeed( props.currentHeuristic ) * 5 + 20 );
 	return perspectiveAlgo;
 }
@@ -56,15 +56,15 @@ displaySky.defaultProps = {
 
 
 
-function addMutliItemsSky(props){
+export function addMultiItemsSky(props){
 	let items = [];
 	let numItems = 10;
 
-	for (var i = 1; i <= props.numItems; i++) {
+	for (var i = 1; i <= numItems; i++) {
 		let s1, s2, s3, s4;
 		
-		[s1, s2, s3, s4] = props.getMultiSeeds(i)
-		items = props.addItemSky(i , s1, s2, s3, s4, props.items, props.currentHeuristic)
+		[s1, s2, s3, s4] = getMultiSeeds({i: i})
+		items = props.addItemSky({"i": i , "s1": s1, "s2": s2, "s3": s3, "s4": s4, "item":items, "currentHeuristic": props.currentHeuristic})
 		
 	}
 	return items
@@ -74,19 +74,19 @@ addMultiItemsSky.defaultProps = {
 } 
 
 
-function getMultiSeeds(props){
+export function getMultiSeeds(props){
 	let s1 = props.getSeed( props.getSeed( props.currentHeuristic ) * props.i );
 	let s2 = props.getSeed( props.getSeed( props.currentHeuristic ) * props.i + 1 );
 	let s3 = props.getSeed( props.getSeed( props.currentHeuristic ) * props.i + 2 );
 	let s4 = Math.round( props.getSeed( props.getSeed( props.currentHeuristic ) * props.i + 3 ) * 10 );
 	return [s1, s2, s3, s4]
 }
-
-
-getSeeds.defaultProps = {
-	i: undefined, getSeed: getSeed, currentHeuristic: currentHeuristic
+getMultiSeeds.defaultProps = {
+	i: undefined, "getSeed": getSeed, currentHeuristic: undefined
 } 
-function addItemSky( props ){
+
+
+export function addItemSky( props ){
 	scaleMultiplier = 6;
 	items.push(
 		<span key={ props.i } style={{

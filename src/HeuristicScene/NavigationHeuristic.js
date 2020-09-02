@@ -72,7 +72,7 @@ diplayNavigationArrowButton.defaultProps = {
 
 
 
-function diplayNavigationCircleButtons(id, playClickFxAudio=playClickFxAudio){
+function diplayNavigationCircleButtons(id){
 				return(
 					<ul className="heuristics__navigation">
 				<li className={ !id ? 'is-active is-home' : 'is-home' } >
@@ -87,11 +87,12 @@ function diplayNavigationCircleButtons(id, playClickFxAudio=playClickFxAudio){
 					)
 			}
 /*diplayNavigationCircleButtons.defaultProps = {
-	id: undefined, heuristics: heuristics, playClickFxAudio=playClickFxAudio 
+	id: undefined, heuristics: heuristics, playClickFxAudio: playClickFxAudio 
 }*/
 
-export const homePageCaseNavigation = (current, next, prev)=>{
-	if ( !current ) { 
+export const homePageCaseNavigation = (props)=>{
+	let [prev, next] = [props.prev, props.next]
+	if ( !props.current ) { 
 	// home page has no id
 		prev = heuristics.length; 
 		// previous page button goes to the last page in the web app
@@ -104,6 +105,8 @@ export const homePageCaseNavigation = (current, next, prev)=>{
 homePageCaseNavigation.defaultProps = {
 	current: undefined, next: undefined, prev: undefined, heuristics: heuristics
 }
+
+
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
 export const firstPageCaseNavigation = (current, prev)=>{
 	if ( current === 1 ) { 
@@ -112,29 +115,37 @@ export const firstPageCaseNavigation = (current, prev)=>{
 	}
 	return prev
 }
+
+
 //Child of handlesEdgeCaseNavigation -third layer into abstraction
 export const lastPageCaseNavigation = (props) =>{
-	if ( current === heuristics.length ) {
+	let next = props.next;
+	if ( props.current === heuristics.length ) {
 		//next page button goes to home page
 		next = "";
 	}
-	return props.next
+	return next
 }
 lastPageCaseNavigation.defaultProps = {
 	current: undefined, next: undefined, heuristics: heuristics
 }
+
+
 //Second Layer into Abstraction
 export const handlesEdgeCaseNavigation = (props)=>{
-	[prev, next] = homePageCaseNavigation(props.current, props.next, props.prev)
-	prev = firstPageCaseNavigation(props.current, prev)	
-	next = lastPageCaseNavigation(props.current, next)
+	let prev, next;
+	[prev, next] = homePageCaseNavigation({"current": props.current, "next": props.next, "prev": props.prev})
+	prev = firstPageCaseNavigation({"current": props.current, "prev": prev})	
+	next = lastPageCaseNavigation({"current": props.current, "next": next})
 	return [prev, next]
 }
 handlesEdgeCaseNavigation.defaultProps = {
-	current: undefined, prev: undefined, next: undefined, heuristics: heuristics
+	"current": undefined, "prev": undefined, "next": undefined, heuristics: heuristics
 }
+
+
 //Second Layer into Abstraction
-export const handlesStandardCaseNavigation= (props)=>{
+export function handlesStandardCaseNavigation(props){
 	let current = parseInt( props.id );
 	let next = current + 1;
 	let prev = current - 1;
@@ -143,11 +154,13 @@ export const handlesStandardCaseNavigation= (props)=>{
 handlesStandardCaseNavigation.defaultProps = {
 	id: undefined
 }
+
+
 //Main Function of Use
-export const determineNextPrevNavigation = (props)=>{ // id is the id the router passes to the function
+export function determineNextPrevNavigation(props){ // id is the id the router passes to the function
 	let current, prev, next; //page indecies (integers) 
-	[current, prev, next] = handlesStandardCaseNavigation(props.id);
-	[prev, next] = handlesEdgeCaseNavigation(current, prev, next, props.heuristics);
+	[current, prev, next] = handlesStandardCaseNavigation({id: props.id});
+	[prev, next] = handlesEdgeCaseNavigation({current: current, prev: prev, next: next});
 	return [prev, next]
 }
 determineNextPrevNavigation.defaultProps = {
