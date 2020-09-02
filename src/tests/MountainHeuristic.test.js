@@ -1,7 +1,7 @@
 import {HEURISTICS, COLOR_SCHEMES} from '../HeuristicScene/Constants.js'
 import React from "react";
 import { configure, shallow, mount } from "enzyme";
-import {Mountain} from '../HeuristicScene/MountainHeuristic.js'
+import {Mountain, getMgStyle} from '../HeuristicScene/MountainHeuristic.js'
 import Adapter from "enzyme-adapter-react-16";
 
 
@@ -24,11 +24,17 @@ describe("Mountains component", () => {
 
 describe("Mountains Helper Functions", () =>{
 	const tableGetMgStyle = [
-		[{currentHeuristic: undefined},{mgStylye: NaN}],
-		[{currentHeuristic: 1},{mgStylye: NaN}],
-		[{currentHeuristic: ""},{mgStylye: NaN}],
+		[{currentHeuristic: undefined},{mgStyle: "NaN%"}],
+		[{currentHeuristic: NaN},{mgStyle: "NaN%"}],
+		[{currentHeuristic: ""},{mgStyle: "23.11816810582968%"}],
+		[{currentHeuristic: 0},{mgStyle: "23.11816810582968%"}],
+		[{currentHeuristic: 1},{mgStyle: "18.436509146813478%"}],
+		[{currentHeuristic: 2},{mgStyle: "58.96622154785291%"}]
 	]
-	test.todo("getMgStyle")
+	test.each(tableGetMgStyle)("getMgStyle", (props, expected) => {
+		let result = getMgStyle(props.currentHeuristic)
+		expect(result).toEqual(expected.mgStyle)
+	})
 	const tableDisplayMountainBG = [
 	[{}, {}]
 	]

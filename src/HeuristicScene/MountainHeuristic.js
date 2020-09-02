@@ -26,7 +26,7 @@ Mountain.defaultProps= {
 * Mountain Helper Functions
 */
 export function getMgStyle(props){
-	let seed = props.getSeed({number: props.currentHeuristic})
+	let seed = getSeed({number: props.currentHeuristic})
 	let mgStyle = 60 * seed + "%";
 	return mgStyle;
 }
