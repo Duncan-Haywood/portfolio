@@ -21,17 +21,16 @@ describe("Mountains component", () => {
 	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
 	test.todo("renders fully")
 })
-
+ 
 describe("Mountains Helper Functions", () =>{
 	const tableGetMgStyle = [
-		[{currentHeuristic: undefined},{mgStyle: "NaN%"}],
 		[{currentHeuristic: NaN},{mgStyle: "NaN%"}],
 		[{currentHeuristic: ""},{mgStyle: "23.11816810582968%"}],
 		[{currentHeuristic: 0},{mgStyle: "23.11816810582968%"}],
 		[{currentHeuristic: 1},{mgStyle: "18.436509146813478%"}],
 		[{currentHeuristic: 2},{mgStyle: "58.96622154785291%"}]
 	]
-	test.each(tableGetMgStyle)("getMgStyle", (props, expected) => {
+	test.each(tableGetMgStyle)("getMgStyle: %j", (props, expected) => {
 		let result = getMgStyle(props.currentHeuristic)
 		expect(result).toEqual(expected.mgStyle)
 	})
