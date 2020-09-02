@@ -23,7 +23,15 @@ describe("Mountains component", () => {
 })
 
 describe("Mountains Helper Functions", () =>{
-
+	const tableGetMgStyle = [
+		[{currentHeuristic: undefined},{mgStylye: NaN}],
+		[{currentHeuristic: 1},{mgStylye: NaN}],
+		[{currentHeuristic: ""},{mgStylye: NaN}],
+	]
+	test.todo("getMgStyle")
+	const tableDisplayMountainBG = [
+	[{}, {}]
+	]
 	test.todo("displayMountainBG")
 	test.todo("displayMountainFG")
 })

@@ -1,5 +1,6 @@
+immport {getSeed } from '../HeuristicScene/HelperFunctions.js'
 describe("HelperFunctions colors", () => {
-	tableGetSeed = [
+	const tableGetSeed = [
 		[{number: 0},{seed: 0.3853}],
 		[{number: 1},{seed: 0.3072}],
 		[{number: 10},{seed: 0.1297}],
@@ -8,7 +9,7 @@ describe("HelperFunctions colors", () => {
 	]
 	test.each(tableGetSeed)("getSeed", (number) => {
 		result = getSeed(number)
-		expect(result).toEqual(expected)
+		expect(result).toEqual(expected.seed)
 	})
 	/*	( number ) {
 	number += 1138;
@@ -16,9 +17,9 @@ describe("HelperFunctions colors", () => {
 	seed = seed - Math.floor( seed );
 	return seed;
 	}*/
-	tableGetRandomColor = [
+	/*tableGetRandomColor = [
 	[{ seedNumber: 0, scheme:  },{}]
-	];
+	];*/
 	test.todo("getRandomColor")
 
 	/*( seedNumber, scheme, colorSchemes=colorSchemesConst ) {

@@ -25,8 +25,9 @@ Mountain.defaultProps= {
 /*
 * Mountain Helper Functions
 */
-function getMgStyle(props){
-	let mgStyle = 60 * props.getSeed({currentHeuristic: props.currentHeuristic}) + "%";
+export function getMgStyle(props){
+	let seed = props.getSeed({currentHeuristic: props.currentHeuristic})
+	let mgStyle = 60 * seed + "%";
 	return mgStyle;
 }
 getMgStyle.defaultProps = {
@@ -34,7 +35,7 @@ getMgStyle.defaultProps = {
 }
 
 
-function displayMountainBG(props){
+export function displayMountainBG(props){
 	let darkColor = props.getDarkColor( {currentHeuristic: props.currentHeuristic} )
 	return(
 		<svg className="m__group-bg" 
@@ -53,7 +54,7 @@ displayMountainBG.defaultProps = {
 
 
 
-function displayMountainFG(props){
+export function displayMountainFG(props){
 	let lightColor = props.getLightColor( {currentHeuristic: props.currentHeuristic} )
 	return(
 <svg className="m__group-fg" 

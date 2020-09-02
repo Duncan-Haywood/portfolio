@@ -4,7 +4,7 @@
 import React from 'react';
 import './App.scss';
 import { HeuristicScene } from './HeuristicScene';
-import {useRoutes} from 'hookrouter';
+import { useRoutes } from 'hookrouter';
 /**
  * Render the Heuristics App
  */
@@ -17,7 +17,7 @@ export function App (props) {
 	return (
 		//TODO: <Router basename={'/'}>
 		// </Router>
-		<{routeResult} />
+		routeResult
 	)
 }
 App.defaultProps = {
