@@ -17,7 +17,7 @@ export function getSeed( props ) {
 getSeed.defaultProps = {
 	number: undefined
 }
-
+ 
 
 export function getRandomColor( props ) {
 	// seedNumber is the number to be randomized.
