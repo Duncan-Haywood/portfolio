@@ -90,18 +90,27 @@ getMultiSeeds.defaultProps = {
 export function addItemSky( props ){
 	let scaleMultiplier = 6;
 	let items = props.items;
-	items.push(
-		<span key={ props.i } style={{
-			backgroundColor: props.getRandomColor( props.i + 1 * props.currentHeuristic, 
-				props.currentHeuristic, props.colorSchemes, props.getSeed),
-			left: ( 100 / props.numItems ) * props.i + "%",
-			top: 100 * props.s1 + "%",
-			transform: 
-				'translate(-50%, -50%)'
+
+	let itemBackgroundColorSeedNumber = props.i + 1 * props.currentHeuristic;
+	
+	let itemBackgroundColor = getRandomColor( {seedNumber: itemBackgroundColorSeedNumber, scheme: 
+				props.currentHeuristic} );
+
+	let itemLeft = ( 100 / props.numItems ) * props.i + "%";
+	let itemTop = 100 * props.s1 + "%";
+	let itemTransform = 'translate(-50%, -50%)'
 				+ 'translateZ(' + props.s4 + 'px)'
 				+ 'rotate(' + props.s2 * 360 + 'deg)'
-				+ 'scale(' + props.s3 * scaleMultiplier + ')',
-			opacity: props.s1,
+				+ 'scale(' + props.s3 * scaleMultiplier + ')';
+	let itemOpacity = props.s1; 
+
+	items.push(
+		<span key={ props.i } style={{
+			backgroundColor: {itemBackgroundColor},
+			left: {itemLeft},
+			top: {itemTop},
+			transform: {itemTransform},
+			opacity: {itemOpacity},
 		}} />
 	);
 	return items;

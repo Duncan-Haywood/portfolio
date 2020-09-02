@@ -21,7 +21,7 @@ getSeed.defaultProps = {
 
 export function getRandomColor( props ) {
 	// seedNumber is the number to be randomized.
-	// scheme is the scheme from the array of color arrays to use.
+	// scheme is the scheme from the array of color arrays to use. (an integer)
 
 	// Note to self: by picking a number between 0 and 1 as the seed, 
 	// multiplying by the array length,
@@ -33,12 +33,13 @@ export function getRandomColor( props ) {
 	// 
 	// This makes it cycle through the available color arrays, 
 	// one after the other, and cycle when the array ends.
-	let colorScheme = props.scheme % props.colorSchemes.length;
+	let colorSchemeIndex = props.scheme % props.colorSchemes.length;
 
 	// Store random color from that scheme.
 	let colorFromScheme = Math.floor( getSeed( props.seedNumber ) * 
-		props.colorSchemes[ colorScheme ][2].length );
-	let randomColor = props.colorSchemes[ colorScheme ][2][ colorFromScheme ];
+		props.colorSchemes[ colorSchemeIndex ][2].length );
+	// picks a color from colorSchemes 
+	let randomColor = props.colorSchemes[ colorSchemeIndex ][2][ colorFromScheme ];
 	return randomColor;
 }
 getRandomColor.defaultProps = {
