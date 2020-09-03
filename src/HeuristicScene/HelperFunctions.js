@@ -1,5 +1,5 @@
 import {COLOR_SCHEMES} from './Constants.js' 
-const colorSchemes = COLOR_SCHEMES;
+export const colorSchemes = COLOR_SCHEMES;
 
 
 /*

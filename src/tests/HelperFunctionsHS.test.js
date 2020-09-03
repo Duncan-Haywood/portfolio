@@ -20,7 +20,7 @@ describe("HelperFunctions colors", () => {
 			[{seedNumber: 1, schemeIndex: 1},{randomColor: undefined}]
 		]
 		test.each(tableGetRandomColor)("getRandomColor: %j => %j", (props, expected) => {
-			let result = getRandomColor(props);
+			let result = consts.getRandomColor(props);
 			expect(result).toEqual(expected.randomColor)
 		})
 		test.todo("getRandomColor")
@@ -37,7 +37,7 @@ describe("HelperFunctions colors", () => {
 		]
 
 		test.each(tableGetDarkColor)("getDarkColor: %j => %j", (props, expected) => {
-			result = getDarkColor(props);
+			result = consts.getDarkColor(props);
 			expect(result).toEqual(expected.darkColor)
 		})
 
@@ -54,7 +54,7 @@ describe("HelperFunctions colors", () => {
 		]
 
 		test.each(tableGetLightColor)("getLightColor: %j => %j", (props, expected) => {
-			result = getLightColor(props);
+			let result = consts.getLightColor(props);
 			expect(result).toEqual(expected.lightColor)
 		})
 	})
