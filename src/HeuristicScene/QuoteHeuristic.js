@@ -1,23 +1,22 @@
-import { getLightColor, getDarkColor } from './HelperFunctions.js'
-import { COLOR_SCHEMES } from './Constants.js'
+import * as helpers from './HelperFunctions.js'
 import React from 'react'
 
 /**
  * Heuristic Quote
  */
-let colorSchemes = COLOR_SCHEMES
-
 export function Quote( props ) {
-	return (
-		<div className="heuristic__quote"
+	let darkColor = helpers.getDarkColor({schemeIndex: props.currentHeuristic});
+	let lightColor = helpers.getLightColor({schemeIndex: props.currentHeuristic});
+	quoteComponent = <div className="heuristic__quote"
 			style={{
-				backgroundColor: props.getDarkColor( props.currentHeuristic, props.colorSchemes ),
-				color: props.getLightColor( props.currentHeuristic, props.colorSchemes ),
+				backgroundColor: darkColor,
+				color: lightColor,
 			}}>
 			{ props.heuristic }
 		</div>
-	);
+
+	return ( quoteComponent);
 }
 Quote.defaultProps = { 
-	currentHeuristic: undefined, heuristic: undefined, getDarkColor: getDarkColor, getLightColor: getLightColor, colorSchemes: colorSchemes 
+	currentHeuristic: undefined, heuristic: undefined //, getDarkColor: getDarkColor, getLightColor: getLightColor, colorSchemes: colorSchemes 
 }
