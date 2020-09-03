@@ -11,8 +11,6 @@ export function Mountain( props ) {
 				style={{ bottom: {mgStyle} }}>
 				{bgMountain}
 				{fgMountain}
-				
-				
 			</div>
 		</div>
 	);
