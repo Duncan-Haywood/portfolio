@@ -37,11 +37,11 @@ describe("HelperFunctions colors", () => {
 		]
 
 		test.each(tableGetDarkColor)("getDarkColor: %j => %j", (props, expected) => {
-			result = consts.getDarkColor(props);
+			let result = consts.getDarkColor(props);
 			expect(result).toEqual(expected.darkColor)
 		})
 
-	}) 
+	})  
 	
 	describe("getLightColor", () => {
 		const tableGetLightColor = [

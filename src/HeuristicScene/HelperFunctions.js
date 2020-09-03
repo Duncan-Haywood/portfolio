@@ -49,12 +49,12 @@ getRandomColor.defaultProps = {
 
 
 export function getDarkColor( props ) {
-	let colorScheme = props.scheme % colorSchemes.length;
-	let darkColor = colorSchemes[ colorScheme ][0][0];
+	let colorSchemeIndex = props.schemeIndex % colorSchemes.length;
+	let darkColor = colorSchemes[ colorSchemeIndex ][0][0];
 	return darkColor;
 }
 getDarkColor.defaultProps = {
-	scheme: undefined//, colorSchemes: COLOR_SCHEMES
+	schemeIndex: undefined//, colorSchemes: COLOR_SCHEMES
 }
 
 export function getLightColor( props ) {
