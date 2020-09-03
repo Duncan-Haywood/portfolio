@@ -1,4 +1,6 @@
 import {COLOR_SCHEMES} from './Constants.js' 
+
+// uses in functions, and entire module needs to be imported as a name-space to use this. 
 export const colorSchemes = COLOR_SCHEMES;
 
 
