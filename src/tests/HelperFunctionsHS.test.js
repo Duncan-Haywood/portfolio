@@ -1,4 +1,4 @@
-import { getSeed, getRandomColor, getDarkColor, getLightColor } from '../HeuristicScene/HelperFunctions.js'
+import * as consts from '../HeuristicScene/HelperFunctions.js'
 describe("HelperFunctions colors", () => {
 	describe("getSeed", () => {
 		const tableGetSeed = [
@@ -7,11 +7,11 @@ describe("HelperFunctions colors", () => {
 			[{number: 10},{seed: 0.1297}],
 		] 
 		test.each(tableGetSeed)("getSeed: %j => %j", (props, expected) => {
-			let result = getSeed({number: props.number})
+			let result = consts.getSeed({number: props.number})
 			// three decimal place equality
 		})
 		test("getSeed: {number: NaN} => {seed: NaN}", () => {
-			let result = getSeed({number: NaN})
+			let result = consts.getSeed({number: NaN})
 			expect(result).toBeNaN() //three decimal place equality
 		})
 	}) 

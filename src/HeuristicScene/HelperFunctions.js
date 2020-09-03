@@ -38,13 +38,13 @@ export function getRandomColor( props ) {
 
 	// Store random color from that scheme.
 	let colorFromScheme = Math.floor( getSeed( props.seedNumber ) * 
-		props.colorSchemes[ colorSchemeIndex ][2].length );
+		colorSchemes[ colorSchemeIndex ][2].length );
 	// Picks a color from colorSchemes 
-	let randomColor = props.colorSchemes[ colorSchemeIndex ][2][ colorFromScheme ];
+	let randomColor = colorSchemes[ colorSchemeIndex ][2][ colorFromScheme ];
 	return randomColor;
 }
 getRandomColor.defaultProps = {
-	seedNumber: undefined, schemeIndex: undefined, colorSchemes: COLOR_SCHEMES, getSeed: getSeed
+	seedNumber: undefined, schemeIndex: undefined//, colorSchemes: COLOR_SCHEMES, getSeed: getSeed
 }
 
 
