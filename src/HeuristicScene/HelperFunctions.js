@@ -1,6 +1,6 @@
 import {COLOR_SCHEMES} from './Constants.js' 
 
-// uses in functions, and entire module needs to be imported as a name-space to use this. 
+// uses in functions, and entire module needs to be imported as a name-space to use this 
 export const colorSchemes = COLOR_SCHEMES;
 
 
@@ -39,7 +39,7 @@ export function getRandomColor( props ) {
 	let colorSchemeIndex = props.schemeIndex % colorSchemes.length;
 
 	// Store random color from that scheme.
-	let colorFromSchemeIndex = Math.floor( getSeed( props.seedNumber ) * 
+	let colorFromSchemeIndex = Math.floor( getSeed( {number: props.seedNumber} ) * 
 		colorSchemes[ colorSchemeIndex ][2].length );
 	// Picks a color from colorSchemes 
 	let randomColor = colorSchemes[ colorSchemeIndex ][2][ colorFromSchemeIndex ];
@@ -47,10 +47,6 @@ export function getRandomColor( props ) {
 }
 getRandomColor.defaultProps = {
 	seedNumber: undefined, schemeIndex: undefined//, colorSchemes: COLOR_SCHEMES, getSeed: getSeed
-}
-getRandomColor.propTypes = {
-	seedNumber: PropTypes.integer;
-	schemeIndex: PropTypes.integer
 }
 
 export function getDarkColor( props ) {

@@ -17,15 +17,19 @@ describe("HelperFunctions colors", () => {
 	}) 
 	describe("getRandomColor", () => {
 		const tableGetRandomColor = [
-			[{seedNumber: 1, schemeIndex: 1},{randomColor: undefined}]
+			[{seedNumber: 0, schemeIndex: 0},{randomColor: "#eb9b00"}],
+			[{seedNumber: 0, schemeIndex: 1},{randomColor: "#a8ab00"}],
+			[{seedNumber: 12, schemeIndex: 12},{randomColor: "#b30074"}],
+			[{seedNumber: 20, schemeIndex: 20},{randomColor: "#ff9a03"}],
+			[{seedNumber: 21, schemeIndex: 3},{randomColor: "#fffab9"}],
+			[{seedNumber:2, schemeIndex: 1},{randomColor: "#e3ff94"}],
+			[{seedNumber: 5, schemeIndex: 5},{randomColor: "#ecffc7"}]
 		]
 		test.each(tableGetRandomColor)("getRandomColor: %j => %j", (props, expected) => {
 			let result = helpers.getRandomColor(props);
 			expect(result).toEqual(expected.randomColor)
 		})
-		test.todo("getRandomColor")
-
-	})
+	}) 
 	describe("getDarkColor", () => {
 		const tableGetDarkColor = [
 			[{schemeIndex: 0}, {darkColor: '#aa3f00'}],
