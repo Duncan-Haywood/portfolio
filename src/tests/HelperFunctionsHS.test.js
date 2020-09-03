@@ -41,7 +41,7 @@ describe("HelperFunctions colors", () => {
 			expect(result).toEqual(expected.darkColor)
 		})
 
-	})
+	}) 
 	
 	describe("getLightColor", () => {
 		const tableGetLightColor = [
