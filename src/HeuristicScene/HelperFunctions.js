@@ -64,7 +64,7 @@ export function getLightColor( props ) {
 }
 getLightColor.defaultProps = {
 	schemeIndex: undefined, colorSchemes: COLOR_SCHEMES
-}
+} 
 
 
 
