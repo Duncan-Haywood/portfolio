@@ -58,12 +58,12 @@ getDarkColor.defaultProps = {
 }
 
 export function getLightColor( props ) {
-	let colorScheme = props.scheme % props.colorSchemes.length;
-	let lightColor = props.colorSchemes[ colorScheme ][1][0];
+	let colorSchemeIndex = props.schemeIndex % props.colorSchemes.length;
+	let lightColor = props.colorSchemes[ colorSchemeIndex ][1][0];
 	return lightColor;
 }
 getLightColor.defaultProps = {
-	scheme: undefined, colorSchemes: COLOR_SCHEMES
+	schemeIndex: undefined, colorSchemes: COLOR_SCHEMES
 }
 
 
