@@ -58,4 +58,4 @@ describe("HelperFunctions colors", () => {
 			expect(result).toEqual(expected.lightColor)
 		})
 	})
-})
+}) 

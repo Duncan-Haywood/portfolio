@@ -12,7 +12,8 @@ import React from 'react';
 export const COLOR_SCHEMES = [
 	// First array are dark colors.
 	// Second array are light colors.
-	// Third array are random colors.
+	// Third array are random colors. - this contains multiple possible colors.
+	// First Dimension (outer layer) is a color scheme (there are five as of writing this (9/2/2020))
 	[ [ '#aa3f00' ], [ '#faffc4' ], 
 		[ '#aa3f00', '#eb9b00', '#83006f', '#b30074', '#ffd32a' ], ],
 
