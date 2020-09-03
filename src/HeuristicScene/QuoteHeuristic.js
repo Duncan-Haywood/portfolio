@@ -7,7 +7,8 @@ import React from 'react'
 export function Quote( props ) {
 	let darkColor = helpers.getDarkColor({schemeIndex: props.currentHeuristic});
 	let lightColor = helpers.getLightColor({schemeIndex: props.currentHeuristic});
-	quoteComponent = <div className="heuristic__quote"
+	let quoteComponent = <div 
+			className="heuristic__quote"
 			style={{
 				backgroundColor: darkColor,
 				color: lightColor,

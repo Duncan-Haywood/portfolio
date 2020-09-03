@@ -11,17 +11,17 @@ configure({ adapter: new Adapter() });
 
 
 const tableQuoteTest = [
-	{currentHeuristic: 1, heuristic: HEURISTICS[0]},
-	{currentHeuristic: "", heuristic: INTRO},
-	{currentHeuristic: 2, heuristic: HEURISTICS[1]},
-	{currentHeuristic: HEURISTICS.length, heuristic: HEURISTICS[HEURISTICS.length]},
+	[{currentHeuristic: 1, heuristic: HEURISTICS[0]},{}],
+	[{currentHeuristic: "", heuristic: INTRO},{}],
+	[{currentHeuristic: 2, heuristic: HEURISTICS[1]},{}],
+	[{currentHeuristic: HEURISTICS.length, heuristic: HEURISTICS[HEURISTICS.length]},{}]
 ]
 
 
 describe("Quote component", () => {
 	// let className = "heuristic__primary";
 	// let currentHeuristic = 1;
-	test.each(tableQuoteTest)("renders shallowly", (props) => {
+	test.each(tableQuoteTest)("renders shallowly", (props, expected) => {
 		shallow(<Quote currentHeuristic={ props.currentHeuristic } 
 					heuristic={ props.heuristic } />)
 	})
