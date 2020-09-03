@@ -1,4 +1,4 @@
-import * as consts from '../HeuristicScene/HelperFunctions.js'
+import * as helpers from '../HeuristicScene/HelperFunctions.js'
 describe("HelperFunctions colors", () => {
 	describe("getSeed", () => {
 		const tableGetSeed = [
@@ -7,11 +7,11 @@ describe("HelperFunctions colors", () => {
 			[{number: 10},{seed: 0.1297}],
 		] 
 		test.each(tableGetSeed)("getSeed: %j => %j", (props, expected) => {
-			let result = consts.getSeed({number: props.number})
+			let result = helpers.getSeed({number: props.number})
 			// three decimal place equality
 		})
 		test("getSeed: {number: NaN} => {seed: NaN}", () => {
-			let result = consts.getSeed({number: NaN})
+			let result = helpers.getSeed({number: NaN})
 			expect(result).toBeNaN() //three decimal place equality
 		})
 	}) 
@@ -20,7 +20,7 @@ describe("HelperFunctions colors", () => {
 			[{seedNumber: 1, schemeIndex: 1},{randomColor: undefined}]
 		]
 		test.each(tableGetRandomColor)("getRandomColor: %j => %j", (props, expected) => {
-			let result = consts.getRandomColor(props);
+			let result = helpers.getRandomColor(props);
 			expect(result).toEqual(expected.randomColor)
 		})
 		test.todo("getRandomColor")
@@ -28,18 +28,18 @@ describe("HelperFunctions colors", () => {
 	})
 	describe("getDarkColor", () => {
 		const tableGetDarkColor = [
-			[{schemeIndex: 0}, {lightColor: '#aa3f00'}],
-			[{schemeIndex: 1}, {lightColor: '#2d7a00'}],
-			[{schemeIndex: 2}, {lightColor: '#ff9f60'}],
-			[{schemeIndex: 3}, {lightColor: '#1115ff'}],
-			[{schemeIndex: 4}, {lightColor: '#6a26ff'}],
-			[{schemeIndex: 5}, {lightColor: '#470064'}]
+			[{schemeIndex: 0}, {darkColor: '#aa3f00'}],
+			[{schemeIndex: 1}, {darkColor: '#2d7a00'}],
+			[{schemeIndex: 2}, {darkColor: '#ff9f60'}],
+			[{schemeIndex: 3}, {darkColor: '#1115ff'}],
+			[{schemeIndex: 4}, {darkColor: '#6a26ff'}],
+			[{schemeIndex: 5}, {darkColor: '#470064'}]
 		]
 
 		test.each(tableGetDarkColor)("getDarkColor: %j => %j", (props, expected) => {
-			let result = consts.getDarkColor(props);
+			let result = helpers.getDarkColor(props);
 			expect(result).toEqual(expected.darkColor)
-		})
+		}) 
 
 	})  
 	
@@ -54,7 +54,7 @@ describe("HelperFunctions colors", () => {
 		]
 
 		test.each(tableGetLightColor)("getLightColor: %j => %j", (props, expected) => {
-			let result = consts.getLightColor(props);
+			let result = helpers.getLightColor(props);
 			expect(result).toEqual(expected.lightColor)
 		})
 	})

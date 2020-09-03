@@ -34,19 +34,22 @@ export function getRandomColor( props ) {
 	// This makes it cycle through the available color arrays, 
 	// one after the other, and cycle when the array ends.
 	// from the multiple color schemes, which collection of color options are we using: there are 5 options at the time of writing (9/2/2020)
-	let colorSchemeIndex = props.schemeIndex % props.colorSchemes.length;
+	let colorSchemeIndex = props.schemeIndex % colorSchemes.length;
 
 	// Store random color from that scheme.
-	let colorFromScheme = Math.floor( getSeed( props.seedNumber ) * 
+	let colorFromSchemeIndex = Math.floor( getSeed( props.seedNumber ) * 
 		colorSchemes[ colorSchemeIndex ][2].length );
 	// Picks a color from colorSchemes 
-	let randomColor = colorSchemes[ colorSchemeIndex ][2][ colorFromScheme ];
+	let randomColor = colorSchemes[ colorSchemeIndex ][2][ colorFromSchemeIndex ];
 	return randomColor;
 }
 getRandomColor.defaultProps = {
 	seedNumber: undefined, schemeIndex: undefined//, colorSchemes: COLOR_SCHEMES, getSeed: getSeed
 }
-
+getRandomColor.propTypes = {
+	seedNumber: PropTypes.integer;
+	schemeIndex: PropTypes.integer
+}
 
 export function getDarkColor( props ) {
 	let colorSchemeIndex = props.schemeIndex % colorSchemes.length;

@@ -35,8 +35,8 @@ getPerspectiveAlgo.defaultProps = {
 * Sky helper Functions.
 */
 export function displaySky(props){
-	let backgroundColor = props.getRandomColor( props.currentHeuristic, 
-					props.currentHeuristic, props.colorSchemes, props.getSeed )
+	let backgroundColor = props.getRandomColor( {seedNumber: props.currentHeuristic, schemeIndex:
+					props.currentHeuristic )
 	let perspective = props.perspectiveAlgo + 'px'
 	// the component is below
 	let sky = 
@@ -93,7 +93,7 @@ export function addItemSky( props ){
 
 	let itemBackgroundColorSeedNumber = props.i + 1 * props.currentHeuristic;
 	
-	let itemBackgroundColor = getRandomColor( {seedNumber: itemBackgroundColorSeedNumber, scheme: 
+	let itemBackgroundColor = getRandomColor( {seedNumber: itemBackgroundColorSeedNumber, schemeIndex: 
 				props.currentHeuristic} );
 
 	let itemLeft = ( 100 / props.numItems ) * props.i + "%";
