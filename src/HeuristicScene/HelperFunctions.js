@@ -1,5 +1,5 @@
 import {COLOR_SCHEMES} from './Constants.js' 
-
+const colorSchemes = COLOR_SCHEMES;
 
 
 /*
@@ -49,12 +49,12 @@ getRandomColor.defaultProps = {
 
 
 export function getDarkColor( props ) {
-	let colorScheme = props.scheme % props.colorSchemes.length;
-	let darkColor = props.colorSchemes[ colorScheme ][0][0];
+	let colorScheme = props.scheme % colorSchemes.length;
+	let darkColor = colorSchemes[ colorScheme ][0][0];
 	return darkColor;
 }
 getDarkColor.defaultProps = {
-	scheme: undefined, colorSchemes: COLOR_SCHEMES
+	scheme: undefined//, colorSchemes: COLOR_SCHEMES
 }
 
 export function getLightColor( props ) {
