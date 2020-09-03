@@ -11,19 +11,23 @@ configure({ adapter: new Adapter() });
 
 
 
-const tableGetCurrentNextHeuristicScene = [
-["", 1], 
-[1, 2], 
-[HEURISTICS.length, ""]]
+
 
 
 describe("helperFunctions HeuristicScene", () => {
-	
-	test.each(tableGetCurrentNextHeuristicScene)("getCurrentNextHeuristicScene", (id="", expected=1, heuristics=HEURISTICS ) => {
-		let resultNext = getCurrentNextHeuristicScene(id, heuristics)
-		let expectedNext = expected
-		expect(resultNext).toEqual(expectedNext )
+	describe("getCurrentNextHeuristicScene", () => {
+		const tableGetCurrentNextHeuristicScene = [
+			[{id: ""},{next: 1}], 
+			[{id: 1},{next: 2}],
+			[{id: HEURISTICS.length},{next: ""}]
+		]
+
+		test.each(tableGetCurrentNextHeuristicScene)("getCurrentNextHeuristicScene %j => %j", (props, expected) => {
+			let result = getCurrentNextHeuristicScene({id: props.id})
+			expect(result).toEqual(expected.next )
+		})
 	})
+	
 
 	test.todo("displayHeuristicScene")
 	test.todo("handleClick")

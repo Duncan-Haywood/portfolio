@@ -13,17 +13,17 @@ import useRedirect from 'hookrouter'
 
 
 export function HeuristicScene (props) {
-	let id = parseInt( props.id ); //TODO
-	let currentHeuristic, heuristic;
-	[currentHeuristic, heuristic] = props.determineCurrentHeuristicAndHeuristic({id: id})
-	let heuristicScene=props.displayHeuristicScene({id: id, currentHeuristic: currentHeuristic, heuristic: heuristic} )
+	let currentHeuristicIndex, heuristic;
+	currentHeuristicIndex = determineCurrentHeuristicIndex({id: props.id})
+	heuristic = determineHeuristic({currentHeuristicIndex: currentHeuristicIndex})
+	let HeuristicSceneComponent = displayHeuristicScene({id: props.id, currentHeuristicIndex: currentHeuristicIndex, heuristic: heuristic} )
 	return (
 		// Render.
-		<heuristicScene />
+		<HeuristicSceneComponent />
 	);
 }
 HeuristicScene.defaultProps = {
-	id: undefined, determineCurrentHeuristicAndHeuristic: determineCurrentHeuristicAndHeuristic, displayHeuristicScene: displayHeuristicScene, heuristics: HEURISTICS, intro: INTRO,  
+	id: undefined, determineCurrentHeuristicIndex: determineCurrentHeuristicIndex, determineHeuristic: determineHeuristic, displayHeuristicScene: displayHeuristicScene, heuristics: HEURISTICS, intro: INTRO,  
 }
 
 /*
@@ -40,35 +40,55 @@ HeuristicScene.defaultProps = {
 
 
 export function displayHeuristicScene (props) {
+	let HeuristicSceneBackground = displayHeuristicSceneBackground({currentHeuristicIndex: props.currentHeuristicIndex})
+	let HeuristicSceneContent = displayHeuristicSceneContent({id: props.id, currentHeuristicIndex: props.currentHeuristicIndex, heuristic: props.heuristic})
+
 	let heuristicScene = <>
 	{/*Navigation and quotes*/}
-	<h1>A space of peace and art.</h1>
-	<props.Sounds />
-	<props.Navigation id={ props.id } 
-		currentHeuristic={ props.currentHeuristic } 
-		playAudio={ props.playWaterDrop }/>
-	<h2>{ props.currentHeuristic === 0 ? '' : props.currentHeuristic }</h2>
-	<props.Quote currentHeuristic={ props.currentHeuristic } 
-		heuristic={ props.heuristic } />
-		{/*background*/}
-	<section className="heuristic" onClick={ this.handleClick }>
-		<props.Sky className="heuristic__primary" 
-			currentHeuristic={ props.currentHeuristic } colorSchemes={props.colorSchemes} />
-		<props.Sky className="heuristic__clone" 
-			currentHeuristic={ props.currentHeuristic } colorSchemes={props.colorSchemes} />
-		<props.Mountain className="m" 
-			currentHeuristic={ props.currentHeuristic } colorSchemes={props.colorSchemes} />
-		<props.Mountain className="m__clone" 
-			currentHeuristic={ props.currentHeuristic } colorSchemes={props.colorSchemes} />
-	</section>
+	{HeuristicSceneContent}
+	{/*background*/}
+	{HeuristicSceneBackground}
 </>
 	return(heuristicScene)
 }
 displayHeuristicScene.defaultProps = {
-				id: undefined, currentHeuristic: undefined, heuristic: undefined, playClickFxAudio: playClickFxAudio, handleClick: handleClick, colorSchemes: COLOR_SCHEMES, playBackgroundSound: playBackgroundSound, Navigation: Navigation, Quote: Quote, Sky: Sky, Mountain: Mountain
+				id: undefined, currentHeuristicIndex: undefined, heuristic: undefined
+}
+export function displayHeuristicSceneContent(props){
+	let HeuristicSceneContent = <>
+		<h1>A space of peace and art.</h1>
+		<props.Sounds />
+		<props.Navigation id={ props.id } 
+			currentHeuristic={ props.currentHeuristicIndex } 
+			playAudio={ props.playClickFxAudio }/>
+		<h2>{ props.currentHeuristic === 0 ? '' : props.currentHeuristicIndex }</h2>
+		<props.Quote currentHeuristic={ props.currentHeuristicIndex } 
+			heuristic={ props.heuristic } />
+	</>
+	return HeuristicSceneContent;}
+HeuristicSceneContent.defaultProps = {
+	id: undefined, currentHeuristicIndex: undefined, heuristic: undefined, playClickFxAudio: playClickFxAudio
 }
 
 
+export function displayHeuristicSceneBackground(props){
+	let HeuristicSceneBackground = <section 
+	className="heuristic" onClick={ handleClick }>
+		<props.Sky className="heuristic__primary" 
+			currentHeuristic={ props.currentHeuristicIndex } colorSchemes={props.colorSchemes} />
+		<props.Sky className="heuristic__clone" 
+			currentHeuristic={ props.currentHeuristicIndex } colorSchemes={props.colorSchemes} />
+		<props.Mountain className="m" 
+			currentHeuristic={ props.currentHeuristicIndex } colorSchemes={props.colorSchemes} />
+		<props.Mountain className="m__clone" 
+			currentHeuristicIndex={ props.currentHeuristicIndex } colorSchemes={props.colorSchemes} />
+	</section>
+
+	return HeuristicSceneBackground
+}
+displayHeuristicSceneBackground.defaultProps = {
+	currentHeuristicIndex: undefined, colorSchemes: COLOR_SCHEMES, handleClick: handleClick, Sky: Sky, Mountain: Mountain
+}
 
 export function handleClick(props) {
 	props.e.preventDefault()
@@ -105,25 +125,43 @@ getCurrentNextHeuristicScene.defaultProps = {
 }
 
 
-export function determineCurrentHeuristicAndHeuristic(props) {
+export function determineCurrentHeuristicIndex(props) {
 	// Show homepage or heuristic 
 	// where heuristic is one of the quotes from the top.
 	
-	let currentHeuristic = props.id;
+	let currentHeuristicIndex = props.id;
 	// the quote (heuristic) we use mathces the index of 
 	// the page upon which we are with the corresponding quote in 
 	// the list of heuristics from the top of the page
-	let heuristic = props.heuristics[currentHeuristic - 1];
-	if ( !currentHeuristic ) {
+	if ( !currentHeuristicIndex ) {
+		// the quote we use (heuristic) is 
+		// the intro text we defined at the top
+		// the index of the quote text at which we are located
+		currentHeuristicIndex = 0; // Must be zero.
+	}
+	return [currentHeuristicIndex, heuristic]
+}
+determineCurrentHeuristicAndHeuristic.defaultProps = {
+	id: undefined
+}
+
+export function determineHeuristic(props) {
+	// Show homepage or heuristic 
+	// where heuristic is one of the quotes from the top.
+	
+
+	// the quote (heuristic) we use mathces the index of 
+	// the page upon which we are with the corresponding quote in 
+	// the list of heuristics from the top of the page
+	let heuristic = props.heuristics[currentHeuristicIndex - 1];
+	if ( !currentHeuristicIndex ) {
 		// the quote we use (heuristic) is 
 		// the intro text we defined at the top
 		heuristic = props.intro;
-		// the index of the quote text at which we are located
-		currentHeuristic = 0; // Must be zero.
 	}
-	return [currentHeuristic, heuristic]
+	return [currentHeuristicIndex, heuristic]
 }
 determineCurrentHeuristicAndHeuristic.defaultProps = {
-	id: undefined, heuristics: HEURISTICS, intro: INTRO
+	currentHeuristicIndex: undefined, heuristics: HEURISTICS, intro: INTRO
 }
 
