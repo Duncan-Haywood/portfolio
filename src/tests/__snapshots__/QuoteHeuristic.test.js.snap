@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quote component Quote snapshots Snapshot for: { currentHeuristicIndex: '', heuristic: [Object] } 1`] = `
+<div
+  className="heuristic__quote"
+  style={
+    Object {
+      "backgroundColor": "#aa3f00",
+      "color": "#faffc4",
+    }
+  }
+>
+  <p>
+    <strong>
+      Welcome!
+    </strong>
+     
+    Thank you so much for visiting; It means a lot to me that you're engaging in my passions.
+  </p>
+  <p>
+    This is one of my first large scale projects that I have hosted. And, if you'd like to check, I'll be sharing more art projects here over time.
+  </p>
+  <p>
+     Sincerely,
+     
+    <a
+      href="https://www.linkedin.com/in/duncanhaywood"
+    >
+      Duncan Haywood
+    </a>
+    .
+  </p>
+</div>
+`;
+
+exports[`Quote component Quote snapshots Snapshot for: { currentHeuristicIndex: 1, heuristic: [Object] } 1`] = `
+<div
+  className="heuristic__quote"
+  style={
+    Object {
+      "backgroundColor": "#2d7a00",
+      "color": "#efffc2",
+    }
+  }
+>
+  <p>
+    The background and navigation of this web app was built by the amazing 
+     
+    <a
+      href="http://moc.co"
+    >
+      Joen
+    </a>
+     
+     
+    who shared this 
+     
+    <a
+      href="https://github.com/jasmussen/turtleshell"
+    >
+      project
+    </a>
+     
+     
+    as open source.
+  </p>
+  <p>
+    The quotes in the following pages are also created by Joen. Much thanks to him.
+  </p>
+</div>
+`;
+
+exports[`Quote component Quote snapshots Snapshot for: { currentHeuristicIndex: 2, heuristic: [Object] } 1`] = `
+<div
+  className="heuristic__quote"
+  style={
+    Object {
+      "backgroundColor": "#ff9f60",
+      "color": "#00113c",
+    }
+  }
+>
+  <p>
+    So far I've added the music and sound effects to this site. I aim to wrap different art based machine learning projects and incorporate them into this project next.
+  </p>
+</div>
+`;
+
+exports[`Quote component Quote snapshots Snapshot for: { currentHeuristicIndex: 36, heuristic: [Object] } 1`] = `
+<div
+  className="heuristic__quote"
+  style={
+    Object {
+      "backgroundColor": "#aa3f00",
+      "color": "#faffc4",
+    }
+  }
+>
+  <p>
+    Invest in trees. The long term ROI could be your way of life.
+  </p>
+</div>
+`;
