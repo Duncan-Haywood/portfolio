@@ -31,7 +31,7 @@ describe("Mountains Helper Functions", () =>{
 		[{currentHeuristicIndex: 2},{mgStyle: "58.96622154785291%"}]
 	]
 	test.each(tableGetMgStyle)("getMgStyle: %j", (props, expected) => {
-		let result = getMgStyle(props.currentHeuristicIndex)
+		let result = getMgStyle(props)
 		expect(result).toEqual(expected.mgStyle)
 	})
 	const tableDisplayMountainBG = [

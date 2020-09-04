@@ -11,13 +11,13 @@ export const colorSchemes = COLOR_SCHEMES;
 */
 
 export function getSeed( props ) {
-	let number = props.number + 1138;
+	let number = props.seedNumber + 1138;
 	let seed = Math.sin( number ++ ) * 10000;
 	seed = seed - Math.floor( seed );
 	return seed;
 }
 getSeed.defaultProps = {
-	number: undefined
+	seedNumber: undefined
 }
  
 
@@ -39,7 +39,7 @@ export function getRandomColor( props ) {
 	let colorSchemeIndex = props.schemeIndex % colorSchemes.length;
 
 	// Store random color from that scheme.
-	let colorFromSchemeIndex = Math.floor( getSeed( {number: props.seedNumber} ) * 
+	let colorFromSchemeIndex = Math.floor( getSeed( {seedNumber: props.seedNumber} ) * 
 		colorSchemes[ colorSchemeIndex ][2].length );
 	// Picks a color from colorSchemes 
 	let randomColor = colorSchemes[ colorSchemeIndex ][2][ colorFromSchemeIndex ];
