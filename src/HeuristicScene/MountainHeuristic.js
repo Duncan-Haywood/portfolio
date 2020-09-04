@@ -2,9 +2,9 @@ import {getSeed, getDarkColor, getLightColor} from './HelperFunctions.js'
 import React from 'react'
 
 export function Mountain( props ) {
-	let mgStyle = getMgStyle({currentHeuristic: props.currentHeuristic})
-	let bgMountain= displayMountainBG({currentHeuristic: props.currentHeuristic})
-	let fgMountain = displayMountainFG({currentHeuristic: props.currentHeuristic})
+	let mgStyle = getMgStyle({currentHeuristicIndex: props.currentHeuristicIndex})
+	let bgMountain= displayMountainBG({currentHeuristicIndex: props.currentHeuristicIndex})
+	let fgMountain = displayMountainFG({currentHeuristicIndex: props.currentHeuristicIndex})
 	return (
 		<div className={ props.className }>
 			<div className="m__group" 
@@ -16,7 +16,7 @@ export function Mountain( props ) {
 	);
 }
 Mountain.defaultProps= {
-	className: undefined, currentHeuristic: undefined, getSeed: getSeed 
+	className: undefined, currentHeuristicIndex: undefined, getSeed: getSeed 
 }
 
 
@@ -24,17 +24,17 @@ Mountain.defaultProps= {
 * Mountain Helper Functions
 */
 export function getMgStyle(props){
-	let seed = getSeed({number: props.currentHeuristic})
+	let seed = getSeed({number: props.currentHeuristicIndex})
 	let mgStyle = 60 * seed + "%";
 	return mgStyle;
 }
 getMgStyle.defaultProps = {
-	currentHeuristic: undefined, getSeed: getSeed
+	currentHeuristicIndex: undefined, getSeed: getSeed
 }
 
 
 export function displayMountainBG(props){
-	let darkColor = props.getDarkColor( {currentHeuristic: props.currentHeuristic} )
+	let darkColor = props.getDarkColor( {currentHeuristicIndex: props.currentHeuristicIndex} )
 	return(
 		<svg className="m__group-bg" 
 	style={{ fill: {darkColor} }} 
@@ -47,13 +47,13 @@ export function displayMountainBG(props){
 </svg>		)
 }
 displayMountainBG.defaultProps = {
-	currentHeuristic: undefined, getDarkColor: getDarkColor
+	currentHeuristicIndex: undefined, getDarkColor: getDarkColor
 }
 
 
 
 export function displayMountainFG(props){
-	let lightColor = props.getLightColor( {currentHeuristic: props.currentHeuristic} )
+	let lightColor = props.getLightColor( {currentHeuristicIndex: props.currentHeuristicIndex} )
 	return(
 <svg className="m__group-fg" 
 	style={{ fill: {lightColor} }} 
@@ -77,5 +77,5 @@ export function displayMountainFG(props){
 )
 }
 displayMountainFG.defaultProps = {
-	currentHeuristic: undefined, getLightColor: getLightColor
+	currentHeuristicIndex: undefined, getLightColor: getLightColor
 }

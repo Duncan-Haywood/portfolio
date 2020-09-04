@@ -5,8 +5,8 @@ import React from 'react'
  * Heuristic Quote
  */
 export function Quote( props ) {
-	let darkColor = helpers.getDarkColor({schemeIndex: props.currentHeuristic});
-	let lightColor = helpers.getLightColor({schemeIndex: props.currentHeuristic});
+	let darkColor = helpers.getDarkColor({schemeIndex: props.currentHeuristicIndex});
+	let lightColor = helpers.getLightColor({schemeIndex: props.currentHeuristicIndex});
 	let quoteComponent = <div 
 			className="heuristic__quote"
 			style={{
@@ -19,5 +19,5 @@ export function Quote( props ) {
 	return ( quoteComponent);
 }
 Quote.defaultProps = { 
-	currentHeuristic: undefined, heuristic: undefined //, getDarkColor: getDarkColor, getLightColor: getLightColor, colorSchemes: colorSchemes 
+	currentHeuristicIndex: undefined, heuristic: undefined //, getDarkColor: getDarkColor, getLightColor: getLightColor, colorSchemes: colorSchemes 
 }

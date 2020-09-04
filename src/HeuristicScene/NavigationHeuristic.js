@@ -10,9 +10,9 @@ let [heuristics, colorSchemes] = [HEURISTICS, COLOR_SCHEMES]
  
 export function Navigation( props ) {
 	// id is the page number in the web app
-	let [prev, next] = determineNextPrevNavigation(props.id, props.currentHeuristic)
+	let [prev, next] = determineNextPrevNavigation(props.id, props.currentHeuristicIndex)
 	let circleButtons = diplayNavigationCircleButtons()
-	let arrowButtons = diplayNavigationArrowButton({prev: prev,next: next, currentHeuristic: props.currentHeuristic})
+	let arrowButtons = diplayNavigationArrowButton({prev: prev,next: next, currentHeuristicIndex: props.currentHeuristicIndex})
 
 	let navigationComponent = <>
 			{/*comment: 
@@ -30,7 +30,7 @@ export function Navigation( props ) {
 		
 }
 Navigation.defaultProps = { 
- 	currentHeuristic: undefined, id: undefined, diplayNavigationCircleButtons: diplayNavigationCircleButtons, diplayNavigationArrowButton: diplayNavigationArrowButton
+ 	currentHeuristicIndex: undefined, id: undefined, diplayNavigationCircleButtons: diplayNavigationCircleButtons, diplayNavigationArrowButton: diplayNavigationArrowButton
  }
 
 
@@ -44,8 +44,8 @@ function diplayNavigationArrowButton(props){
 	let nextArrowButton = displayNextNavigationArrowButton(props)
 	let arrowButtons = <div className="heuristics__navigation-next-prev"
 			style={{
-				backgroundColor: props.getDarkColor( props.currentHeuristic, props.colorSchemes ),
-				color: props.getLightColor( props.currentHeuristic, props.colorSchemes ),
+				backgroundColor: props.getDarkColor( props.currentHeuristicIndex, props.colorSchemes ),
+				color: props.getLightColor( props.currentHeuristicIndex, props.colorSchemes ),
 			}}>
 			{prevArrowButton}
 			{nextArrowButton}
@@ -53,7 +53,7 @@ function diplayNavigationArrowButton(props){
 	return( arrowButtons )
 }
 diplayNavigationArrowButton.defaultProps = {
-	prev: undefined, next: undefined, currentHeuristic: undefined, getDarkColor: getDarkColor, colorSchemes: colorSchemes, getLightColor: getLightColor, playClickFxAudio: playClickFxAudio
+	prev: undefined, next: undefined, currentHeuristicIndex: undefined, getDarkColor: getDarkColor, colorSchemes: colorSchemes, getLightColor: getLightColor, playClickFxAudio: playClickFxAudio
 }
 function displayPrevNavigationArrowButton(props){
 	let prevArrowButton = 

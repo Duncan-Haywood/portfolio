@@ -9,20 +9,20 @@ configure({ adapter: new Adapter() });
 
 
 const tableSkyTest = [
-	{className: "", currentHeuristic: ""},
-	{className: "", currentHeuristic: 1},
-	{className: "", currentHeuristic: HEURISTICS.length},
+	[{className: "", currentHeuristicIndex: ""}],
+	[{className: "", currentHeuristicIndex: 1}],
+	[{className: "", currentHeuristicIndex: HEURISTICS.length}],
 ]
 
 describe("Sky component", () => {
 	// let className = "heuristic__primary";
-	// let currentHeuristic = 1;
-	test.each(tableSkyTest)("renders shallowly", (props) => {
+	// let currentHeuristicIndex = 1;
+	test.each(tableSkyTest)("renders shallowly %s", (props) => {
 		shallow(<Sky className={ props.className }
-			currentHeuristic={ props.currentHeuristic } />)
+			currentHeuristicIndex={ props.currentHeuristicIndex } />)
 	})
 
-	test.todo("renders shallowly with a variety of classNames and currentHeuristics")
+	test.todo("renders shallowly with a variety of classNames and currentHeuristicIndexs")
 	test.todo("renders fully")
 })
 

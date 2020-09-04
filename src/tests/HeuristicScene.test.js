@@ -31,7 +31,7 @@ describe("helperFunctions HeuristicScene", () => {
 
 	test.todo("displayHeuristicScene")
 	test.todo("handleClick")
-	test.todo("determineCurrentHeuristicAndHeuristic")
+	test.todo("determinecurrentHeuristicIndexAndHeuristic")
 })
 
 describe("HeuristicScene component", () => {

@@ -10,24 +10,24 @@ export function Sky( props ) {
 	// TODO: what are items?
 	let items;
 	//TODO: what does this do?
-	items = props.addMultiItemsSky(items, props.currentHeuristic)
+	items = props.addMultiItemsSky(items, props.currentHeuristicIndex)
 	let perspectiveAlgo = getPerspectiveAlgo()
-	let sky = props.displaySky(props.className, props.currentHeuristic, perspectiveAlgo, items)
+	let sky = props.displaySky(props.className, props.currentHeuristicIndex, perspectiveAlgo, items)
 	return (
 		sky
 	);
 }
 Sky.defaultProps = { 
- 	className: undefined, currentHeuristic: undefined, id: undefined, getSeed: getSeed, addMultiItemsSky: addMultiItemsSky, displaySky: displaySky
+ 	className: undefined, currentHeuristicIndex: undefined, id: undefined, getSeed: getSeed, addMultiItemsSky: addMultiItemsSky, displaySky: displaySky
  }
 
 
 export function getPerspectiveAlgo(props){
-	let perspectiveAlgo = Math.round( props.getSeed( props.currentHeuristic ) * 5 + 20 );
+	let perspectiveAlgo = Math.round( props.getSeed( props.currentHeuristicIndex ) * 5 + 20 );
 	return perspectiveAlgo;
 }
 getPerspectiveAlgo.defaultProps = {
-	 currentHeuristic: undefined, getSeed: getSeed 
+	 currentHeuristicIndex: undefined, getSeed: getSeed 
 }
 
 
@@ -35,8 +35,8 @@ getPerspectiveAlgo.defaultProps = {
 * Sky helper Functions.
 */
 export function displaySky(props){
-	let backgroundColor = props.getRandomColor( {seedNumber: props.currentHeuristic, schemeIndex:
-					props.currentHeuristic )
+	let backgroundColor = props.getRandomColor( {seedNumber: props.currentHeuristicIndex, schemeIndex:
+					props.currentHeuristicIndex )
 	let perspective = props.perspectiveAlgo + 'px'
 	// the component is below
 	let sky = 
@@ -51,7 +51,7 @@ export function displaySky(props){
 	return(sky)
 }
 displaySky.defaultProps = {
-	className: undefined, perspectiveAlgo: undefined, currentHeuristic: undefined, items: undefined, getRandomColor: getRandomColor, colorSchemes: COLOR_SCHEMES, getSeed: getSeed 
+	className: undefined, perspectiveAlgo: undefined, currentHeuristicIndex: undefined, items: undefined, getRandomColor: getRandomColor, colorSchemes: COLOR_SCHEMES, getSeed: getSeed 
 }
 
 
@@ -65,25 +65,25 @@ export function addMultiItemsSky(props){
 		let s1, s2, s3, s4;
 		
 		[s1, s2, s3, s4] = getMultiSeeds({i: i})
-		items = props.addItemSky({"i": i , "s1": s1, "s2": s2, "s3": s3, "s4": s4, "item":items, "currentHeuristic": props.currentHeuristic})
+		items = props.addItemSky({"i": i , "s1": s1, "s2": s2, "s3": s3, "s4": s4, "item":items, "currentHeuristicIndex": props.currentHeuristicIndex})
 		
 	}
 	return items
 }
 addMultiItemsSky.defaultProps = {
-	currentHeuristic: undefined, getMultiSeeds: getMultiSeeds, addItemSky: addItemSky, 
+	currentHeuristicIndex: undefined, getMultiSeeds: getMultiSeeds, addItemSky: addItemSky, 
 } 
 
 
 export function getMultiSeeds(props){
-	let s1 = props.getSeed( props.getSeed( props.currentHeuristic ) * props.i );
-	let s2 = props.getSeed( props.getSeed( props.currentHeuristic ) * props.i + 1 );
-	let s3 = props.getSeed( props.getSeed( props.currentHeuristic ) * props.i + 2 );
-	let s4 = Math.round( props.getSeed( props.getSeed( props.currentHeuristic ) * props.i + 3 ) * 10 );
+	let s1 = props.getSeed( props.getSeed( props.currentHeuristicIndex ) * props.i );
+	let s2 = props.getSeed( props.getSeed( props.currentHeuristicIndex ) * props.i + 1 );
+	let s3 = props.getSeed( props.getSeed( props.currentHeuristicIndex ) * props.i + 2 );
+	let s4 = Math.round( props.getSeed( props.getSeed( props.currentHeuristicIndex ) * props.i + 3 ) * 10 );
 	return [s1, s2, s3, s4]
 }
 getMultiSeeds.defaultProps = {
-	i: undefined, "getSeed": getSeed, currentHeuristic: undefined
+	i: undefined, "getSeed": getSeed, currentHeuristicIndex: undefined
 } 
 
 
@@ -91,10 +91,10 @@ export function addItemSky( props ){
 	let scaleMultiplier = 6;
 	let items = props.items;
 
-	let itemBackgroundColorSeedNumber = props.i + 1 * props.currentHeuristic;
+	let itemBackgroundColorSeedNumber = props.i + 1 * props.currentHeuristicIndex;
 	
 	let itemBackgroundColor = getRandomColor( {seedNumber: itemBackgroundColorSeedNumber, schemeIndex: 
-				props.currentHeuristic} );
+				props.currentHeuristicIndex} );
 
 	let itemLeft = ( 100 / props.numItems ) * props.i + "%";
 	let itemTop = 100 * props.s1 + "%";
@@ -116,5 +116,5 @@ export function addItemSky( props ){
 	return items;
 }
 addItemSky.defaultProps = {
-	items: undefined, i: undefined, s1: undefined, s2: undefined, s3: undefined, s4: undefined, currentHeuristic: undefined, numItems: undefined, getRandomColor: getRandomColor, colorSchemes: COLOR_SCHEMES, getSeed: getSeed
+	items: undefined, i: undefined, s1: undefined, s2: undefined, s3: undefined, s4: undefined, currentHeuristicIndex: undefined, numItems: undefined, getRandomColor: getRandomColor, colorSchemes: COLOR_SCHEMES, getSeed: getSeed
 }
