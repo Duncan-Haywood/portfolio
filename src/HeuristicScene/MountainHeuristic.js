@@ -5,15 +5,15 @@ export function Mountain( props ) {
 	let mgStyle = getMgStyle({currentHeuristicIndex: props.currentHeuristicIndex})
 	let bgMountain= displayMountainBG({currentHeuristicIndex: props.currentHeuristicIndex})
 	let fgMountain = displayMountainFG({currentHeuristicIndex: props.currentHeuristicIndex})
-	return (
-		<div className={ props.className }>
+	
+	let MountainComponent = <div className={ props.className }>
 			<div className="m__group" 
 				style={{ bottom: {mgStyle} }}>
 				{bgMountain}
 				{fgMountain}
 			</div>
 		</div>
-	);
+	return (MountainComponent);
 }
 Mountain.defaultProps= {
 	className: undefined, currentHeuristicIndex: undefined 
@@ -34,7 +34,7 @@ getMgStyle.defaultProps = {
 
 
 export function displayMountainBG(props){
-	let darkColor = helpers.getDarkColor( {currentHeuristicIndex: props.currentHeuristicIndex} )
+	let darkColor = helpers.getDarkColor( {schemeIndex: props.currentHeuristicIndex} )
 	
 	let bgMountain = <svg className="m__group-bg" 
 			style={{ fill: {darkColor} }} 
@@ -55,7 +55,7 @@ displayMountainBG.defaultProps = {
 
 
 export function displayMountainFG(props){
-	let lightColor = helpers.getLightColor( {currentHeuristicIndex: props.currentHeuristicIndex} )
+	let lightColor = helpers.getLightColor( {schemeIndex: props.currentHeuristicIndex} )
 	let fgMountain = <svg className="m__group-fg" 
 			style={{ fill: {lightColor} }} 
 				width="100" height="200" viewBox="0 0 100 200">
